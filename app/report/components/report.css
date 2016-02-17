@@ -1,0 +1,57 @@
+table {
+  font-family: sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+tr {
+
+}
+
+th {
+  text-align: left;
+  background: white;
+  color: black;
+}
+
+td {
+  margin: 0;
+  padding: 5px;
+  border: 0;
+}
+
+tr:nth-of-type(2n) {
+  background: #ddd;
+}
+
+tr.no_ad {
+  background: #ddcaca;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  text-align: right;
+  font-weight: bold;
+}
+
+td h1 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+tbody {
+  /*padding-bottom: 15px;*/
+}
+
+tbody tr:first-child td {
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+}
+
+tbody tr:first-child {
+  background: black;
+}
