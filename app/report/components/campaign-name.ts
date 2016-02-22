@@ -11,7 +11,7 @@ import {AdzerkManagementAPICampaignResponse,
     <span *ngIf="campaignResponse">{{campaignResponse.Name}}</span>
   `
 })
-export class CampaignName {
+export class CampaignName implements OnInit {
   @Input() adData;
 
   campaignResponse: AdzerkManagementAPICampaignResponse;
@@ -22,7 +22,11 @@ export class CampaignName {
     if (this.adData && this.adData.campaignId) {
       this._adzerkService
         .getCampaign(this.adData.campaignId)
-        .subscribe(res => this.campaignResponse = res);
+        .subscribe(res => {
+          if (res.Id) {
+            this.campaignResponse = res;
+          }
+        });
     }
   }
 }

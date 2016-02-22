@@ -11,7 +11,7 @@ import {AdzerkManagementAPIAdResponse,
     <span *ngIf="adResponse">{{adResponse.Creative.Title}}</span>
   `
 })
-export class CreativeName {
+export class CreativeName implements OnInit {
   @Input() adData;
 
   adResponse: AdzerkManagementAPIAdResponse;
@@ -22,7 +22,11 @@ export class CreativeName {
     if (this.adData && this.adData.flightId && this.adData.adId) {
       this._adzerkService
         .getAd(this.adData.flightId, this.adData.adId)
-        .subscribe(res => this.adResponse = res);
+        .subscribe(res => {
+          if (res.Id) {
+            this.adResponse = res;
+          }
+        });
     }
   }
 }

@@ -1,5 +1,10 @@
 <p><b>Dovetail URL:</b> {{url}}</p>
 
+<p *ngIf="adzerkRequest">
+  <b>Properties: <button (click)="onEdit()">Edit</button>
+    {{adzerkRequest.placements[0].properties | json}}</b>
+</p>
+
 <form (ngSubmit)="onRun()" #reportForm="ngForm" *ngIf="adzerkRequest">
   <select [(ngModel)]="runner.iterations" ngControl="iterations">
     <option value="1">1</option>

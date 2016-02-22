@@ -30,7 +30,8 @@ export interface AdzerkNativeAdAPIRequest {
   ip?: string,
   blockedCreatives?: number[],
   flightViewTimes?: {},
-  isMobile?: boolean
+  isMobile?: boolean,
+  properties?: {}
 }
 
 export interface AdzerkNativeAdAPIResponseDecision {

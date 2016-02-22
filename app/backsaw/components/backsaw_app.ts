@@ -3,32 +3,21 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {Search} from '../../search/components/search';
 import {Report} from '../../report/components/report';
+import {Advanced} from '../../advanced/components/advanced';
 import {AuthenticationService} from '../../shared/services/authentication_service';
 
 @Component({
   selector: 'backsaw-app',
   directives: [ROUTER_DIRECTIVES],
   providers: [AuthenticationService],
-  template: `
-    <div [ngSwitch]="isAuthenticated()">
-      <div *ngSwitchWhen="true">
-        <button (click)="onLogout()">Logout</button>
-        <router-outlet></router-outlet>
-      </div>
-      <form *ngSwitchDefault (ngSubmit)="onSubmit()" #authForm="ngForm">
-        <p>Adzerk API Key</p>
-        <input required [(ngModel)]="authData.adzkerkAPIKey">
-        <button type="submit" [disabled]="!authForm.form.valid">Submit</button>
-      </form>
-    </div>
-
-  `
+  templateUrl: 'app/backsaw/components/backsaw_app.html'
 })
 @RouteConfig([
   { path: '/', name: 'Search', component: Search },
-  { path: '/:url', name: 'Report', component: Report }
+  { path: '/report', name: 'Report', component: Report },
+  { path: '/advanced', name: 'Advanced', component: Advanced }
 ])
-export class BacksawApp {
+export class BacksawApp implements OnInit {
   constructor(private _authService: AuthenticationService) {}
 
   authData: {adzkerkAPIKey?: string} = {};

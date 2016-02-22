@@ -11,7 +11,7 @@ import {AdzerkManagementAPIFlightResponse,
     <span *ngIf="flightResponse">{{flightResponse.Name}}</span>
   `
 })
-export class FlightName {
+export class FlightName implements OnInit {
   @Input() adData;
 
   flightResponse: AdzerkManagementAPIFlightResponse;
@@ -22,7 +22,11 @@ export class FlightName {
     if (this.adData && this.adData.flightId) {
       this._adzerkService
         .getFlight(this.adData.flightId)
-        .subscribe(res => this.flightResponse = res);
+        .subscribe(res => {
+          if (res.Id) {
+            this.flightResponse = res;
+          }
+        });
     }
   }
 }

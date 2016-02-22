@@ -1,0 +1,44 @@
+.wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  font-family: sans-serif;
+  height: 90vh;
+}
+
+.left {
+  padding: 10px;
+}
+
+.left pre {
+  background: #e2e2e2;
+  padding: 8px;
+}
+
+.left label {
+  font-weight: bold;
+  display: block;
+}
+
+.left fieldset{
+  padding: 10px;
+  border: 0;
+}
+
+.left input {
+  padding: 8px;
+  width: 300px;
+}
+
+.right {
+  height: 100%;
+}
+
+.right pre {
+  height: 100%;
+  overflow: scroll;
+  border-left: 1px solid #ccc;
+  margin-left: 10px;
+  padding-left: 10px;
+}

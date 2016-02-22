@@ -1,4 +1,6 @@
 *.js.map
 *.js
 
+npm-debug.log
+
 /node_modules
