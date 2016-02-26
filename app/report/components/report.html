@@ -15,7 +15,9 @@
   <button type="submit">Run report</button>
 </form>
 
-<table>
+<slot-report *ngFor="#slot of report.slots"></slot-report>
+
+<!-- <table>
   <tr>
     <th>Campaign</th>
     <th>Flight</th>
@@ -49,4 +51,4 @@
       <td>({{(placement.ads[adId].count / runner.completed) | percent:'1.0-1'}})</td>
     </tr>
   </tbody>
-</table>
+</table> -->

@@ -1,0 +1,10 @@
+<div class="wrap" *ngIf="adzerkRequest">
+  <div class="left">
+    <pre>{{ adzerkRequest.placements[0].properties | json }}</pre>
+
+    <properties-form [adzerkRequest]="adzerkRequest" [propOverrides]="propOverrides" [episode]="episode"></properties-form>
+  </div>
+  <div class="right">
+    <pre>{{adzerkRequest | json}}</pre>
+  </div>
+</div>

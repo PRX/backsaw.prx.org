@@ -16,21 +16,6 @@
   padding: 8px;
 }
 
-.left label {
-  font-weight: bold;
-  display: block;
-}
-
-.left fieldset{
-  padding: 10px;
-  border: 0;
-}
-
-.left input {
-  padding: 8px;
-  width: 300px;
-}
-
 .right {
   height: 100%;
 }
