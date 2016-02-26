@@ -6,14 +6,33 @@ System.config({
     "npm:*": "jspm_packages/npm/*",
     "github:*": "jspm_packages/github/*"
   },
+  typescriptOptions:{
+    tsconfig: true
+  },
+
+  packages: {
+    app: {
+      defaultExtension: "ts",
+      meta: {
+        "*.ts": {
+          "loader": "ts"
+        }
+      }
+    }
+  },
 
   map: {
     "angular2": "npm:angular2@2.0.0-beta.7",
     "es6-shim": "github:es-shims/es6-shim@0.34.4",
+    "plugin-typescript": "github:frankwallis/plugin-typescript@4.0.1",
     "reflect-metadata": "npm:reflect-metadata@0.1.3",
     "rxjs": "npm:rxjs@5.0.0-beta.2",
+    "ts": "github:frankwallis/plugin-typescript@4.0.1",
     "typescript": "npm:typescript@1.8.2",
     "zone.js": "npm:zone.js@0.5.15",
+    "github:frankwallis/plugin-typescript@4.0.1": {
+      "typescript": "npm:typescript@1.8.2"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
