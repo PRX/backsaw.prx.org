@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="#episode of episodes | async">
+    <span (click)="onSelect(episode)">{{episode.title}}</span>
+    (<span (click)="onAdvanced(episode)">Adv.</span>)
+  </li>
+</ul>

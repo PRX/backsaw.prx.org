@@ -1,0 +1,11 @@
+<p>{{episode.url}}</p>
+
+<h1 *ngIf="!getAdzerkRequest()">Loading...</h1>
+
+<div *ngIf="getAdzerkRequest()">
+  <form (ngSubmit)="onRun()" #reportForm="ngForm">
+    <button type="submit">Run report</button>
+  </form>
+
+  <report-details></report-details>
+</div>

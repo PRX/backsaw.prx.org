@@ -1,0 +1,14 @@
+label {
+  font-weight: bold;
+  display: block;
+}
+
+fieldset{
+  padding: 10px;
+  border: 0;
+}
+
+input {
+  padding: 8px;
+  width: 300px;
+}

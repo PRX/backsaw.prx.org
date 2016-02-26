@@ -1,0 +1,5 @@
+<div *ngIf="adzerkResponses">
+  <slot-report-details *ngFor="#slot of getSlots()" [slot]="slot"></slot-report-details>
+
+  <pre>{{adzerkResponses | json}}</pre>
+</div>

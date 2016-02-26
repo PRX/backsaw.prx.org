@@ -1,0 +1,7 @@
+<div [ngSwitch]="isAuthenticated()">
+  <div *ngSwitchWhen="true">
+    <toolbar></toolbar>
+    <router-outlet></router-outlet>
+  </div>
+  <authentication-form *ngSwitchDefault></authentication-form>
+</div>

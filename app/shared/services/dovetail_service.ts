@@ -7,7 +7,7 @@ import { AdzerkNativeAdAPIRequest } from '../../shared/services/adzerk_native_ad
 export class DovetailService {
   constructor (private http: Http) {}
 
-  getAdzerkRequest (url: string) {
+  getAdzerkRequestBody(url: string) {
     let result = /(dovetail\.prxu\.org\/.*)/.exec(url);
     let dovetail_url = 'https://' + result[1];
 

@@ -2,6 +2,12 @@ import {Injectable} from 'angular2/core';
 
 import {LocalStorage} from '../../shared/services/local_storage'
 
+export class AuthenticationRequest {
+  constructor(
+    public adzkerkAPIKey?: string
+  ) {}
+}
+
 @Injectable()
 export class AuthenticationService {
   constructor(private _ls: LocalStorage) {}

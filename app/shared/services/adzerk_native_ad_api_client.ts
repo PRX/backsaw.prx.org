@@ -20,6 +20,13 @@ interface AdzerkNativeAdAPIRequestUser {
   key: string
 }
 
+export interface AdzerkNativeAdAPIRequestProperties {
+  guid?: string,
+  publishedAt?: number,
+  publishedAtPlus30?: number,
+  duration?: number
+}
+
 export interface AdzerkNativeAdAPIRequest {
   placements: AdzerkNativeAdAPIRequestPlacement[],
   user?: AdzerkNativeAdAPIRequestUser,
@@ -31,7 +38,7 @@ export interface AdzerkNativeAdAPIRequest {
   blockedCreatives?: number[],
   flightViewTimes?: {},
   isMobile?: boolean,
-  properties?: {}
+  properties?: AdzerkNativeAdAPIRequestProperties
 }
 
 export interface AdzerkNativeAdAPIResponseDecision {
