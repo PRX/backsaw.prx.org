@@ -1,5 +1,15 @@
-<div *ngIf="adzerkResponses">
-  <slot-report-details *ngFor="#slot of getSlots()" [slot]="slot"></slot-report-details>
-
-  <pre>{{adzerkResponses | json}}</pre>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Campaign</th>
+        <th>Flight</th>
+        <th>Creative</th>
+        <th>Ad</th>
+        <th>Count</th>
+        <th>of {{getAdzerkResponses().length}}</th>
+      </tr>
+    </thead>
+    <slot-report-details *ngFor="#report of slotReports | async" [slotReport]="report"></slot-report-details>
+  </table>
 </div>

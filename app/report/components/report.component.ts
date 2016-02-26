@@ -1,9 +1,11 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 
+import {Observable} from 'rxjs/Observable';
+
 import {ReportDetailsComponent} from './report-details.component'
 import {Episode} from '../../shared/services/feed_service';
-import {ReportService} from '../../shared/services/report.service'
+import {ReportService, EpisodeReport} from '../../shared/services/report.service'
 
 // This is to satisfy deps in the report service. Can they be injected there?
 import {DovetailService} from '../../shared/services/dovetail_service'
@@ -19,6 +21,7 @@ import {AdzerkNativeAdAPI,
 export class ReportComponent implements OnInit {
   episode: Episode;
   propertyOverrides: AdzerkNativeAdAPIRequestProperties;
+  episodeReport: Observable<EpisodeReport>;
 
   constructor(
     private _routeParams: RouteParams,
@@ -57,5 +60,7 @@ export class ReportComponent implements OnInit {
     this._reportService.setEpisode(this.episode);
     this._reportService.setProperties(this.propertyOverrides);
     this._reportService.prime();
+
+    this.episodeReport = this._reportService.getEpisodeReport();
   }
 }

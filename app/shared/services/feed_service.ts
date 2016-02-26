@@ -4,7 +4,8 @@ import {Http, Response} from 'angular2/http';
 export class Episode {
   constructor(
     public url: string,
-    public title?: string) {}
+    public title?: string
+  ) {}
 
   paramURL() {
     return encodeURIComponent(this.url);

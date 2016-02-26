@@ -1,0 +1,12 @@
+slot-info,
+ad-report-details,
+null-ad-report-details {
+  display: table-row;
+}
+
+slot-info td {
+  text-align: center;
+  text-transform: uppercase;
+  background: #ddd;
+  font-weight: bold;
+}

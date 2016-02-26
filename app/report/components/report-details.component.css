@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+slot-report-details {
+  display: table-row-group;
+}
