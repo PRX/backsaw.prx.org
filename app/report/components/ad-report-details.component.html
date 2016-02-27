@@ -1,6 +1,6 @@
-<td><campaign-name [ad]="ad" *ngIf="ad"></campaign-name></td>
+<td><campaign-name [slotId]="slotId" [ad]="ad" *ngIf="ad" [filter]="filter" (filterOnCampaign)="setCampaignFilter($event)"></campaign-name></td>
 <td><flight-name [ad]="ad" *ngIf="ad"></flight-name></td>
 <td><creative-name [ad]="ad" *ngIf="ad"></creative-name></td>
-<td>{{adId}}</td>
+<td (click)="toggleAdFilter()" [ngClass]="{'is-filter': isInFilter()}">{{adId}}</td>
 <td>{{count}}</td>
 <td>({{(count / adzerkResponses.length) | percent:'1.0-1'}})</td>

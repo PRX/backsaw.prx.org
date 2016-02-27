@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from 'angular2/core';
 
 import {AdzerkManagementAPIAdResponse,
-  AdzerkManagementAPI} from '../../shared/services/adzerk_management_api_client'
+  AdzerkManagementAPI} from '../../shared/services/adzerk_management_api_client';
 
 @Component({
   selector: 'creative-name',
@@ -16,7 +16,9 @@ export class CreativeNameComponent implements OnInit {
 
   adResponse: AdzerkManagementAPIAdResponse;
 
-  constructor(private _adzerkService: AdzerkManagementAPI) {}
+  constructor(
+    private _adzerkService: AdzerkManagementAPI
+  ) {}
 
   ngOnInit() {
     if (this.ad && this.ad.flightId && this.ad.adId) {

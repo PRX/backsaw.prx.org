@@ -1,3 +1,3 @@
 <slot-info><td colspan="6">{{slotId}}</td></slot-info>
-<ad-report-details *ngFor="#adId of adIds" [slotId]="slotId" [adId]="adId" [adzerkResponses$]="adzerkResponses$"></ad-report-details>
+<ad-report-details *ngFor="#adId of adIds" [slotId]="slotId" [adId]="adId" [adzerkResponses$]="adzerkResponses$" [filter]="filter"></ad-report-details>
 <null-ad-report-details [slotId]="slotId" [adzerkResponses$]="adzerkResponses$"></null-ad-report-details>

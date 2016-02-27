@@ -6,6 +6,7 @@ import {CreativeNameComponent} from './creative-name.component'
 import {
   AdzerkNativeAdAPIResponseDecision,
   AdzerkNativeAdAPIResponse} from '../../shared/services/adzerk_native_ad_api_client';
+import {ReportService} from '../../shared/services/report.service'
 
 export class Ad {
   constructor(
@@ -26,46 +27,37 @@ export class AdReportDetailsComponent implements OnInit {
   @Input() slotId: number;
   @Input() adId: number;
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  @Input() filter;
 
   count = 0;
   adzerkResponses: AdzerkNativeAdAPIResponse[] = [];
   ad: Ad;
 
-  responseIncludes(response, filters) {
-    return true;
+  constructor(
+    private _reportService: ReportService
+  ) {}
 
-    var failed = false;
+  isInFilter() {
+    return (this.filter
+      && this.filter[this.slotId]
+      && this.filter[this.slotId]['adId']
+      && this.filter[this.slotId]['adId'] == this.adId)
+  }
 
-    for (var slotId in filters) {
-      if (filters.hasOwnProperty(slotId)) {
-        // Get the decision from the response for the slot that matches the slot
-        // the filter that's being checked
-        let decision = response.decisions[slotId];
-
-        // If this response had a null decision (no ad) for this slot, it should
-        // fail the test (this could be improved)
-        if (!decision) {
-          failed = true;
-        } else {
-          // Make sure all the values for this decision pass the filter
-
-          // Only need the filter for this particular slot
-          let filter = filters[slotId];
-
-          // For each property defined in the filter...
-          for (var adProp in filter) {
-            if (filter.hasOwnProperty(adProp)) {
-              // ...check to make sure the decision passes
-              if (filter[adProp] !== decision[adProp]) {
-                failed = true;
-              }
-            }
-          }
-        }
-      }
+  toggleAdFilter() {
+    if (this.isInFilter()) {
+      this._reportService.removeFilter(this.slotId, 'adId', this.adId);
+    } else {
+      this._reportService.addFilter(this.slotId, 'adId', this.adId);
     }
+  }
 
-    return !failed;
+  setCampaignFilter(add) {
+    if (add) {
+      this._reportService.addFilter(this.slotId, 'campaignId', this.ad.campaignId);
+    } else {
+      this._reportService.removeFilter(this.slotId, 'campaignId', this.ad.campaignId);
+    }
   }
 
   ngOnInit() {
@@ -78,13 +70,7 @@ export class AdReportDetailsComponent implements OnInit {
           let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
           let decision = decisions[this.slotId];
 
-          let filter = {
-            'strangers_pre_1': {
-              adId: 1488152
-            }
-          };
-
-          if (decision && decision.adId == this.adId && this.responseIncludes(response, filter)) {
+          if (decision && decision.adId == this.adId && this._reportService.doesResponseSatisfyFilter(response)) {
             this.count += 1;
 
             if (!this.ad) {

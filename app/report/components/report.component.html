@@ -2,10 +2,11 @@
 
 <h1 *ngIf="!report.canFetchResponses()">Loading...</h1>
 <div *ngIf="report.canFetchResponses()">
-  <form (ngSubmit)="onRunReport()" #reportForm="ngForm">
-    <button type="submit">Run report</button>
+  <form>
+    <button (click)="onRunReport()">Run report</button>
     <button (click)="onEdit()">Edit</button>
+    <button (click)="onClearFilter()">Clear Filter</button>
   </form>
 
-  <report-details [adzerkResponses$]="report.adzerkResponses$"></report-details>
+  <report-details [adzerkResponses$]="report.adzerkResponses$" [filter]="report.filter"></report-details>
 </div>

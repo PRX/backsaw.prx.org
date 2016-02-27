@@ -16,6 +16,7 @@ import {
 export class SlotReportDetailsComponent implements OnInit {
   @Input() slotId: string;
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  @Input() filter;
 
   adIds: string[] = [];
 

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {ReportDetailsComponent} from './report-details.component'
 import {Episode} from '../../shared/services/feed_service';
-import {ReportService2} from '../../shared/services/report.service'
+import {ReportService} from '../../shared/services/report.service'
 
 // This is to satisfy deps in the report service. Can they be injected there?
 import {DovetailService} from '../../shared/services/dovetail_service'
@@ -14,7 +14,7 @@ import {AdzerkNativeAdAPI,
 
 @Component({
   directives: [ReportDetailsComponent],
-  providers: [ReportService2, DovetailService, AdzerkNativeAdAPI],
+  providers: [ReportService, DovetailService, AdzerkNativeAdAPI],
   templateUrl: 'app/report/components/report.component.html',
   styleUrls: ['app/report/components/report.component.css']
 })
@@ -25,7 +25,7 @@ export class ReportComponent implements OnInit {
   constructor(
     private _router: Router,
     private _routeParams: RouteParams,
-    public report: ReportService2
+    public report: ReportService
   ) {}
 
   ngOnInit() {
@@ -44,7 +44,11 @@ export class ReportComponent implements OnInit {
   }
 
   onRunReport() {
-    this.report.fetchResponses(10);
+    this.report.fetchResponses(100);
+  }
+
+  onClearFilter() {
+    this.report.clearFilter();
   }
 
   onEdit() {

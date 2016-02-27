@@ -15,6 +15,7 @@ import {SlotReportDetailsComponent} from './slot-report-details.component';
 })
 export class ReportDetailsComponent {
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  @Input() filter;
 
   adzerkResponses: AdzerkNativeAdAPIResponse[] = [];
   slotIds: string[] = [];

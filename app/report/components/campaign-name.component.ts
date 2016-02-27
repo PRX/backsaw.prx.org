@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
 
 import {AdzerkManagementAPICampaignResponse,
   AdzerkManagementAPI} from '../../shared/services/adzerk_management_api_client'
@@ -6,13 +6,19 @@ import {AdzerkManagementAPICampaignResponse,
 @Component({
   selector: 'campaign-name',
   providers: [AdzerkManagementAPI],
+  styleUrls: ['app/report/components/campaign-name.component.css'],
   template: `
-    <span *ngIf="campaignResponse">{{ad.campaignId}}</span>
-    <span *ngIf="campaignResponse">{{campaignResponse.Name}}</span>
+    <span (click)="toggleFilter()" [ngClass]="{'is-filter': isInFilter()}">
+      <span *ngIf="!campaignResponse">{{ad.campaignId}}</span>
+      <span *ngIf="campaignResponse">{{campaignResponse.Name}}</span>
+    </span>
   `
 })
 export class CampaignNameComponent implements OnInit {
+  @Input() slotId: number;
   @Input() ad;
+  @Input() filter;
+  @Output() filterOnCampaign = new EventEmitter();
 
   campaignResponse: AdzerkManagementAPICampaignResponse;
 
@@ -28,5 +34,16 @@ export class CampaignNameComponent implements OnInit {
           }
         });
     }
+  }
+
+  isInFilter() {
+    return (this.filter
+      && this.filter[this.slotId]
+      && this.filter[this.slotId]['campaignId']
+      && this.filter[this.slotId]['campaignId'] == this.ad.campaignId)
+  }
+
+  toggleFilter() {
+    this.filterOnCampaign.emit(!this.isInFilter());
   }
 }
