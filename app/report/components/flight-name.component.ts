@@ -7,21 +7,21 @@ import {AdzerkManagementAPIFlightResponse,
   selector: 'flight-name',
   providers: [AdzerkManagementAPI],
   template: `
-    <span *ngIf="!flightResponse">{{adData.flightId}}</span>
+    <span *ngIf="!flightResponse">{{ad.flightId}}</span>
     <span *ngIf="flightResponse">{{flightResponse.Name}}</span>
   `
 })
-export class FlightName implements OnInit {
-  @Input() adData;
+export class FlightNameComponent implements OnInit {
+  @Input() ad;
 
   flightResponse: AdzerkManagementAPIFlightResponse;
 
   constructor(private _adzerkService: AdzerkManagementAPI) {}
 
   ngOnInit() {
-    if (this.adData && this.adData.flightId) {
+    if (this.ad && this.ad.flightId) {
       this._adzerkService
-        .getFlight(this.adData.flightId)
+        .getFlight(this.ad.flightId)
         .subscribe(res => {
           if (res.Id) {
             this.flightResponse = res;

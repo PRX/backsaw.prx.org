@@ -7,21 +7,21 @@ import {AdzerkManagementAPIAdResponse,
   selector: 'creative-name',
   providers: [AdzerkManagementAPI],
   template: `
-    <span *ngIf="!adResponse">{{adData.creativeId}}</span>
+    <span *ngIf="!adResponse">{{ad.creativeId}}</span>
     <span *ngIf="adResponse">{{adResponse.Creative.Title}}</span>
   `
 })
-export class CreativeName implements OnInit {
-  @Input() adData;
+export class CreativeNameComponent implements OnInit {
+  @Input() ad;
 
   adResponse: AdzerkManagementAPIAdResponse;
 
   constructor(private _adzerkService: AdzerkManagementAPI) {}
 
   ngOnInit() {
-    if (this.adData && this.adData.flightId && this.adData.adId) {
+    if (this.ad && this.ad.flightId && this.ad.adId) {
       this._adzerkService
-        .getAd(this.adData.flightId, this.adData.adId)
+        .getAd(this.ad.flightId, this.ad.adId)
         .subscribe(res => {
           if (res.Id) {
             this.adResponse = res;

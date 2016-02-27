@@ -1,11 +1,11 @@
 <p>{{episode.url}}</p>
 
-<h1 *ngIf="!getAdzerkRequest()">Loading...</h1>
-
-<div *ngIf="getAdzerkRequest()">
-  <form (ngSubmit)="onRun()" #reportForm="ngForm">
+<h1 *ngIf="!report.canFetchResponses()">Loading...</h1>
+<div *ngIf="report.canFetchResponses()">
+  <form (ngSubmit)="onRunReport()" #reportForm="ngForm">
     <button type="submit">Run report</button>
+    <button (click)="onEdit()">Edit</button>
   </form>
 
-  <report-details [episodeReport]="episodeReport" *ngIf="episodeReport"></report-details>
+  <report-details [adzerkResponses$]="report.adzerkResponses$"></report-details>
 </div>

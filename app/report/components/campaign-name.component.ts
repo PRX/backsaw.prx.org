@@ -7,21 +7,21 @@ import {AdzerkManagementAPICampaignResponse,
   selector: 'campaign-name',
   providers: [AdzerkManagementAPI],
   template: `
-    <span *ngIf="!campaignResponse">{{adData.campaignId}}</span>
+    <span *ngIf="campaignResponse">{{ad.campaignId}}</span>
     <span *ngIf="campaignResponse">{{campaignResponse.Name}}</span>
   `
 })
-export class CampaignName implements OnInit {
-  @Input() adData;
+export class CampaignNameComponent implements OnInit {
+  @Input() ad;
 
   campaignResponse: AdzerkManagementAPICampaignResponse;
 
   constructor(private _adzerkService: AdzerkManagementAPI) {}
 
   ngOnInit() {
-    if (this.adData && this.adData.campaignId) {
+    if (this.ad && this.ad.campaignId) {
       this._adzerkService
-        .getCampaign(this.adData.campaignId)
+        .getCampaign(this.ad.campaignId)
         .subscribe(res => {
           if (res.Id) {
             this.campaignResponse = res;

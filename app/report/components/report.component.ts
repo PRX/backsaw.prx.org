@@ -1,11 +1,11 @@
 import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
+import {Router, RouteParams} from 'angular2/router';
 
 import {Observable} from 'rxjs/Observable';
 
 import {ReportDetailsComponent} from './report-details.component'
 import {Episode} from '../../shared/services/feed_service';
-import {ReportService, EpisodeReport} from '../../shared/services/report.service'
+import {ReportService2} from '../../shared/services/report.service'
 
 // This is to satisfy deps in the report service. Can they be injected there?
 import {DovetailService} from '../../shared/services/dovetail_service'
@@ -14,18 +14,18 @@ import {AdzerkNativeAdAPI,
 
 @Component({
   directives: [ReportDetailsComponent],
-  providers: [ReportService, DovetailService, AdzerkNativeAdAPI],
+  providers: [ReportService2, DovetailService, AdzerkNativeAdAPI],
   templateUrl: 'app/report/components/report.component.html',
   styleUrls: ['app/report/components/report.component.css']
 })
 export class ReportComponent implements OnInit {
   episode: Episode;
   propertyOverrides: AdzerkNativeAdAPIRequestProperties;
-  episodeReport: Observable<EpisodeReport>;
 
   constructor(
+    private _router: Router,
     private _routeParams: RouteParams,
-    private _reportService: ReportService
+    public report: ReportService2
   ) {}
 
   ngOnInit() {
@@ -38,29 +38,19 @@ export class ReportComponent implements OnInit {
         this.propertyOverrides = props;
       }
 
-      this._setupReportService();
+      this.report.setEpisode(this.episode);
+      this.report.setProperties(this.propertyOverrides);
     }
   }
 
-  getAdzerkRequest() {
-    return this._reportService.getAdzerkRequest();
+  onRunReport() {
+    this.report.fetchResponses(10);
   }
 
-  getAdzerkResponses() {
-    return this._reportService.getAdzerkResponses();
-  }
-
-  onRun() {
-    if (this.getAdzerkRequest()) {
-      this._reportService.run(10);
-    }
-  }
-
-  private _setupReportService() {
-    this._reportService.setEpisode(this.episode);
-    this._reportService.setProperties(this.propertyOverrides);
-    this._reportService.prime();
-
-    this.episodeReport = this._reportService.getEpisodeReport();
+  onEdit() {
+    // this._router.navigate(['Advanced', {
+    //   properties: this._routeParams.get('properties'),
+    //   url: this._routeParams.get('url')
+    // }]);
   }
 }

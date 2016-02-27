@@ -7,9 +7,9 @@
         <th>Creative</th>
         <th>Ad</th>
         <th>Count</th>
-        <th>of {{getAdzerkResponses().length}}</th>
+        <th>of {{adzerkResponses.length}}</th>
       </tr>
     </thead>
-    <slot-report-details *ngFor="#report of slotReports | async" [slotReport]="report"></slot-report-details>
+    <slot-report-details *ngFor="#slotId of slotIds" [slotId]="slotId" [adzerkResponses$]="adzerkResponses$"></slot-report-details>
   </table>
 </div>

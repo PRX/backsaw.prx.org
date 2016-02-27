@@ -1,24 +1,6 @@
-<td>{{adReport.ad.campaignId}}</td>
-<td>{{adReport.ad.flightId}}</td>
-<td>{{adReport.ad.creativeId}}</td>
-<td>{{adReport.ad.adId}}</td>
-<td>{{adReport.count}}</td>
-<td>({{(adReport.count / getResponseCount()) | percent:'1.0-1'}})</td>
-<!-- <td [ngSwitch]="!placement.ads[adId].adId">
-  <span *ngSwitchWhen="true">No campaign</span>
-  <campaign-name [adData]="placement.ads[adId]" *ngSwitchWhen="false"></campaign-name>
-</td>
-<td [ngSwitch]="!placement.ads[adId].adId">
-  <span *ngSwitchWhen="true">No flight</span>
-  <flight-name [adData]="placement.ads[adId]" *ngSwitchWhen="false"></flight-name>
-</td>
-<td [ngSwitch]="!placement.ads[adId].adId">
-  <span *ngSwitchWhen="true">No creative</span>
-  <creative-name [adData]="placement.ads[adId]" *ngSwitchWhen="false"></creative-name>
-</td>
-<td [ngSwitch]="!placement.ads[adId].adId">
-  <span *ngSwitchWhen="true">No ad</span>
-  <span *ngSwitchWhen="false">{{placement.ads[adId].adId}}</span>
-</td>
-<td>{{placement.ads[adId].count}}</td>
-<td>({{(placement.ads[adId].count / runner.completed) | percent:'1.0-1'}})</td> -->
+<td><campaign-name [ad]="ad" *ngIf="ad"></campaign-name></td>
+<td><flight-name [ad]="ad" *ngIf="ad"></flight-name></td>
+<td><creative-name [ad]="ad" *ngIf="ad"></creative-name></td>
+<td>{{adId}}</td>
+<td>{{count}}</td>
+<td>({{(count / adzerkResponses.length) | percent:'1.0-1'}})</td>

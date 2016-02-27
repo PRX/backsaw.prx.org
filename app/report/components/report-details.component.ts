@@ -2,9 +2,10 @@ import {Component, Input, OnInit} from 'angular2/core';
 
 import {Observable} from 'rxjs/Observable';
 
-import {AdzerkNativeAdAPIResponse} from '../../shared/services/adzerk_native_ad_api_client';
+import {
+  AdzerkNativeAdAPIResponseDecision,
+  AdzerkNativeAdAPIResponse} from '../../shared/services/adzerk_native_ad_api_client';
 import {SlotReportDetailsComponent} from './slot-report-details.component';
-import {EpisodeReport, ReportService} from '../../shared/services/report.service'
 
 @Component({
   selector: 'report-details',
@@ -13,19 +14,18 @@ import {EpisodeReport, ReportService} from '../../shared/services/report.service
   styleUrls: ['app/report/components/report-details.component.css']
 })
 export class ReportDetailsComponent {
-  @Input() episodeReport: Observable<EpisodeReport>;
+  @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
 
-  slotReports;
-
-  constructor(
-    private _reportService: ReportService
-  ) {}
+  adzerkResponses: AdzerkNativeAdAPIResponse[] = [];
+  slotIds: string[] = [];
 
   ngOnInit() {
-    this.slotReports = this.episodeReport.map(report => report.slotReports());
-  }
+    this.adzerkResponses$
+      .subscribe(responses => {
+        this.adzerkResponses = responses;
 
-  getAdzerkResponses() {
-    return this._reportService.getAdzerkResponses();
+        let decisions: AdzerkNativeAdAPIResponseDecision[] = responses[0].decisions;
+        this.slotIds = Object.keys(decisions);
+      });
   }
 }
