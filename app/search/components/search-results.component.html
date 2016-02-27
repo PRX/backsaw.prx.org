@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="#episode of episodes | async">
-    <span (click)="onSelect(episode)">{{episode.title}}</span>
-    (<span (click)="onAdvanced(episode)">Adv.</span>)
+    <a [routerLink]="['/Report', {url: episode.paramURL()}]">{{episode.title}}</a>
+    (<a [routerLink]="['/Advanced', {url: episode.paramURL()}]">Custom</a>)
   </li>
 </ul>

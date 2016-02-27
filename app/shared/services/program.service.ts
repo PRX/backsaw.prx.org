@@ -3,7 +3,8 @@ import {Injectable} from 'angular2/core';
 export class Program {
   constructor(
     public name: string,
-    public url: string) {}
+    public url: string
+  ) {}
 
   paramURL() {
     return encodeURIComponent(this.url);

@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {NgForm} from 'angular2/common'
+import {NgForm} from 'angular2/common';
 
 import {
   AuthenticationService,
@@ -21,6 +21,7 @@ export class AuthenticationFormComponent {
 
   onSubmit() {
     this._authService.setAdzerkAPIKey(this.request.adzkerkAPIKey);
+    alert('Refresh page to log in :-/');
     // this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
   }
 }

@@ -111,6 +111,10 @@ export class ReportService {
     return !!this._adzerkRequest;
   }
 
+  propertyOverrides() {
+    return this._adzerkRequestProperties;
+  }
+
   // Setup
 
   setEpisode(episode: Episode) {
@@ -137,7 +141,19 @@ export class ReportService {
     }
   }
 
+  // Execute
+
+  private _applyProperties() {
+    if (this._adzerkRequestProperties) {
+      for (let placement of this._adzerkRequest.placements) {
+        placement.properties = this._adzerkRequestProperties;
+      }
+    }
+  }
+
   fetchResponses(times: number) {
+    this._applyProperties();
+
     for (var i = 0; i < times; i++) {
       this._fetchResponse();
     }

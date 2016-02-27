@@ -1,5 +1,4 @@
 import {Component} from 'angular2/core';
-import {NgForm} from 'angular2/common';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {AuthenticationService} from '../../shared/services/authentication_service';
@@ -17,6 +16,7 @@ export class ToolbarComponent {
   ) {}
 
   onLogout() {
+    alert('TODO');
     // this._authService.unsetAdzerkAPIKey();
     // this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
   }

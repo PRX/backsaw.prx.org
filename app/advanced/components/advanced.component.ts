@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 
-import {PropertiesFormComponent} from './properties-form.component'
+import {PropertiesFormComponent} from './properties-form.component';
 import {Episode} from '../../shared/services/feed_service';
 import {DovetailService} from '../../shared/services/dovetail_service';
 import {

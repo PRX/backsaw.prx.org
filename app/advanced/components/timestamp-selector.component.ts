@@ -1,7 +1,9 @@
 import {Component, Input, OnInit, OnChanges, SimpleChange} from 'angular2/core';
 import {NgForm} from 'angular2/common';
 
-import {AdzerkNativeAdAPIRequest} from '../../shared/services/adzerk_native_ad_api_client';
+import {
+  AdzerkNativeAdAPIRequestProperties,
+  AdzerkNativeAdAPIRequest} from '../../shared/services/adzerk_native_ad_api_client';
 import {Episode} from '../../shared/services/feed_service';
 
 @Component({
@@ -11,7 +13,7 @@ import {Episode} from '../../shared/services/feed_service';
   styleUrls: ['app/advanced/components/timestamp-selector.component.css']
 })
 export class TimestampSelectorComponent implements OnInit, OnChanges {
-  @Input() propOverrides: any;
+  @Input() propOverrides: AdzerkNativeAdAPIRequestProperties;
   @Input() prop: string;
 
   date = { year: 2016, month: 1, day: 1 }

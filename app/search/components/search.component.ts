@@ -21,7 +21,8 @@ export class SearchComponent {
 
   constructor (
     private _routeParams: RouteParams,
-    private _programService: ProgramService) {}
+    private _programService: ProgramService
+  ) {}
 
   ngOnInit() {
     if (this._routeParams.get('url')) {

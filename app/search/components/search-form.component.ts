@@ -19,7 +19,8 @@ export class SearchFormComponent implements OnInit {
   constructor (
     private _router: Router,
     private _routeParams: RouteParams,
-    private _programService: ProgramService) {}
+    private _programService: ProgramService
+  ) {}
 
   query = new SearchQuery('');
 

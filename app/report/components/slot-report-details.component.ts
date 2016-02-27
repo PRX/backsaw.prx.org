@@ -5,7 +5,6 @@ import {NullAdReportDetailsComponent} from './null-ad-report-details.component';
 import {
   AdzerkNativeAdAPIResponseDecision,
   AdzerkNativeAdAPIResponse} from '../../shared/services/adzerk_native_ad_api_client';
-// import {SlotReport} from '../../shared/services/report.service';
 
 @Component({
   selector: 'slot-report-details',

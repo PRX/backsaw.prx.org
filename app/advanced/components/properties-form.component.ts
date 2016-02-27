@@ -2,9 +2,11 @@ import {Component, Input} from 'angular2/core';
 import {NgForm} from 'angular2/common';
 import {Router} from 'angular2/router';
 
-import {AdzerkNativeAdAPIRequest} from '../../shared/services/adzerk_native_ad_api_client';
+import {
+  AdzerkNativeAdAPIRequestProperties,
+  AdzerkNativeAdAPIRequest} from '../../shared/services/adzerk_native_ad_api_client';
 import {Episode} from '../../shared/services/feed_service';
-import {TimestampSelectorComponent} from './timestamp-selector.component'
+import {TimestampSelectorComponent} from './timestamp-selector.component';
 
 @Component({
   selector: 'properties-form',
@@ -14,7 +16,7 @@ import {TimestampSelectorComponent} from './timestamp-selector.component'
 })
 export class PropertiesFormComponent {
   @Input() adzerkRequest: AdzerkNativeAdAPIRequest;
-  @Input() propOverrides: any;
+  @Input() propOverrides: AdzerkNativeAdAPIRequestProperties;
   @Input() episode: Episode;
 
   constructor(
