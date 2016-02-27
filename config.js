@@ -2,18 +2,18 @@ System.config({
   baseURL: "/",
   defaultJSExtensions: true,
   transpiler: "typescript",
+  typescriptOptions: {
+    "tsconfig": true
+  },
   paths: {
     "npm:*": "jspm_packages/npm/*",
     "github:*": "jspm_packages/github/*"
   },
-  typescriptOptions:{
-    tsconfig: true
-  },
 
   packages: {
-    app: {
-      defaultExtension: "ts",
-      meta: {
+    "app": {
+      "defaultExtension": "ts",
+      "meta": {
         "*.ts": {
           "loader": "ts"
         }
