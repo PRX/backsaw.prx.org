@@ -17,11 +17,11 @@ export class Episode {
 @Injectable()
 export class FeedService {
   constructor (
-    private _http: Http
+    private http: Http
   ) {}
 
   getEpisodes (url: string): Observable<Episode[]> {
-    return this._http.get(url).map((res: Response) => {
+    return this.http.get(url).map((res: Response) => {
       let episodes: Episode[] = [];
 
       let xml: string = res.text();

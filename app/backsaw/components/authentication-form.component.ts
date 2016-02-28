@@ -15,13 +15,13 @@ import {
 })
 export class AuthenticationFormComponent {
   constructor(
-    private _authService: AuthenticationService
+    private auth: AuthenticationService
   ) {}
 
   request: AuthenticationRequest = new AuthenticationRequest();
 
   onSubmit(): void {
-    this._authService.setAdzerkAPIKey(this.request.adzkerkAPIKey);
+    this.auth.setAdzerkAPIKey(this.request.adzkerkAPIKey);
     alert('Refresh page to log in :-/');
     // TODO this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
   }

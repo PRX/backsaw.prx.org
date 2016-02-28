@@ -22,27 +22,27 @@ export class AdvancedComponent implements OnInit {
   propOverrides: AdzerkNativeAdAPIRequestProperties;
 
   constructor(
-    private _routeParams: RouteParams,
-    private _dovetailService: DovetailService
+    private routeParams: RouteParams,
+    private dovetailService: DovetailService
   ) {}
 
   ngOnInit(): void {
-    if (this._routeParams.get('url')) {
-      let url: string = decodeURIComponent(this._routeParams.get('url'));
+    if (this.routeParams.get('url')) {
+      let url: string = decodeURIComponent(this.routeParams.get('url'));
       this.episode = new Episode(url);
 
-      this._dovetailService
+      this.dovetailService
         .getAdzerkRequestBody(this.episode.url)
         .subscribe((request: AdzerkNativeAdAPIRequest) => {
           this.adzerkRequest = request;
-          this._setupPropOverrides();
+          this.setupPropOverrides();
         });
     }
   }
 
-  private _setupPropOverrides(): void {
-    if (this._routeParams.get('properties')) {
-      this.propOverrides = JSON.parse(decodeURIComponent(this._routeParams.get('properties')));
+  private setupPropOverrides(): void {
+    if (this.routeParams.get('properties')) {
+      this.propOverrides = JSON.parse(decodeURIComponent(this.routeParams.get('properties')));
     } else {
       this.propOverrides = this.adzerkRequest.placements[0].properties;
     }

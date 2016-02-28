@@ -18,11 +18,11 @@ export class TimestampSelectorComponent implements OnInit, OnChanges {
   date: {year: number, month: number, day: number} = { day: 1, month: 1, year: 2016 };
 
   ngOnInit(): void {
-    this._setControls();
+    this.setControls();
   }
 
   ngOnChanges(changes: {[propName: string]: SimpleChange}): void {
-    this._setControls();
+    this.setControls();
   }
 
   updateTimestampYear(year: number): void {
@@ -40,7 +40,7 @@ export class TimestampSelectorComponent implements OnInit, OnChanges {
     this.propOverrides[this.prop] = d.getTime();
   }
 
-  private _setControls(): void {
+  private setControls(): void {
     if (this.propOverrides[this.prop]) {
       let d: Date = new Date(Number(this.propOverrides[this.prop]));
 

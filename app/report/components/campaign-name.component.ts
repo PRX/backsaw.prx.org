@@ -25,11 +25,11 @@ export class CampaignNameComponent implements OnInit {
 
   campaignResponse: AdzerkManagementAPICampaignResponse;
 
-  constructor(private _adzerkService: AdzerkManagementAPI) {}
+  constructor(private adzerk: AdzerkManagementAPI) {}
 
   ngOnInit(): void {
     if (this.ad && this.ad.campaignId) {
-      this._adzerkService
+      this.adzerk
         .getCampaign(this.ad.campaignId)
         .subscribe((res: AdzerkManagementAPICampaignResponse) => {
           if (res.Id) {

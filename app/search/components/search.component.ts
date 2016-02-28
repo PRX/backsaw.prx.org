@@ -19,14 +19,14 @@ export class SearchComponent implements OnInit {
   program: Program;
 
   constructor (
-    private _routeParams: RouteParams,
-    private _programService: ProgramService
+    private routeParams: RouteParams,
+    private programService: ProgramService
   ) {}
 
   ngOnInit(): void {
-    if (this._routeParams.get('url')) {
-      let url: string = decodeURIComponent(this._routeParams.get('url'));
-      this.program = this._programService.programFromURL(url);
+    if (this.routeParams.get('url')) {
+      let url: string = decodeURIComponent(this.routeParams.get('url'));
+      this.program = this.programService.programFromURL(url);
     }
   }
 }

@@ -10,17 +10,17 @@ export class AuthenticationRequest {
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private _ls: LocalStorage) {}
+  constructor(private ls: LocalStorage) {}
 
   setAdzerkAPIKey(key: string): void {
-    this._ls.set('adzerkApiKey', key);
+    this.ls.set('adzerkApiKey', key);
   }
 
   unsetAdzerkAPIKey(): void {
-    this._ls.remove('adzerkApiKey');
+    this.ls.remove('adzerkApiKey');
   }
 
   getAdzerkAPIKey(): string {
-    return this._ls.get('adzerkApiKey');
+    return this.ls.get('adzerkApiKey');
   }
 }

@@ -19,19 +19,19 @@ export class ReportComponent implements OnInit {
   episode: Episode;
 
   constructor(
-    private _routeParams: RouteParams,
+    private routeParams: RouteParams,
     public report: ReportService
   ) {}
 
   ngOnInit(): void {
-    if (this._routeParams.get('url')) {
-      let url: string = decodeURIComponent(this._routeParams.get('url'));
+    if (this.routeParams.get('url')) {
+      let url: string = decodeURIComponent(this.routeParams.get('url'));
 
       this.episode = new Episode(url);
       this.report.setEpisode(this.episode);
 
-      if (this._routeParams.get('properties')) {
-        let decodedProperties: string = decodeURIComponent(this._routeParams.get('properties'));
+      if (this.routeParams.get('properties')) {
+        let decodedProperties: string = decodeURIComponent(this.routeParams.get('properties'));
         let propertyOverrides: AdzerkNativeAdAPIRequestProperties = JSON.parse(decodedProperties);
 
         this.report.setProperties(propertyOverrides);

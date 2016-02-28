@@ -19,12 +19,12 @@ export class CreativeNameComponent implements OnInit {
   adResponse: AdzerkManagementAPIAdResponse;
 
   constructor(
-    private _adzerkService: AdzerkManagementAPI
+    private adzerk: AdzerkManagementAPI
   ) {}
 
   ngOnInit(): void {
     if (this.ad && this.ad.flightId && this.ad.adId) {
-      this._adzerkService
+      this.adzerk
         .getAd(this.ad.flightId, this.ad.adId)
         .subscribe((res: AdzerkManagementAPIAdResponse) => {
           if (res.Id) {

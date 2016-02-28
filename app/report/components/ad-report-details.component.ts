@@ -37,7 +37,7 @@ export class AdReportDetailsComponent implements OnInit {
   ad: Ad;
 
   constructor(
-    private _reportService: ReportService
+    private reportService: ReportService
   ) {}
 
   isInFilter(): boolean {
@@ -49,17 +49,17 @@ export class AdReportDetailsComponent implements OnInit {
 
   toggleAdFilter(): void {
     if (this.isInFilter()) {
-      this._reportService.removeFilter(this.slotId, 'adId', this.adId);
+      this.reportService.removeFilter(this.slotId, 'adId', this.adId);
     } else {
-      this._reportService.addFilter(this.slotId, 'adId', this.adId);
+      this.reportService.addFilter(this.slotId, 'adId', this.adId);
     }
   }
 
   setCampaignFilter(add: boolean): void {
     if (add) {
-      this._reportService.addFilter(this.slotId, 'campaignId', this.ad.campaignId);
+      this.reportService.addFilter(this.slotId, 'campaignId', this.ad.campaignId);
     } else {
-      this._reportService.removeFilter(this.slotId, 'campaignId', this.ad.campaignId);
+      this.reportService.removeFilter(this.slotId, 'campaignId', this.ad.campaignId);
     }
   }
 
@@ -75,7 +75,7 @@ export class AdReportDetailsComponent implements OnInit {
 
           if (decision
             && decision.adId === this.adId
-            && this._reportService.doesResponseSatisfyFilter(response)) {
+            && this.reportService.doesResponseSatisfyFilter(response)) {
             this.count += 1;
 
             if (!this.ad) {

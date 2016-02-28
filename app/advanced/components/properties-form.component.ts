@@ -21,13 +21,13 @@ export class PropertiesFormComponent {
   @Input() episode: Episode;
 
   constructor(
-    private _router: Router
+    private router: Router
   ) {}
 
   onSubmit(): void {
     let properties: string = encodeURIComponent(JSON.stringify(this.propOverrides));
     let url: string = this.episode.paramURL();
 
-    this._router.navigate(['Report', { properties: properties, url: url }]);
+    this.router.navigate(['Report', { properties: properties, url: url }]);
   }
 }

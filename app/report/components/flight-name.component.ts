@@ -19,11 +19,11 @@ export class FlightNameComponent implements OnInit {
 
   flightResponse: AdzerkManagementAPIFlightResponse;
 
-  constructor(private _adzerkService: AdzerkManagementAPI) {}
+  constructor(private adzerk: AdzerkManagementAPI) {}
 
   ngOnInit(): void {
     if (this.ad && this.ad.flightId) {
-      this._adzerkService
+      this.adzerk
         .getFlight(this.ad.flightId)
         .subscribe((res: AdzerkManagementAPIFlightResponse) => {
           if (res.Id) {

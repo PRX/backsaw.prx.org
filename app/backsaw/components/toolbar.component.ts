@@ -12,7 +12,7 @@ import {AuthenticationService} from '../../shared/services/authentication_servic
 })
 export class ToolbarComponent {
   constructor(
-    private _authService: AuthenticationService
+    private auth: AuthenticationService
   ) {}
 
   onLogout(): void {

@@ -20,24 +20,24 @@ class SearchQuery {
 })
 export class SearchFormComponent implements OnInit {
   constructor (
-    private _router: Router,
-    private _routeParams: RouteParams,
-    private _programService: ProgramService
+    private router: Router,
+    private routeParams: RouteParams,
+    private programService: ProgramService
   ) {}
 
   query: SearchQuery = new SearchQuery('');
 
   ngOnInit(): void {
-    if (this._routeParams.get('url')) {
-      this.query.url = decodeURIComponent(this._routeParams.get('url'));
+    if (this.routeParams.get('url')) {
+      this.query.url = decodeURIComponent(this.routeParams.get('url'));
     }
   }
 
   programs(): Program[] {
-    return this._programService.programs;
+    return this.programService.programs;
   }
 
   onSubmit(): void {
-    this._router.navigate(['Search', { url: encodeURIComponent(this.query.url) }]);
+    this.router.navigate(['Search', { url: encodeURIComponent(this.query.url) }]);
   }
 }

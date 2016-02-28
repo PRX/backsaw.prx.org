@@ -23,15 +23,15 @@ import {AuthenticationService} from '../../shared/services/authentication_servic
 ])
 export class BacksawAppComponent implements OnInit {
   constructor(
-    private _authService: AuthenticationService
+    private auth: AuthenticationService
   ) {}
 
   authData: {adzkerkAPIKey?: string} = {};
   adzkerkAPIKey: string;
 
   ngOnInit(): void {
-    if (this._authService.getAdzerkAPIKey()) {
-      this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
+    if (this.auth.getAdzerkAPIKey()) {
+      this.adzkerkAPIKey = this.auth.getAdzerkAPIKey();
     }
   }
 

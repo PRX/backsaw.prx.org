@@ -17,19 +17,19 @@ export class ReportService {
   public adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   public filter: {} = {};
 
-  private _episode: Episode;
-  private _adzerkRequest: AdzerkNativeAdAPIRequest;
-  private _adzerkRequestProperties: AdzerkNativeAdAPIRequestProperties;
-  private _adzerkResponses: AdzerkNativeAdAPIResponse[];
-  private _adzerkResponsesObserver: Observer<AdzerkNativeAdAPIResponse[]>;
+  private episode: Episode;
+  private adzerkRequest: AdzerkNativeAdAPIRequest;
+  private adzerkRequestProperties: AdzerkNativeAdAPIRequestProperties;
+  private adzerkResponses: AdzerkNativeAdAPIResponse[];
+  private adzerkResponsesObserver: Observer<AdzerkNativeAdAPIResponse[]>;
 
   constructor(
-    private _dovetailService: DovetailService,
-    private _azerkService: AdzerkNativeAdAPI
+    private dovetailService: DovetailService,
+    private azerkService: AdzerkNativeAdAPI
   ) {
-    this._adzerkResponses = [];
+    this.adzerkResponses = [];
     this.adzerkResponses$ = new Observable((observer: Observer<AdzerkNativeAdAPIResponse[]>) => {
-      this._adzerkResponsesObserver = observer;
+      this.adzerkResponsesObserver = observer;
     }).share();
   }
 
@@ -38,8 +38,8 @@ export class ReportService {
   clearFilter(): void {
     this.filter = {};
 
-    if (this._adzerkResponsesObserver) {
-      this._adzerkResponsesObserver.next(this._adzerkResponses);
+    if (this.adzerkResponsesObserver) {
+      this.adzerkResponsesObserver.next(this.adzerkResponses);
     }
   }
 
@@ -50,8 +50,8 @@ export class ReportService {
 
     this.filter[slotId][key] = value;
 
-    if (this._adzerkResponsesObserver) {
-      this._adzerkResponsesObserver.next(this._adzerkResponses);
+    if (this.adzerkResponsesObserver) {
+      this.adzerkResponsesObserver.next(this.adzerkResponses);
     }
   }
 
@@ -59,8 +59,8 @@ export class ReportService {
     if (this.filter[slotId] && this.filter[slotId][key]) {
       delete this.filter[slotId][key];
 
-      if (this._adzerkResponsesObserver) {
-        this._adzerkResponsesObserver.next(this._adzerkResponses);
+      if (this.adzerkResponsesObserver) {
+        this.adzerkResponsesObserver.next(this.adzerkResponses);
       }
     }
   }
@@ -108,66 +108,66 @@ export class ReportService {
   // State
 
   canFetchResponses(): boolean {
-    return !!this._adzerkRequest;
+    return !!this.adzerkRequest;
   }
 
   propertyOverrides(): AdzerkNativeAdAPIRequestProperties {
-    return this._adzerkRequestProperties;
+    return this.adzerkRequestProperties;
   }
 
   // Setup
 
   setEpisode(episode: Episode): void {
     // Reset the service
-    this._episode = undefined;
-    this._adzerkRequest = undefined;
-    this._adzerkRequestProperties = undefined;
-    this._adzerkResponses = [];
+    this.episode = undefined;
+    this.adzerkRequest = undefined;
+    this.adzerkRequestProperties = undefined;
+    this.adzerkResponses = [];
 
-    this._episode = episode;
+    this.episode = episode;
 
-    this._dovetailService
-      .getAdzerkRequestBody(this._episode.url)
+    this.dovetailService
+      .getAdzerkRequestBody(this.episode.url)
       .subscribe((request: AdzerkNativeAdAPIRequest) => {
-        this._adzerkRequest = request;
+        this.adzerkRequest = request;
       });
   }
 
   setProperties(properties: AdzerkNativeAdAPIRequestProperties): void {
-    if (this._adzerkResponses.length > 0) {
+    if (this.adzerkResponses.length > 0) {
       console.error('Cannot set properties after report has run.');
     } else {
-      this._adzerkRequestProperties = properties;
+      this.adzerkRequestProperties = properties;
     }
   }
 
   // Execute
 
   fetchResponses(times: number): void {
-    this._applyProperties();
+    this.applyProperties();
 
     let i: number;
     for (i = 0; i < times; i++) {
-      this._fetchResponse();
+      this.fetchResponse();
     }
   }
 
-  private _fetchResponse(): void {
-    this._azerkService
-      .request(this._adzerkRequest)
+  private fetchResponse(): void {
+    this.azerkService
+      .request(this.adzerkRequest)
       .subscribe((response: AdzerkNativeAdAPIResponse) => {
-        this._adzerkResponses.push(response);
+        this.adzerkResponses.push(response);
 
-        if (this._adzerkResponsesObserver) {
-          this._adzerkResponsesObserver.next(this._adzerkResponses);
+        if (this.adzerkResponsesObserver) {
+          this.adzerkResponsesObserver.next(this.adzerkResponses);
         }
       });
   }
 
-  private _applyProperties(): void {
-    if (this._adzerkRequestProperties) {
-      for (let placement of this._adzerkRequest.placements) {
-        placement.properties = this._adzerkRequestProperties;
+  private applyProperties(): void {
+    if (this.adzerkRequestProperties) {
+      for (let placement of this.adzerkRequest.placements) {
+        placement.properties = this.adzerkRequestProperties;
       }
     }
   }

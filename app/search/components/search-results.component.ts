@@ -17,14 +17,14 @@ export class SearchResultsComponent implements OnInit {
   @Input() program: Program;
 
   constructor (
-    private _feedService: FeedService
+    private feedService: FeedService
   ) {}
 
   episodes: Observable<Episode[]>;
 
   ngOnInit(): void {
     if (this.program) {
-      this.episodes = this._feedService.getEpisodes(this.program.url);
+      this.episodes = this.feedService.getEpisodes(this.program.url);
     }
   }
 }
