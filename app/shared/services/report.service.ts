@@ -1,6 +1,7 @@
 import {Injectable} from 'angular2/core';
 
 import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/share';
 
 import {Episode} from './feed_service';
@@ -20,14 +21,14 @@ export class ReportService {
   private _adzerkRequest: AdzerkNativeAdAPIRequest;
   private _adzerkRequestProperties: AdzerkNativeAdAPIRequestProperties;
   private _adzerkResponses: AdzerkNativeAdAPIResponse[];
-  private _adzerkResponsesObserver: any;
+  private _adzerkResponsesObserver: Observer<AdzerkNativeAdAPIResponse[]>;
 
   constructor(
     private _dovetailService: DovetailService,
     private _azerkService: AdzerkNativeAdAPI
   ) {
     this._adzerkResponses = [];
-    this.adzerkResponses$ = new Observable((observer: any) => {
+    this.adzerkResponses$ = new Observable((observer: Observer<AdzerkNativeAdAPIResponse[]>) => {
       this._adzerkResponsesObserver = observer;
     }).share();
   }
