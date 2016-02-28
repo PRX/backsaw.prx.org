@@ -1,26 +1,33 @@
 import {Component, Input, OnInit} from 'angular2/core';
 
+import {Observable} from 'rxjs/Observable';
+
+import {
+  AdzerkNativeAdAPIResponse,
+  AdzerkNativeAdAPIResponseDecision,
+} from '../../shared/services/adzerk_native_ad_api_client';
+
 @Component({
   selector: 'null-ad-report-details',
+  styleUrls: ['app/report/components/null-ad-report-details.component.css'],
   templateUrl: 'app/report/components/null-ad-report-details.component.html',
-  styleUrls: ['app/report/components/null-ad-report-details.component.css']
 })
 export class NullAdReportDetailsComponent implements OnInit {
   @Input() slotId: number;
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
 
-  count = 0;
+  count: number = 0;
   adzerkResponses: AdzerkNativeAdAPIResponse[] = [];
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.adzerkResponses$
-      .subscribe(responses => {
+      .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
         this.adzerkResponses = responses;
         this.count = 0;
 
         for (let response of responses) {
           let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
-          let decision = decisions[this.slotId];
+          let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.slotId];
 
           if (!decision) {
             this.count += 1;

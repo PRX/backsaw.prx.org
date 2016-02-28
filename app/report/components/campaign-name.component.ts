@@ -1,34 +1,37 @@
 import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
 
-import {AdzerkManagementAPICampaignResponse,
-  AdzerkManagementAPI} from '../../shared/services/adzerk_management_api_client'
+import {Ad} from './ad-report-details.component';
+import {
+  AdzerkManagementAPICampaignResponse,
+  AdzerkManagementAPI,
+} from '../../shared/services/adzerk_management_api_client';
 
 @Component({
-  selector: 'campaign-name',
   providers: [AdzerkManagementAPI],
+  selector: 'campaign-name',
   styleUrls: ['app/report/components/campaign-name.component.css'],
   template: `
     <span (click)="toggleFilter()" [ngClass]="{'is-filter': isInFilter()}">
       <span *ngIf="!campaignResponse">{{ad.campaignId}}</span>
       <span *ngIf="campaignResponse">{{campaignResponse.Name}}</span>
     </span>
-  `
+  `,
 })
 export class CampaignNameComponent implements OnInit {
   @Input() slotId: number;
-  @Input() ad;
-  @Input() filter;
-  @Output() filterOnCampaign = new EventEmitter();
+  @Input() ad: Ad;
+  @Input() filter: {};
+  @Output() filterOnCampaign: EventEmitter<boolean> = new EventEmitter();
 
   campaignResponse: AdzerkManagementAPICampaignResponse;
 
   constructor(private _adzerkService: AdzerkManagementAPI) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.ad && this.ad.campaignId) {
       this._adzerkService
         .getCampaign(this.ad.campaignId)
-        .subscribe(res => {
+        .subscribe((res: AdzerkManagementAPICampaignResponse) => {
           if (res.Id) {
             this.campaignResponse = res;
           }
@@ -36,14 +39,14 @@ export class CampaignNameComponent implements OnInit {
     }
   }
 
-  isInFilter() {
+  isInFilter(): boolean {
     return (this.filter
       && this.filter[this.slotId]
-      && this.filter[this.slotId]['campaignId']
-      && this.filter[this.slotId]['campaignId'] == this.ad.campaignId)
+      && this.filter[this.slotId].campaignId
+      && this.filter[this.slotId].campaignId === this.ad.campaignId);
   }
 
-  toggleFilter() {
+  toggleFilter(): void {
     this.filterOnCampaign.emit(!this.isInFilter());
   }
 }

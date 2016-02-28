@@ -4,20 +4,20 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {AuthenticationService} from '../../shared/services/authentication_service';
 
 @Component({
-  selector: 'toolbar',
   directives: [ROUTER_DIRECTIVES],
   providers: [AuthenticationService],
+  selector: 'toolbar',
+  styleUrls: ['app/backsaw/components/toolbar.component.css'],
   templateUrl: 'app/backsaw/components/toolbar.component.html',
-  styleUrls: ['app/backsaw/components/toolbar.component.css']
 })
 export class ToolbarComponent {
   constructor(
     private _authService: AuthenticationService
   ) {}
 
-  onLogout() {
+  onLogout(): void {
     alert('TODO');
-    // this._authService.unsetAdzerkAPIKey();
-    // this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
+    // TODO this._authService.unsetAdzerkAPIKey();
+    // TODO this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
   }
 }

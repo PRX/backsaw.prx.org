@@ -1,20 +1,22 @@
 import {Injectable} from 'angular2/core';
-import {Http, Headers, RequestOptions} from 'angular2/http';
+import {Http, Headers, RequestOptions, Response} from 'angular2/http';
 
-import { AdzerkNativeAdAPIRequest } from '../../shared/services/adzerk_native_ad_api_client'
+import {Observable} from 'rxjs/Observable';
+
+import { AdzerkNativeAdAPIRequest } from '../../shared/services/adzerk_native_ad_api_client';
 
 @Injectable()
 export class DovetailService {
   constructor (private http: Http) {}
 
-  getAdzerkRequestBody(url: string) {
-    let result = /(dovetail\.prxu\.org\/.*)/.exec(url);
-    let dovetail_url = 'https://' + result[1];
+  getAdzerkRequestBody(url: string): Observable<AdzerkNativeAdAPIRequest> {
+    let result: RegExpExecArray = /(dovetail\.prxu\.org\/.*)/.exec(url);
+    let dovetailUrl: string = 'https://' + result[1];
 
-    let headers = new Headers({ 'Accept': 'application/vnd.dovetail.v1+json' });
-    let options = new RequestOptions({ headers: headers });
+    let headers: Headers = new Headers({ 'Accept': 'application/vnd.dovetail.v1+json' });
+    let options: RequestOptions = new RequestOptions({ headers: headers });
 
-    return this.http.get(dovetail_url, options).map(res => {
+    return this.http.get(dovetailUrl, options).map((res: Response) => {
       let body: AdzerkNativeAdAPIRequest = JSON.parse(res.text()).request;
       return body;
     });

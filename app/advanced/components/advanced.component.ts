@@ -6,13 +6,14 @@ import {Episode} from '../../shared/services/feed_service';
 import {DovetailService} from '../../shared/services/dovetail_service';
 import {
   AdzerkNativeAdAPIRequest,
-  AdzerkNativeAdAPIRequestProperties} from '../../shared/services/adzerk_native_ad_api_client';
+  AdzerkNativeAdAPIRequestProperties,
+} from '../../shared/services/adzerk_native_ad_api_client';
 
 @Component({
   directives: [PropertiesFormComponent],
   providers: [DovetailService],
+  styleUrls: ['app/advanced/components/advanced.component.css'],
   templateUrl: 'app/advanced/components/advanced.component.html',
-  styleUrls: ['app/advanced/components/advanced.component.css']
 })
 export class AdvancedComponent implements OnInit {
   episode: Episode;
@@ -25,21 +26,21 @@ export class AdvancedComponent implements OnInit {
     private _dovetailService: DovetailService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this._routeParams.get('url')) {
-      let url = decodeURIComponent(this._routeParams.get('url'));
+      let url: string = decodeURIComponent(this._routeParams.get('url'));
       this.episode = new Episode(url);
 
       this._dovetailService
         .getAdzerkRequestBody(this.episode.url)
-        .subscribe(request => {
+        .subscribe((request: AdzerkNativeAdAPIRequest) => {
           this.adzerkRequest = request;
           this._setupPropOverrides();
         });
     }
   }
 
-  private _setupPropOverrides() {
+  private _setupPropOverrides(): void {
     if (this._routeParams.get('properties')) {
       this.propOverrides = JSON.parse(decodeURIComponent(this._routeParams.get('properties')));
     } else {

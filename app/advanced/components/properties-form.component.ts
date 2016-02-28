@@ -4,15 +4,16 @@ import {Router} from 'angular2/router';
 
 import {
   AdzerkNativeAdAPIRequestProperties,
-  AdzerkNativeAdAPIRequest} from '../../shared/services/adzerk_native_ad_api_client';
+  AdzerkNativeAdAPIRequest,
+} from '../../shared/services/adzerk_native_ad_api_client';
 import {Episode} from '../../shared/services/feed_service';
 import {TimestampSelectorComponent} from './timestamp-selector.component';
 
 @Component({
+directives: [NgForm, TimestampSelectorComponent],
   selector: 'properties-form',
-  directives: [NgForm, TimestampSelectorComponent],
+  styleUrls: ['app/advanced/components/properties-form.component.css'],
   templateUrl: 'app/advanced/components/properties-form.component.html',
-  styleUrls: ['app/advanced/components/properties-form.component.css']
 })
 export class PropertiesFormComponent {
   @Input() adzerkRequest: AdzerkNativeAdAPIRequest;
@@ -23,9 +24,9 @@ export class PropertiesFormComponent {
     private _router: Router
   ) {}
 
-  onSubmit() {
-    let properties = encodeURIComponent(JSON.stringify(this.propOverrides));
-    let url = this.episode.paramURL();
+  onSubmit(): void {
+    let properties: string = encodeURIComponent(JSON.stringify(this.propOverrides));
+    let url: string = this.episode.paramURL();
 
     this._router.navigate(['Report', { properties: properties, url: url }]);
   }

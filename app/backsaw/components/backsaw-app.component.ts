@@ -7,21 +7,19 @@ import {ToolbarComponent} from './toolbar.component';
 import {SearchComponent} from '../../search/components/search.component';
 import {ReportComponent} from '../../report/components/report.component';
 import {AdvancedComponent} from '../../advanced/components/advanced.component';
-import {
-  AuthenticationService,
-  AuthenticationRequest} from '../../shared/services/authentication_service';
+import {AuthenticationService} from '../../shared/services/authentication_service';
 
 @Component({
-  selector: 'backsaw-app',
   directives: [ROUTER_DIRECTIVES, AuthenticationFormComponent, ToolbarComponent],
   providers: [AuthenticationService],
+  selector: 'backsaw-app',
+  styleUrls: ['app/backsaw/components/backsaw-app.component.css'],
   templateUrl: 'app/backsaw/components/backsaw-app.component.html',
-  styleUrls: ['app/backsaw/components/backsaw-app.component.css']
 })
 @RouteConfig([
-  { path: '/', name: 'Search', component: SearchComponent },
-  { path: '/report', name: 'Report', component: ReportComponent },
-  { path: '/advanced', name: 'Advanced', component: AdvancedComponent }
+  { component: SearchComponent, name: 'Search', path: '/' },
+  { component: ReportComponent, name: 'Report', path: '/report' },
+  { component: AdvancedComponent, name: 'Advanced', path: '/advanced' },
 ])
 export class BacksawAppComponent implements OnInit {
   constructor(
@@ -31,13 +29,13 @@ export class BacksawAppComponent implements OnInit {
   authData: {adzkerkAPIKey?: string} = {};
   adzkerkAPIKey: string;
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this._authService.getAdzerkAPIKey()) {
       this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
     }
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return !!this.adzkerkAPIKey;
   }
 }

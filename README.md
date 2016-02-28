@@ -22,3 +22,6 @@ npm install lite-server --save-dev
 ```
 
 `angular2` is installed as a npm dependency right now so index.html can include angular2-polyfills directly. That will probably get fixed at some point. `rxjs` is an npm dependency because without it the transpiler couldn't find module to import (at least not in Atom). Be sure to keep those to packages in sync between npm and jspm.
+
+TODO
+[ ] https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines

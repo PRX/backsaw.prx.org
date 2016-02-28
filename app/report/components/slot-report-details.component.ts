@@ -1,33 +1,36 @@
 import {Component, Input, OnInit} from 'angular2/core';
 
+import {Observable} from 'rxjs/Observable';
+
 import {AdReportDetailsComponent} from './ad-report-details.component';
 import {NullAdReportDetailsComponent} from './null-ad-report-details.component';
 import {
   AdzerkNativeAdAPIResponseDecision,
-  AdzerkNativeAdAPIResponse} from '../../shared/services/adzerk_native_ad_api_client';
+  AdzerkNativeAdAPIResponse,
+} from '../../shared/services/adzerk_native_ad_api_client';
 
 @Component({
-  selector: 'slot-report-details',
   directives: [AdReportDetailsComponent, NullAdReportDetailsComponent],
+  selector: 'slot-report-details',
+  styleUrls: ['app/report/components/slot-report-details.component.css'],
   templateUrl: 'app/report/components/slot-report-details.component.html',
-  styleUrls: ['app/report/components/slot-report-details.component.css']
 })
 export class SlotReportDetailsComponent implements OnInit {
   @Input() slotId: string;
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
-  @Input() filter;
+  @Input() filter: {};
 
-  adIds: string[] = [];
+  adIds: number[] = [];
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.adzerkResponses$
-      .subscribe(responses => {
+      .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
         for (let response of responses) {
           let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
-          let decision = decisions[this.slotId];
+          let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.slotId];
 
           if (decision) {
-            if (this.adIds.indexOf(decision.adId) == -1) {
+            if (this.adIds.indexOf(decision.adId) === -1) {
               this.adIds.push(decision.adId);
             }
           }

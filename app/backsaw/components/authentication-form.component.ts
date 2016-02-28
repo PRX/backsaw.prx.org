@@ -3,25 +3,26 @@ import {NgForm} from 'angular2/common';
 
 import {
   AuthenticationService,
-  AuthenticationRequest} from '../../shared/services/authentication_service';
+  AuthenticationRequest,
+} from '../../shared/services/authentication_service';
 
 @Component({
-  selector: 'authentication-form',
   directives: [NgForm],
   providers: [AuthenticationService],
+  selector: 'authentication-form',
+  styleUrls: ['app/backsaw/components/authentication-form.component.css'],
   templateUrl: 'app/backsaw/components/authentication-form.component.html',
-  styleUrls: ['app/backsaw/components/authentication-form.component.css']
 })
 export class AuthenticationFormComponent {
   constructor(
     private _authService: AuthenticationService
   ) {}
 
-  request = new AuthenticationRequest();
+  request: AuthenticationRequest = new AuthenticationRequest();
 
-  onSubmit() {
+  onSubmit(): void {
     this._authService.setAdzerkAPIKey(this.request.adzkerkAPIKey);
     alert('Refresh page to log in :-/');
-    // this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
+    // TODO this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
   }
 }

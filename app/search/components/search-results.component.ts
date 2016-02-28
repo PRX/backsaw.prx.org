@@ -4,16 +4,17 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
 
 import {FeedService, Episode} from '../../shared/services/feed_service';
+import {Program} from '../../shared/services/program.service';
 
 @Component({
-  selector: 'search-results',
   directives: [ROUTER_DIRECTIVES],
   providers: [FeedService],
+  selector: 'search-results',
   styleUrls: ['app/search/components/search-results.component.css'],
-  templateUrl: 'app/search/components/search-results.component.html'
+  templateUrl: 'app/search/components/search-results.component.html',
 })
 export class SearchResultsComponent implements OnInit {
-  @Input() program;
+  @Input() program: Program;
 
   constructor (
     private _feedService: FeedService
@@ -21,7 +22,7 @@ export class SearchResultsComponent implements OnInit {
 
   episodes: Observable<Episode[]>;
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.program) {
       this.episodes = this._feedService.getEpisodes(this.program.url);
     }

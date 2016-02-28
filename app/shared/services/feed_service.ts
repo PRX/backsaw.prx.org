@@ -1,13 +1,15 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 
+import {Observable} from 'rxjs/Observable';
+
 export class Episode {
   constructor(
     public url: string,
     public title?: string
   ) {}
 
-  paramURL() {
+  paramURL(): string {
     return encodeURIComponent(this.url);
   }
 }
@@ -18,27 +20,28 @@ export class FeedService {
     private _http: Http
   ) {}
 
-  getEpisodes (url: string) {
-    return this._http.get(url).map(res => {
-      var episodes: Episode[] = [];
+  getEpisodes (url: string): Observable<Episode[]> {
+    return this._http.get(url).map((res: Response) => {
+      let episodes: Episode[] = [];
 
-      let xml = res.text();
+      let xml: string = res.text();
 
-      let parser = new DOMParser();
-      var doc = parser.parseFromString(xml, 'application/xml');
+      let parser: DOMParser = new DOMParser();
+      let doc: XMLDocument = parser.parseFromString(xml, 'application/xml');
 
-      let elements = doc.querySelectorAll('item')
+      let elements: NodeList = doc.querySelectorAll('item');
 
-      for (var i = 0; i < elements.length; ++i) {
-        let item = elements[i];
+      let i: number;
+      for (i = 0; i < elements.length; ++i) {
+        let item: Element = <Element> elements[i];
 
-        let title = function (html) {
-          var txt = document.createElement('textarea');
+        let title: string = function (html: string): string {
+          let txt: HTMLTextAreaElement = document.createElement('textarea');
           txt.innerHTML = html;
           return txt.value;
         }(item.querySelector('title').innerHTML);
 
-        let encUrl = item.querySelector('enclosure').getAttribute('url');
+        let encUrl: string = item.querySelector('enclosure').getAttribute('url');
 
         episodes.push(new Episode(encUrl, title));
       }

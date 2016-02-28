@@ -1,12 +1,15 @@
 import {Component, Input, OnInit} from 'angular2/core';
 
-import {CampaignNameComponent} from './campaign-name.component'
-import {FlightNameComponent} from './flight-name.component'
-import {CreativeNameComponent} from './creative-name.component'
+import {Observable} from 'rxjs/Observable';
+
+import {CampaignNameComponent} from './campaign-name.component';
+import {FlightNameComponent} from './flight-name.component';
+import {CreativeNameComponent} from './creative-name.component';
 import {
   AdzerkNativeAdAPIResponseDecision,
-  AdzerkNativeAdAPIResponse} from '../../shared/services/adzerk_native_ad_api_client';
-import {ReportService} from '../../shared/services/report.service'
+  AdzerkNativeAdAPIResponse,
+} from '../../shared/services/adzerk_native_ad_api_client';
+import {ReportService} from '../../shared/services/report.service';
 
 export class Ad {
   constructor(
@@ -18,18 +21,18 @@ export class Ad {
 }
 
 @Component({
-  selector: 'ad-report-details',
   directives: [CampaignNameComponent, FlightNameComponent, CreativeNameComponent],
+  selector: 'ad-report-details',
+  styleUrls: ['app/report/components/ad-report-details.component.css'],
   templateUrl: 'app/report/components/ad-report-details.component.html',
-  styleUrls: ['app/report/components/ad-report-details.component.css']
 })
 export class AdReportDetailsComponent implements OnInit {
   @Input() slotId: number;
   @Input() adId: number;
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
-  @Input() filter;
+  @Input() filter: {};
 
-  count = 0;
+  count: number = 0;
   adzerkResponses: AdzerkNativeAdAPIResponse[] = [];
   ad: Ad;
 
@@ -37,14 +40,14 @@ export class AdReportDetailsComponent implements OnInit {
     private _reportService: ReportService
   ) {}
 
-  isInFilter() {
+  isInFilter(): boolean {
     return (this.filter
       && this.filter[this.slotId]
-      && this.filter[this.slotId]['adId']
-      && this.filter[this.slotId]['adId'] == this.adId)
+      && this.filter[this.slotId].adId
+      && this.filter[this.slotId].adId === this.adId);
   }
 
-  toggleAdFilter() {
+  toggleAdFilter(): void {
     if (this.isInFilter()) {
       this._reportService.removeFilter(this.slotId, 'adId', this.adId);
     } else {
@@ -52,7 +55,7 @@ export class AdReportDetailsComponent implements OnInit {
     }
   }
 
-  setCampaignFilter(add) {
+  setCampaignFilter(add: boolean): void {
     if (add) {
       this._reportService.addFilter(this.slotId, 'campaignId', this.ad.campaignId);
     } else {
@@ -60,17 +63,19 @@ export class AdReportDetailsComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.adzerkResponses$
-      .subscribe(responses => {
+      .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
         this.adzerkResponses = responses;
         this.count = 0;
 
         for (let response of responses) {
           let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
-          let decision = decisions[this.slotId];
+          let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.slotId];
 
-          if (decision && decision.adId == this.adId && this._reportService.doesResponseSatisfyFilter(response)) {
+          if (decision
+            && decision.adId === this.adId
+            && this._reportService.doesResponseSatisfyFilter(response)) {
             this.count += 1;
 
             if (!this.ad) {
@@ -79,7 +84,7 @@ export class AdReportDetailsComponent implements OnInit {
                 decision.flightId,
                 decision.creativeId,
                 decision.adId
-              )
+              );
             }
           }
         }
