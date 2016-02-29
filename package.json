@@ -13,7 +13,7 @@
   "scripts": {
     "build": "gulp build",
     "deploy": "gulp build && gulp deploy",
-    "local": "gulp build && lite-server --config=bs-config.json",
+    "local": "gulp build && lite-server --config=config/local-deploy.bs.config.json",
     "start": "gulp && lite-server"
   },
   "dependencies": {},
