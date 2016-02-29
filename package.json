@@ -11,6 +11,7 @@
   ],
   "repository": "https://github.com/PRX/backsaw.prx.org.git",
   "scripts": {
+    "build": "gulp build",
     "deploy": "gulp build && gulp deploy",
     "local": "gulp build && lite-server --config=bs-config.json",
     "start": "gulp && lite-server"
