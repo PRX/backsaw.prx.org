@@ -28,4 +28,6 @@ TODO
 
 ### Release
 
+`npm run release`
+
 Needs an `aws.json` for [gulp-s3](https://www.npmjs.com/package/gulp-s3)

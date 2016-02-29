@@ -29,7 +29,7 @@ gulp.task('buildIndex', function (callback) {
 gulp.task('jspmBundleSfx', function (callback) {
   return gulp
     .src('app/main.ts')
-    .pipe(jspm({selfExecutingBundle: true}))
+    .pipe(jspm({ selfExecutingBundle: true }))
     .pipe(rename('backsaw.min.js'))
     .pipe(gulp.dest('.dist/scripts'));
 });
@@ -59,14 +59,13 @@ gulp.task('uploadToS3', function (callback) {
     .pipe(s3(aws));
 });
 
-gulp.task('release', function (callback) {
+gulp.task('build', function (callback) {
   runSequence(
     'copyTemplates',
     'copyStyles',
     'copyPolyfills',
     'buildIndex',
     'jspmBundleSfx',
-    'uploadToS3',
     function (error) {
       if (error) {
         console.log(error.message);
@@ -75,5 +74,11 @@ gulp.task('release', function (callback) {
       }
       callback(error);
     }
+  );
+});
+
+gulp.task('deploy', function (callback) {
+  runSequence(
+    'uploadToS3'
   );
 });
