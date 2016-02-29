@@ -30,6 +30,7 @@
     "rxjs": "^5.0.0-beta.2"
   },
   "jspm": {
+    "configFile": "config/systemjs.config.js",
     "dependencies": {
       "angular2": "npm:angular2@^2.0.0-beta.7",
       "plugin-typescript": "github:frankwallis/plugin-typescript@^4.0.1",
