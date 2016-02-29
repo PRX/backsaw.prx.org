@@ -46,6 +46,12 @@ gulp.task('copyStyles', function (callback) {
     .pipe(gulp.dest('.dist/app'));
 });
 
+gulp.task('copyImages', function (callback) {
+  return gulp
+    .src('images/**/*')
+    .pipe(gulp.dest('.dist/images'));
+});
+
 gulp.task('copyPolyfills', function (callback) {
   return gulp
     .src('node_modules/angular2/bundles/angular2-polyfills.js')
@@ -63,6 +69,7 @@ gulp.task('build', function (callback) {
   runSequence(
     'copyTemplates',
     'copyStyles',
+    'copyImages',
     'copyPolyfills',
     'buildIndex',
     'jspmBundleSfx',
