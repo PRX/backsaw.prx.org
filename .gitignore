@@ -3,5 +3,10 @@
 
 npm-debug.log
 
+/.dist/
+
 *.js.map
 /app/**/*.js
+
+/index.html
+/aws.json

@@ -25,3 +25,7 @@ npm install lite-server --save-dev
 
 TODO
 [ ] https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
+
+### Release
+
+Needs an `aws.json` for [gulp-s3](https://www.npmjs.com/package/gulp-s3)

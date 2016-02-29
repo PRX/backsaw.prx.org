@@ -11,16 +11,21 @@
   ],
   "repository": "https://github.com/PRX/backsaw.prx.org.git",
   "scripts": {
-    "start": "lite-server",
-    "build": "jspm bundle-sfx app/main"
+    "start": "gulp && lite-server",
+    "release": "gulp release"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.7",
-    "rxjs": "^5.0.0-beta.2"
+    "angular2": "2.0.0-beta.7"
   },
   "devDependencies": {
+    "gulp-jade": "^1.1.0",
+    "gulp-jspm": "^0.5.7",
+    "gulp-rename": "^1.2.2",
+    "gulp-s3": "^0.3.0",
     "jspm": "^0.16.30",
-    "lite-server": "^2.1.0"
+    "lite-server": "^2.1.0",
+    "run-sequence": "^1.1.5",
+    "rxjs": "^5.0.0-beta.2"
   },
   "jspm": {
     "dependencies": {
