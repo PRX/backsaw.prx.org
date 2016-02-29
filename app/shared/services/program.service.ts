@@ -30,6 +30,10 @@ export class ProgramService {
     new Program('Serial', 'http://f.prxu.org/serial/feed-rss.xml'),
     new Program('Criminal', 'http://f.prxu.org/criminal/feed-rss.xml'),
     new Program('Strangers', 'http://f.prxu.org/strangers/feed-rss.xml'),
+    new Program('Love+Radio', 'http://f.prxu.org/loveandradio/feed-rss.xml'),
+    new Program('The Heart', 'http://f.prxu.org/theheart/feed-rss.xml'),
+    new Program('The Moth', 'http://f.prxu.org/themoth/feed-rss.xml'),
+    new Program('99% Invisible', 'http://f.prxu.org/99pi/feed-rss.xml'),
   ];
 
   programFromURL(url: string): Program {
