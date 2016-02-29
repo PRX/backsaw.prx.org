@@ -29,7 +29,7 @@ gulp.task('buildIndex', function (callback) {
 gulp.task('jspmBundleSfx', function (callback) {
   return gulp
     .src('app/main.ts')
-    .pipe(jspm({ selfExecutingBundle: true }))
+    .pipe(jspm({selfExecutingBundle: true, minify: true, mangle: false}))
     .pipe(rename('backsaw.min.js'))
     .pipe(gulp.dest('.dist/scripts'));
 });
