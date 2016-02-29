@@ -1,5 +1,17 @@
 import {Injectable} from 'angular2/core';
 
+export class Episode {
+  constructor(
+    public url: string,
+    public title?: string
+  ) {}
+
+  paramURL(): string {
+    return encodeURIComponent(this.url);
+  }
+}
+
+@Injectable()
 export class Program {
   constructor(
     public name: string,

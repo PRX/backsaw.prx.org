@@ -3,25 +3,16 @@ import {Http, Response} from 'angular2/http';
 
 import {Observable} from 'rxjs/Observable';
 
-export class Episode {
-  constructor(
-    public url: string,
-    public title?: string
-  ) {}
-
-  paramURL(): string {
-    return encodeURIComponent(this.url);
-  }
-}
+import {Program, Episode} from './program.service';
 
 @Injectable()
-export class FeedService {
+export class RssFeedService {
   constructor (
     private http: Http
   ) {}
 
-  getEpisodes (url: string): Observable<Episode[]> {
-    return this.http.get(url).map((res: Response) => {
+  episodesForProgram(program: Program): Observable<Episode[]> {
+    return this.http.get(program.url).map((res: Response) => {
       let episodes: Episode[] = [];
 
       let xml: string = res.text();

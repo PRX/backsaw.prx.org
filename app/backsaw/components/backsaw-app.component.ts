@@ -7,7 +7,7 @@ import {ToolbarComponent} from './toolbar.component';
 import {SearchComponent} from '../../search/components/search.component';
 import {ReportComponent} from '../../report/components/report.component';
 import {AdvancedComponent} from '../../advanced/components/advanced.component';
-import {AuthenticationService} from '../../shared/services/authentication_service';
+import {AuthenticationService} from '../../shared/services/authentication.service';
 
 @Component({
   directives: [ROUTER_DIRECTIVES, AuthenticationFormComponent, ToolbarComponent],

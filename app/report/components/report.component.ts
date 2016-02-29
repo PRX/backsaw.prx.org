@@ -3,7 +3,7 @@ import {RouteParams} from 'angular2/router';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {ReportDetailsComponent} from './report-details.component';
-import {Episode} from '../../shared/services/feed_service';
+import {Episode} from '../../shared/services/program.service';
 import {ReportService} from '../../shared/services/report.service';
 import {
   AdzerkNativeAdAPIRequestProperties,

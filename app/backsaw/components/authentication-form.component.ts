@@ -4,7 +4,7 @@ import {NgForm} from 'angular2/common';
 import {
   AuthenticationService,
   AuthenticationRequest,
-} from '../../shared/services/authentication_service';
+} from '../../shared/services/authentication.service';
 
 @Component({
   directives: [NgForm],

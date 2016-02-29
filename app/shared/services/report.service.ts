@@ -4,13 +4,13 @@ import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/share';
 
-import {Episode} from './feed_service';
+import {Episode} from './program.service';
 import {AdzerkNativeAdAPIRequestProperties,
   AdzerkNativeAdAPIRequest,
   AdzerkNativeAdAPIResponse,
   AdzerkNativeAdAPI,
 } from './adzerk_native_ad_api_client';
-import {DovetailService} from './dovetail_service';
+import {DovetailService} from './dovetail-api.service';
 
 @Injectable()
 export class ReportService {

@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions, Response} from 'angular2/http';
 
 import {Observable} from 'rxjs/Observable';
 
-import {AuthenticationService} from './authentication_service';
+import {AuthenticationService} from './authentication.service';
 
 export interface AdzerkManagementAPIAdvertiserResponse {
   Id: number;

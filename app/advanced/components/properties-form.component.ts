@@ -6,7 +6,7 @@ import {
   AdzerkNativeAdAPIRequestProperties,
   AdzerkNativeAdAPIRequest,
 } from '../../shared/services/adzerk_native_ad_api_client';
-import {Episode} from '../../shared/services/feed_service';
+import {Episode} from '../../shared/services/program.service';
 import {TimestampSelectorComponent} from './timestamp-selector.component';
 
 @Component({
