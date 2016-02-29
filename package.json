@@ -14,10 +14,10 @@
     "start": "gulp && lite-server",
     "release": "gulp release"
   },
-  "dependencies": {
-    "angular2": "2.0.0-beta.7"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "angular2": "2.0.0-beta.7",
+    "gulp": "^3.9.1",
     "gulp-jade": "^1.1.0",
     "gulp-jspm": "^0.5.7",
     "gulp-rename": "^1.2.2",
