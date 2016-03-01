@@ -15,6 +15,7 @@ import {DovetailService} from './dovetail-api.service';
 @Injectable()
 export class ReportService {
   public adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  public filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   public filter: {} = {};
 
   private episode: Episode;
@@ -31,6 +32,19 @@ export class ReportService {
     this.adzerkResponses$ = new Observable((observer: Observer<AdzerkNativeAdAPIResponse[]>) => {
       this.adzerkResponsesObserver = observer;
     }).share();
+    
+    this.filteredAdzerkResponses$ = this.adzerkResponses$
+      .map((responses: AdzerkNativeAdAPIResponse[]) => {
+        let filteredAdzerkResponses: AdzerkNativeAdAPIResponse[] = [];
+
+        for (let response of responses) {
+          if (this.doesResponseSatisfyFilter(response)) {
+            filteredAdzerkResponses.push(response);
+          }
+        }
+
+        return filteredAdzerkResponses;
+      });
   }
 
   // Filters

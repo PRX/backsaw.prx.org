@@ -14,5 +14,5 @@
   <button (click)="fetchResponses(1)">Run report x1</button>
   <button (click)="fetchResponses(100)">Run report x100</button>
 
-  <report-details [adzerkResponses$]="report.adzerkResponses$" [filter]="report.filter"></report-details>
+  <report-details [adzerkResponses$]="report.adzerkResponses$" [filteredAdzerkResponses$]="report.filteredAdzerkResponses$" [filter]="report.filter"></report-details>
 </div>

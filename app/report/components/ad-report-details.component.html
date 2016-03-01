@@ -3,4 +3,5 @@
 <td><creative-name [ad]="ad" *ngIf="ad"></creative-name></td>
 <td (click)="toggleAdFilter()" [ngClass]="{'is-filter': isInFilter()}">{{adId}}</td>
 <td>{{count}}</td>
+<td>({{(count / filteredAdzerkResponses.length) | percent:'1.0-1'}})</td>
 <td>({{(count / adzerkResponses.length) | percent:'1.0-1'}})</td>

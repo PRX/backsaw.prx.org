@@ -30,10 +30,12 @@ export class AdReportDetailsComponent implements OnInit {
   @Input() slotId: number;
   @Input() adId: number;
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  @Input() filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   @Input() filter: {};
 
   count: number = 0;
   adzerkResponses: AdzerkNativeAdAPIResponse[] = [];
+  filteredAdzerkResponses: AdzerkNativeAdAPIResponse[] = [];
   ad: Ad;
 
   constructor(
@@ -67,6 +69,11 @@ export class AdReportDetailsComponent implements OnInit {
     this.adzerkResponses$
       .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
         this.adzerkResponses = responses;
+      });
+
+    this.filteredAdzerkResponses$
+      .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
+        this.filteredAdzerkResponses = responses;
         this.count = 0;
 
         for (let response of responses) {
