@@ -1,6 +1,6 @@
 {
   "name": "backsaw.prx.org",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "homepage": "http://backsaw.prx.org",
   "bugs": "https://github.com/PRX/backsaw.prx.org/issues",
@@ -11,18 +11,27 @@
   ],
   "repository": "https://github.com/PRX/backsaw.prx.org.git",
   "scripts": {
-    "start": "lite-server",
-    "build": "jspm bundle-sfx app/main"
+    "build": "gulp build",
+    "deploy": "gulp build && gulp deploy",
+    "local": "gulp build && lite-server --config=config/local-deploy.bs.config.json",
+    "start": "gulp && lite-server"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "angular2": "2.0.0-beta.7",
+    "gulp": "^3.9.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-jspm": "^0.5.7",
+    "gulp-rename": "^1.2.2",
+    "gulp-s3": "^0.3.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "jspm": "^0.16.30",
+    "lite-server": "^2.1.0",
+    "run-sequence": "^1.1.5",
     "rxjs": "^5.0.0-beta.2"
   },
-  "devDependencies": {
-    "jspm": "^0.16.30",
-    "lite-server": "^2.1.0"
-  },
   "jspm": {
+    "configFile": "config/systemjs.config.js",
     "dependencies": {
       "angular2": "npm:angular2@^2.0.0-beta.7",
       "plugin-typescript": "github:frankwallis/plugin-typescript@^4.0.1",

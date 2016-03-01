@@ -1,7 +1,92 @@
-var gulp = require('gulp');
+var gulp          = require('gulp');
+var sourcemaps    = require('gulp-sourcemaps');
+var runSequence   = require('run-sequence');
+var jspm          = require('gulp-jspm');
+var jade          = require('gulp-jade');
+var s3            = require('gulp-s3');
+var rename        = require('gulp-rename');
+var fs            = require('fs');
 
-gulp.task('default', ['builder']);
+gulp.task('default', ['buildDevIndex']);
 
-gulp.task('builder', function(cb) {
-  
+gulp.task('buildDevIndex', function (callback) {
+  var YOUR_LOCALS = { release: false };
+
+  return gulp
+    .src('./index.jade')
+    .pipe(jade({ locals: YOUR_LOCALS }))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('buildIndex', function (callback) {
+  var YOUR_LOCALS = { release: true };
+
+  return gulp
+    .src('./index.jade')
+    .pipe(jade({ locals: YOUR_LOCALS }))
+    .pipe(gulp.dest('./.dist'));
+});
+
+gulp.task('jspmBundleSfx', function (callback) {
+  return gulp
+    .src('./app/main.ts')
+    .pipe(sourcemaps.init())
+      .pipe(jspm({ selfExecutingBundle: true, minify: true, mangle: false }))
+      .pipe(rename('backsaw.min.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./.dist/scripts'));
+});
+
+gulp.task('copyTemplates', function (callback) {
+  return gulp
+    .src('./app/**/*.html')
+    .pipe(gulp.dest('./.dist/app'));
+});
+
+gulp.task('copyStyles', function (callback) {
+  return gulp
+    .src('./app/**/*.css')
+    .pipe(gulp.dest('./.dist/app'));
+});
+
+gulp.task('copyImages', function (callback) {
+  return gulp
+    .src('./images/**/*')
+    .pipe(gulp.dest('./.dist/images'));
+});
+
+gulp.task('copyPolyfills', function (callback) {
+  return gulp
+    .src('./node_modules/angular2/bundles/angular2-polyfills.js')
+    .pipe(gulp.dest('./.dist/scripts'));
+});
+
+gulp.task('uploadToS3', function (callback) {
+  aws = JSON.parse(fs.readFileSync('./aws.json'));
+  return gulp
+    .src('./.dist/**')
+    .pipe(s3(aws));
+});
+
+gulp.task('build', function (callback) {
+  runSequence(
+    'copyTemplates',
+    'copyStyles',
+    'copyImages',
+    'copyPolyfills',
+    'buildIndex',
+    'jspmBundleSfx',
+    function (error) {
+      if (error) {
+        console.log(error.message);
+      } else {
+        console.log('Release completed successfully.');
+      }
+      callback(error);
+    }
+  );
+});
+
+gulp.task('deploy', function (callback) {
+  runSequence('uploadToS3');
 });
