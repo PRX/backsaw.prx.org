@@ -24,6 +24,7 @@
     "gulp-jspm": "^0.5.7",
     "gulp-rename": "^1.2.2",
     "gulp-s3": "^0.3.0",
+    "gulp-sourcemaps": "^1.6.0",
     "jspm": "^0.16.30",
     "lite-server": "^2.1.0",
     "run-sequence": "^1.1.5",

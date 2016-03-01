@@ -1,4 +1,5 @@
 var gulp          = require('gulp');
+var sourcemaps    = require('gulp-sourcemaps');
 var runSequence   = require('run-sequence');
 var jspm          = require('gulp-jspm');
 var jade          = require('gulp-jade');
@@ -29,8 +30,10 @@ gulp.task('buildIndex', function (callback) {
 gulp.task('jspmBundleSfx', function (callback) {
   return gulp
     .src('./app/main.ts')
-    .pipe(jspm({ selfExecutingBundle: true, minify: true, mangle: false }))
-    .pipe(rename('backsaw.min.js'))
+    .pipe(sourcemaps.init())
+      .pipe(jspm({ selfExecutingBundle: true, minify: true, mangle: false }))
+      .pipe(rename('backsaw.min.js'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./.dist/scripts'));
 });
 
