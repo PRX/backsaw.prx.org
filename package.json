@@ -1,7 +1,7 @@
 {
   "name": "backsaw.prx.org",
   "version": "0.2.0",
-  "description": "",
+  "description": "Adzerk flighting sampling and analysis",
   "homepage": "http://backsaw.prx.org",
   "bugs": "https://github.com/PRX/backsaw.prx.org/issues",
   "license": "AGPL-1.0",
