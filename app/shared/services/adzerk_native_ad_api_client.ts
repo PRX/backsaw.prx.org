@@ -27,6 +27,7 @@ export interface AdzerkNativeAdAPIRequestProperties {
   publishedAt?: number;
   publishedAtPlus30?: number;
   duration?: number;
+  backsaw?: boolean;
 }
 
 export interface AdzerkNativeAdAPIRequest {

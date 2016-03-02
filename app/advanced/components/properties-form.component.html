@@ -1,14 +1,14 @@
 <form (ngSubmit)="onSubmit()" #propertiesForm="ngForm">
-  <fieldset *ngIf="adzerkRequest.placements[0].properties.guid">
+  <fieldset *ngIf="propKeys.indexOf('guid') !== -1">
     <label for="guid">guid</label>
     <input id="guid" [(ngModel)]="propOverrides.guid" ngControl="guid">
   </fieldset>
-  <fieldset *ngIf="adzerkRequest.placements[0].properties.publishedAt">
+  <fieldset *ngIf="propKeys.indexOf('publishedAt') !== -1">
     <label for="publishedAt">publishedAt</label>
     <input id="publishedAt" [(ngModel)]="propOverrides.publishedAt" ngControl="publishedAt">
     <timestamp-selector [propOverrides]="propOverrides" [prop]="'publishedAt'"></timestamp-selector>
   </fieldset>
-  <fieldset *ngIf="adzerkRequest.placements[0].properties.publishedAtPlus30">
+  <fieldset *ngIf="propKeys.indexOf('publishedAtPlus30') !== -1">
     <label for="publishedAtPlus30">publishedAtPlus30</label>
     <input id="publishedAtPlus30" [(ngModel)]="propOverrides.publishedAtPlus30" ngControl="publishedAtPlus30">
     <timestamp-selector [propOverrides]="propOverrides" [prop]="'publishedAtPlus30'"></timestamp-selector>

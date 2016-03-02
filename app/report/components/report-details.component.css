@@ -1,11 +1,21 @@
 table {
   width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
 }
 
 th {
   text-align: left;
+  font-family: sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 5px;
 }
 
 slot-report-details {
   display: table-row-group;
+}
+
+.filtered th:nth-child(6) {
+  background: rgb(197, 232, 174);
 }

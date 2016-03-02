@@ -3,4 +3,6 @@
 <td>None</td>
 <td>None</td>
 <td>{{count}}</td>
-<td>({{(count / adzerkResponses.length) | percent:'1.0-1'}})</td>
+<td [ngClass]="{'filtered': (adzerkResponses.length !== filteredAdzerkResponses.length)}">
+  ({{(count / filteredAdzerkResponses.length) | percent:'1.0-1'}})
+</td>

@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, OnInit} from 'angular2/core';
 import {NgForm} from 'angular2/common';
 import {Router} from 'angular2/router';
 
@@ -15,14 +15,20 @@ directives: [NgForm, TimestampSelectorComponent],
   styleUrls: ['app/advanced/components/properties-form.component.css'],
   templateUrl: 'app/advanced/components/properties-form.component.html',
 })
-export class PropertiesFormComponent {
+export class PropertiesFormComponent implements OnInit {
   @Input() adzerkRequest: AdzerkNativeAdAPIRequest;
   @Input() propOverrides: AdzerkNativeAdAPIRequestProperties;
   @Input() episode: Episode;
 
+  propKeys: string[];
+
   constructor(
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.propKeys = Object.keys(this.propOverrides);
+  }
 
   onSubmit(): void {
     let properties: string = encodeURIComponent(JSON.stringify(this.propOverrides));

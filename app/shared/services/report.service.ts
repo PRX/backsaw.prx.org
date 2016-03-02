@@ -15,6 +15,7 @@ import {DovetailService} from './dovetail-api.service';
 @Injectable()
 export class ReportService {
   public adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  public filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   public filter: {} = {};
 
   private episode: Episode;
@@ -31,6 +32,19 @@ export class ReportService {
     this.adzerkResponses$ = new Observable((observer: Observer<AdzerkNativeAdAPIResponse[]>) => {
       this.adzerkResponsesObserver = observer;
     }).share();
+
+    this.filteredAdzerkResponses$ = this.adzerkResponses$
+      .map((responses: AdzerkNativeAdAPIResponse[]) => {
+        let filteredAdzerkResponses: AdzerkNativeAdAPIResponse[] = [];
+
+        for (let response of responses) {
+          if (this.doesResponseSatisfyFilter(response)) {
+            filteredAdzerkResponses.push(response);
+          }
+        }
+
+        return filteredAdzerkResponses;
+      });
   }
 
   // Filters
@@ -43,7 +57,7 @@ export class ReportService {
     }
   }
 
-  addFilter(slotId: number, key: string, value: number): void {
+  addFilter(slotId: string, key: string, value: number): void {
     if (!this.filter[slotId]) {
       this.filter[slotId] = {};
     }
@@ -55,7 +69,7 @@ export class ReportService {
     }
   }
 
-  removeFilter(slotId: number, key: string, value: number): void {
+  removeFilter(slotId: string, key: string, value: number): void {
     if (this.filter[slotId] && this.filter[slotId][key]) {
       delete this.filter[slotId][key];
 
@@ -166,6 +180,8 @@ export class ReportService {
 
   private applyProperties(): void {
     if (this.adzerkRequestProperties) {
+      this.adzerkRequestProperties.backsaw = true;
+
       for (let placement of this.adzerkRequest.placements) {
         placement.properties = this.adzerkRequestProperties;
       }

@@ -1,3 +1,11 @@
-<slot-info><td colspan="6">{{slotId}}</td></slot-info>
-<ad-report-details *ngFor="#adId of adIds" [slotId]="slotId" [adId]="adId" [adzerkResponses$]="adzerkResponses$" [filter]="filter"></ad-report-details>
-<null-ad-report-details [slotId]="slotId" [adzerkResponses$]="adzerkResponses$"></null-ad-report-details>
+<slot-info><td colspan="7">{{slotId}}</td></slot-info>
+<ad-report-details
+  *ngFor="#flightedAd of flightedAds"
+  [flightedAd]="flightedAd"
+  [adzerkResponses$]="adzerkResponses$"
+  [filteredAdzerkResponses$]="filteredAdzerkResponses$"
+  [filter]="filter"></ad-report-details>
+<null-ad-report-details
+  [flightedAd]="nullAd"
+  [adzerkResponses$]="adzerkResponses$"
+  [filteredAdzerkResponses$]="filteredAdzerkResponses$"></null-ad-report-details>

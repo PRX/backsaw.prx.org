@@ -9,4 +9,7 @@ slot-info td {
   text-transform: uppercase;
   background: #ddd;
   font-weight: bold;
+  font-family: sans-serif;
+  padding: 5px 0;
+  font-size: 14px;
 }

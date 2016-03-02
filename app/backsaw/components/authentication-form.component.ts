@@ -1,10 +1,7 @@
 import {Component} from 'angular2/core';
 import {NgForm} from 'angular2/common';
 
-import {
-  AuthenticationService,
-  AuthenticationRequest,
-} from '../../shared/services/authentication.service';
+import {AuthenticationService} from '../../shared/services/authentication.service';
 
 @Component({
   directives: [NgForm],
@@ -18,11 +15,7 @@ export class AuthenticationFormComponent {
     private auth: AuthenticationService
   ) {}
 
-  request: AuthenticationRequest = new AuthenticationRequest();
-
-  onSubmit(): void {
-    this.auth.setAdzerkAPIKey(this.request.adzkerkAPIKey);
-    alert('Refresh page to log in :-/');
-    // TODO this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
+  onSubmit(apiKey): void {
+    this.auth.setAdzerkAPIKey(apiKey);
   }
 }

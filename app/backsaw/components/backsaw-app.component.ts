@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {AuthenticationFormComponent} from './authentication-form.component';
@@ -21,21 +21,12 @@ import {AuthenticationService} from '../../shared/services/authentication.servic
   { component: ReportComponent, name: 'Report', path: '/report' },
   { component: AdvancedComponent, name: 'Advanced', path: '/advanced' },
 ])
-export class BacksawAppComponent implements OnInit {
+export class BacksawAppComponent {
   constructor(
     private auth: AuthenticationService
   ) {}
 
-  authData: {adzkerkAPIKey?: string} = {};
-  adzkerkAPIKey: string;
-
-  ngOnInit(): void {
-    if (this.auth.getAdzerkAPIKey()) {
-      this.adzkerkAPIKey = this.auth.getAdzerkAPIKey();
-    }
-  }
-
   isAuthenticated(): boolean {
-    return !!this.adzkerkAPIKey;
+    return !!this.auth.getAdzerkAPIKey();
   }
 }
