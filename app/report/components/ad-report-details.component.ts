@@ -51,6 +51,10 @@ export class AdReportDetailsComponent implements OnInit {
   }
 
   setFilter(type: string, add: boolean): void {
+    if (this.count === 0) {
+      return;
+    }
+    
     if (add) {
       this.reportService.addFilter(this.flightedAd.slotId, type, this.flightedAd[type]);
     } else {
@@ -103,7 +107,7 @@ export class AdReportDetailsComponent implements OnInit {
 
   private calculateCount() {
     this.count = 0;
-    
+
     for (let response of this.filteredAdzerkResponses) {
       let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
       let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.flightedAd.slotId];
