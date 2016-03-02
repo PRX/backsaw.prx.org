@@ -16,8 +16,6 @@ export class ToolbarComponent {
   ) {}
 
   onLogout(): void {
-    alert('TODO');
-    // TODO this._authService.unsetAdzerkAPIKey();
-    // TODO this.adzkerkAPIKey = this._authService.getAdzerkAPIKey();
+    this.auth.unsetAdzerkAPIKey();
   }
 }

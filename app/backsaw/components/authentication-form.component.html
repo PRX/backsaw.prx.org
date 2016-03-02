@@ -1,9 +1,9 @@
-<form (ngSubmit)="onSubmit()" #authForm="ngForm">
+<form (ngSubmit)="onSubmit(apiKey.value)" #authForm="ngForm">
   <fieldset>
     <legend>Adzerk API Access</legend>
 
     <label for="adzerk_api_key">Adzerk API Key</label>
-    <input type="text" pattern="[A-Za-z0-9]{36}" id="adzerk_api_key" required [(ngModel)]="request.adzkerkAPIKey" ngControl="key">
+    <input type="text" pattern="[A-Za-z0-9]{36}" id="adzerk_api_key" required #apiKey ngControl="key">
 
     <button type="submit" [disabled]="!authForm.form.valid">Submit</button>
   </fieldset>
