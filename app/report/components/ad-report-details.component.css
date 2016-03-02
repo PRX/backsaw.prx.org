@@ -21,6 +21,6 @@ ad-name {
   color: white;
 }
 
-td:nth-child(6) {
+td.filtered:nth-child(6) {
   background: rgb(197, 232, 174);
 }

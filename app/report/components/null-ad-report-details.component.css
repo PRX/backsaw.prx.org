@@ -4,6 +4,6 @@ td {
   padding: 6px 3px;
 }
 
-td:nth-child(6) {
+td.filtered:nth-child(6) {
   background: rgb(197, 232, 174);
 }

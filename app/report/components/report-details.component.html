@@ -1,5 +1,5 @@
 <div>
-  <table>
+  <table [ngClass]="{'filtered': (filteredAdzerkResponses.length !== adzerkResponses.length)}">
     <thead>
       <tr>
         <th>Campaign</th>

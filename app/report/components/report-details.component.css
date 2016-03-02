@@ -12,10 +12,10 @@ th {
   padding: 5px;
 }
 
-th:nth-child(6) {
-  background: rgb(197, 232, 174);
-}
-
 slot-report-details {
   display: table-row-group;
+}
+
+.filtered th:nth-child(6) {
+  background: rgb(197, 232, 174);
 }
