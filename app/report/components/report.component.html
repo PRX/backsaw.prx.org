@@ -2,7 +2,10 @@
   <dt>Adzerk request source</dt>
   <dd>{{episode.url}}</dd>
 
-  <dt *ngIf="report.propertyOverrides()">Custom placement properties <a [routerLink]="['/Advanced', {url: episode.paramURL(), properties: encodedPropertyOverrides()}]">(Edit)</a></dt>
+  <dt *ngIf="report.propertyOverrides()">
+    Custom placement properties
+    <a [routerLink]="['/Advanced', {url: episode.paramURL(), properties: encodedPropertyOverrides()}]">(Edit)</a>
+  </dt>
   <dd *ngIf="report.propertyOverrides()">{{report.propertyOverrides() | json}}</dd>
 
   <dt *ngIf="!report.propertyOverrides()">Placement properties</dt>
@@ -11,7 +14,7 @@
 
 <h1 *ngIf="!report.canFetchResponses()">Loading...</h1>
 <div *ngIf="report.canFetchResponses()">
-  <button (click)="fetchResponses(1)">Run report x1</button>
+  <button (click)="fetchResponses(10)">Run report x10</button>
   <button (click)="fetchResponses(100)">Run report x100</button>
 
   <report-details [adzerkResponses$]="report.adzerkResponses$" [filteredAdzerkResponses$]="report.filteredAdzerkResponses$" [filter]="report.filter"></report-details>

@@ -1,0 +1,18 @@
+dl {
+  font-family: sans-serif;
+  padding: 5px 12px;
+}
+
+dl dt {
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+dl dd {
+  font-size: 12px
+}
+
+button {
+  margin: 2px 0 2px 10px;
+}

@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, OnInit, Input, Output, EventEmitter, ElementRef} from 'angular2/core';
 
-import {Ad} from './ad-report-details.component';
+import {FlightedAd} from './slot-report-details.component';
 import {
   AdzerkManagementAPICampaignResponse,
   AdzerkManagementAPI,
@@ -11,42 +11,29 @@ import {
   selector: 'campaign-name',
   styleUrls: ['app/report/components/campaign-name.component.css'],
   template: `
-    <span (click)="toggleFilter()" [ngClass]="{'is-filter': isInFilter()}">
-      <span *ngIf="!campaignResponse">{{ad.campaignId}}</span>
-      <span *ngIf="campaignResponse">{{campaignResponse.Name}}</span>
-    </span>
+    <span *ngIf="!campaignResponse">{{flightedAd.campaignId}}</span>
+    <span *ngIf="campaignResponse">{{campaignResponse.Name}}</span>
   `,
 })
 export class CampaignNameComponent implements OnInit {
-  @Input() slotId: number;
-  @Input() ad: Ad;
-  @Input() filter: {};
-  @Output() filterOnCampaign: EventEmitter<boolean> = new EventEmitter();
+  @Input() flightedAd: FlightedAd;
 
   campaignResponse: AdzerkManagementAPICampaignResponse;
 
-  constructor(private adzerk: AdzerkManagementAPI) {}
+  constructor(
+    private adzerk: AdzerkManagementAPI
+  ) {}
 
   ngOnInit(): void {
-    if (this.ad && this.ad.campaignId) {
+    if (this.flightedAd && this.flightedAd.campaignId) {
       this.adzerk
-        .getCampaign(this.ad.campaignId)
+        .getCampaign(this.flightedAd.campaignId)
         .subscribe((res: AdzerkManagementAPICampaignResponse) => {
           if (res.Id) {
             this.campaignResponse = res;
+            this.flightedAd.advertiserId = res.AdvertiserId;
           }
         });
     }
-  }
-
-  isInFilter(): boolean {
-    return (this.filter
-      && this.filter[this.slotId]
-      && this.filter[this.slotId].campaignId
-      && this.filter[this.slotId].campaignId === this.ad.campaignId);
-  }
-
-  toggleFilter(): void {
-    this.filterOnCampaign.emit(!this.isInFilter());
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from 'angular2/core';
 
-import {Ad} from './ad-report-details.component';
+import {FlightedAd} from './slot-report-details.component';
 import {AdzerkManagementAPIAdResponse,
   AdzerkManagementAPI,
 } from '../../shared/services/adzerk_management_api_client';
@@ -9,12 +9,12 @@ import {AdzerkManagementAPIAdResponse,
   providers: [AdzerkManagementAPI],
   selector: 'creative-name',
   template: `
-    <span *ngIf="!adResponse">{{ad.creativeId}}</span>
+    <span *ngIf="!adResponse">{{flightedAd.creativeId}}</span>
     <span *ngIf="adResponse">{{adResponse.Creative.Title}}</span>
   `,
 })
 export class CreativeNameComponent implements OnInit {
-  @Input() ad: Ad;
+  @Input() flightedAd: FlightedAd;
 
   adResponse: AdzerkManagementAPIAdResponse;
 
@@ -23,9 +23,9 @@ export class CreativeNameComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.ad && this.ad.flightId && this.ad.adId) {
+    if (this.flightedAd && this.flightedAd.flightId && this.flightedAd.adId) {
       this.adzerk
-        .getAd(this.ad.flightId, this.ad.adId)
+        .getAd(this.flightedAd.flightId, this.flightedAd.adId)
         .subscribe((res: AdzerkManagementAPIAdResponse) => {
           if (res.Id) {
             this.adResponse = res;

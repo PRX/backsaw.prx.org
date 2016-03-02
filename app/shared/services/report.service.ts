@@ -32,7 +32,7 @@ export class ReportService {
     this.adzerkResponses$ = new Observable((observer: Observer<AdzerkNativeAdAPIResponse[]>) => {
       this.adzerkResponsesObserver = observer;
     }).share();
-    
+
     this.filteredAdzerkResponses$ = this.adzerkResponses$
       .map((responses: AdzerkNativeAdAPIResponse[]) => {
         let filteredAdzerkResponses: AdzerkNativeAdAPIResponse[] = [];
@@ -57,7 +57,7 @@ export class ReportService {
     }
   }
 
-  addFilter(slotId: number, key: string, value: number): void {
+  addFilter(slotId: string, key: string, value: number): void {
     if (!this.filter[slotId]) {
       this.filter[slotId] = {};
     }
@@ -69,7 +69,7 @@ export class ReportService {
     }
   }
 
-  removeFilter(slotId: number, key: string, value: number): void {
+  removeFilter(slotId: string, key: string, value: number): void {
     if (this.filter[slotId] && this.filter[slotId][key]) {
       delete this.filter[slotId][key];
 
