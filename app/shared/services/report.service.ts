@@ -180,6 +180,8 @@ export class ReportService {
 
   private applyProperties(): void {
     if (this.adzerkRequestProperties) {
+      this.adzerkRequestProperties.backsaw = true;
+
       for (let placement of this.adzerkRequest.placements) {
         placement.properties = this.adzerkRequestProperties;
       }
