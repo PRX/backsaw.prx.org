@@ -52,9 +52,14 @@ export class AdReportDetailsComponent implements OnInit {
 
   setFilter(type: string, add: boolean): void {
     if (this.count === 0) {
-      return;
+        if (this.filter[this.flightedAd.slotId]
+          && this.filter[this.flightedAd.slotId][type]) {
+          // Continue
+        } else {
+          return;
+        }
     }
-    
+
     if (add) {
       this.reportService.addFilter(this.flightedAd.slotId, type, this.flightedAd[type]);
     } else {
