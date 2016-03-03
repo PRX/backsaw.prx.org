@@ -4,6 +4,10 @@ null-ad-report-details {
   display: table-row;
 }
 
+null-ad-report-details {
+  background: rgb(245, 233, 233);
+}
+
 slot-info td {
   text-align: center;
   text-transform: uppercase;
