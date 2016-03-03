@@ -1,7 +1,7 @@
 <h1 *ngIf="adzerkResponses.length === 0">Waiting for decisions</h1>
 
 <div *ngIf="adzerkResponses.length > 0">
-  <table [class.filtered]="(adzerkResponses.length !== filteredAdzerkResponses.length)">
+  <table [class.filtered]="adzerkResponses.length !== filteredAdzerkResponses.length">
     <thead>
       <tr>
         <th>Campaign</th>
@@ -11,6 +11,9 @@
         <th>Count</th>
         <th>
           of {{filteredAdzerkResponses.length}}
+          <span *ngIf="adzerkResponses.length !== filteredAdzerkResponses.length">
+            / {{adzerkResponses.length}}
+          </span>
         </th>
       </tr>
     </thead>
