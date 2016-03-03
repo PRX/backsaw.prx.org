@@ -1,4 +1,28 @@
-<dl>
+<button
+  id="edit"
+  [routerLink]="['/Advanced', {url: episode.paramURL(), properties: encodedPropertyOverrides()}]">
+  Edit Properties
+</button>
+
+<div id="run">
+  <div *ngIf="report.canFetchResponses()">
+    <button
+      autofocus
+      (click)="fetchResponses(100)">
+      Sample Downloads 100x
+    </button>
+  </div>
+</div>
+
+<report-details
+  [adzerkResponses$]="report.adzerkResponses$"
+  [filteredAdzerkResponses$]="report.filteredAdzerkResponses$"
+  [filter]="report.filter"></report-details>
+
+
+
+
+<!-- <dl>
   <dt>Adzerk request source</dt>
   <dd>{{episode.url}}</dd>
 
@@ -10,12 +34,4 @@
 
   <dt *ngIf="!report.propertyOverrides()">Placement properties</dt>
   <dd *ngIf="!report.propertyOverrides()">Default</dd>
-</dl>
-
-<h1 *ngIf="!report.canFetchResponses()">Loading...</h1>
-<div *ngIf="report.canFetchResponses()">
-  <button (click)="fetchResponses(10)">Run report x10</button>
-  <button (click)="fetchResponses(100)">Run report x100</button>
-
-  <report-details [adzerkResponses$]="report.adzerkResponses$" [filteredAdzerkResponses$]="report.filteredAdzerkResponses$" [filter]="report.filter"></report-details>
-</div>
+</dl> -->

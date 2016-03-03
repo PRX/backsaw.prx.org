@@ -1,4 +1,6 @@
-<div>
+<h1 *ngIf="adzerkResponses.length === 0">Waiting for decisions</h1>
+
+<div *ngIf="adzerkResponses.length > 0">
   <table [ngClass]="{'filtered': (filteredAdzerkResponses.length !== adzerkResponses.length)}">
     <thead>
       <tr>

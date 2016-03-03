@@ -1,0 +1,24 @@
+fieldset {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+legend {
+  display: none;
+}
+
+label {
+  display: none;
+}
+
+select {
+  display: block;
+  margin: 12px;
+  min-width: 250px;
+  font-size: 14px;
+  border: none;
+  background: #555;
+  color: white;
+  outline: none;
+}

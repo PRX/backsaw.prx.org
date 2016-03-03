@@ -1,13 +1,16 @@
-<form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+<form>
   <fieldset>
     <legend>Program</legend>
 
     <label for="url">Find episodes for</label>
-    <select id="url" [(ngModel)]="query.url" required ngControl="url">
-      <option></option>
-      <option *ngFor="#p of programs()" [value]="p.url">{{p.name}}</option>
+    <!--  -->
+    <select
+      id="url"
+      (change)="onChange(programUrl.value)"
+      onmouseover="this.selectedIndex = 0" 
+      #programUrl>
+      <option value="">Select a program</option>
+      <option *ngFor="#p of programs" [value]="p.url">{{p.name}}</option>
     </select>
-
-    <button type="submit" [disabled]="!searchForm.form.valid">Submit</button>
   </fieldset>
 </form>

@@ -40,7 +40,11 @@ export class ReportComponent implements OnInit {
   }
 
   encodedPropertyOverrides(): string {
-    return encodeURIComponent(JSON.stringify(this.report.propertyOverrides()));
+    if (this.report.propertyOverrides()) {
+      return encodeURIComponent(JSON.stringify(this.report.propertyOverrides()));
+    } else {
+      return '';
+    }
   }
 
   fetchResponses(times: number): void {

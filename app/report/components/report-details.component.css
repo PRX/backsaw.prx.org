@@ -19,3 +19,11 @@ slot-report-details {
 .filtered th:nth-child(6) {
   background: rgb(197, 232, 174);
 }
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 200px;
+  color: #ccc;
+  letter-spacing: -1px;
+}

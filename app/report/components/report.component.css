@@ -1,3 +1,15 @@
+#run {
+  position: absolute;
+  top: 11px;
+  left: 275px;
+}
+
+#edit {
+  position: absolute;
+  top: 11px;
+  left: 425px;
+}
+
 dl {
   font-family: sans-serif;
   padding: 5px 12px;

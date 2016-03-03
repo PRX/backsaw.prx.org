@@ -1,6 +1,6 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, ElementRef} from 'angular2/core';
 import {NgForm} from 'angular2/common';
-import {Router, RouteParams} from 'angular2/router';
+import {Router} from 'angular2/router';
 
 import {
   Program,
@@ -19,25 +19,19 @@ class SearchQuery {
   templateUrl: 'app/search/components/search-form.component.html',
 })
 export class SearchFormComponent implements OnInit {
+  programs: Program[];
+
   constructor (
     private router: Router,
-    private routeParams: RouteParams,
-    private programService: ProgramService
+    private programService: ProgramService,
+    private em: ElementRef
   ) {}
 
-  query: SearchQuery = new SearchQuery('');
-
   ngOnInit(): void {
-    if (this.routeParams.get('url')) {
-      this.query.url = decodeURIComponent(this.routeParams.get('url'));
-    }
+    this.programs = this.programService.programs;
   }
 
-  programs(): Program[] {
-    return this.programService.programs;
-  }
-
-  onSubmit(): void {
-    this.router.navigate(['Search', { url: encodeURIComponent(this.query.url) }]);
+  onChange(programUrl: string): void {
+    this.router.navigate(['Search', { url: encodeURIComponent(programUrl) }]);
   }
 }

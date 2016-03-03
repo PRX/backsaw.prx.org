@@ -1,7 +1,21 @@
+li {
+  padding: 2px;
+}
+
 li span {
   cursor: pointer;
 }
 
 li span:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: blue;
+  font-family: sans-serif;
+  text-decoration: none
+}
+
+a:hover {
   text-decoration: underline;
 }
