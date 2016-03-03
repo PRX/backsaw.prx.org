@@ -1,4 +1,7 @@
-<h1 *ngIf="adzerkResponses.length === 0">Waiting for decisions</h1>
+<div *ngIf="adzerkResponses.length === 0">
+  <h1>Waiting for decisions</h1>
+  <h2>Press enter ⏎</h2>
+</div>
 
 <div *ngIf="adzerkResponses.length > 0">
   <table [class.filtered]="adzerkResponses.length !== filteredAdzerkResponses.length">

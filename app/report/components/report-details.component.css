@@ -24,6 +24,17 @@ h1 {
   font-family: sans-serif;
   text-align: center;
   margin-top: 200px;
+  margin-bottom: 0;
   color: #ccc;
   letter-spacing: -1px;
+}
+
+h2 {
+  font-family: sans-serif;
+  text-align: center;
+  color: #ccc;
+  letter-spacing: -1px;
+  font-size: 18px;
+  margin-top: 10px;
+  text-transform: uppercase;
 }
