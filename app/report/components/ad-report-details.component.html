@@ -2,7 +2,7 @@
   [flightedAd]="flightedAd"
   *ngIf="flightedAd"
   [filter]="filter"
-  [ngClass]="{'is-filter': isFilter('campaignId')}"
+  [class.is-filter]="isFilter('campaignId')"
   (click)="setFilter('campaignId', !isFilter('campaignId'))"
   ></campaign-name>
 <flight-name
@@ -15,9 +15,10 @@
   [flightedAd]="flightedAd"
   *ngIf="flightedAd"
   [filter]="filter"
-  [ngClass]="{'is-filter': isFilter('adId')}"
+  [class.is-filter]="isFilter('adId')"
   (click)="setFilter('adId', !isFilter('adId'))"></ad-name>
 <td>{{count}}</td>
-<td [ngClass]="{'filtered': (adzerkResponses.length !== filteredAdzerkResponses.length)}">
+<td
+  [class.filtered]="(adzerkResponses.length !== filteredAdzerkResponses.length)">
   {{(count / filteredAdzerkResponses.length) | percent:'1.0-1'}}
 </td>

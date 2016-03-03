@@ -1,7 +1,7 @@
 <h1 *ngIf="adzerkResponses.length === 0">Waiting for decisions</h1>
 
 <div *ngIf="adzerkResponses.length > 0">
-  <table [ngClass]="{'filtered': (filteredAdzerkResponses.length !== adzerkResponses.length)}">
+  <table [class.filtered]="(adzerkResponses.length !== filteredAdzerkResponses.length)">
     <thead>
       <tr>
         <th>Campaign</th>
