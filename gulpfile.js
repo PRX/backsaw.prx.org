@@ -1,4 +1,5 @@
 var gulp          = require('gulp');
+var gutil         = require('gulp-util');
 var sourcemaps    = require('gulp-sourcemaps');
 var runSequence   = require('run-sequence');
 var jspm          = require('gulp-jspm');
@@ -6,6 +7,8 @@ var jade          = require('gulp-jade');
 var s3            = require('gulp-s3');
 var rename        = require('gulp-rename');
 var fs            = require('fs');
+var bump          = require('gulp-bump');
+var file          = require('gulp-file');
 
 gulp.task('default', ['buildDevIndex']);
 
@@ -87,6 +90,22 @@ gulp.task('build', function (callback) {
   );
 });
 
+gulp.task('bumpVersion', function (callback){
+  return gulp
+    .src('./package.json')
+    .pipe(bump())
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('writeDeployMaker', function (callback) {
+  return file('version.deploy', require('./package.json').version, { src: true })
+    .pipe(gulp.dest('./.dist/'));
+});
+
 gulp.task('deploy', function (callback) {
-  runSequence('uploadToS3');
+  runSequence(
+    'bumpVersion',
+    'writeDeployMaker',
+    'uploadToS3'
+  );
 });
