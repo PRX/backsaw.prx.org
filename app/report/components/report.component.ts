@@ -52,4 +52,10 @@ export class ReportComponent implements OnInit {
       this.report.fetchResponses(times);
     }
   }
+
+  clearFilter(event: KeyboardEvent): void {
+    if (event.code === 'Escape') {
+      this.report.clearFilter();
+    }
+  }
 }

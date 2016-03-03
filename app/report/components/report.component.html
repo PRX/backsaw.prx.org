@@ -13,6 +13,7 @@
 </button>
 
 <report-details
+  (window:keydown)="clearFilter($event)"
   [adzerkResponses$]="report.adzerkResponses$"
   [filteredAdzerkResponses$]="report.filteredAdzerkResponses$"
   [filter]="report.filter"></report-details>
