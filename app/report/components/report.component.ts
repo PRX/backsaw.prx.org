@@ -47,7 +47,9 @@ export class ReportComponent implements OnInit {
     }
   }
 
-  fetchResponses(times: number): void {
-    this.report.fetchResponses(times);
+  fetchResponses(times: number, event: KeyboardEvent): void {
+    if (!event || event.code === 'Enter') {
+      this.report.fetchResponses(times);
+    }
   }
 }

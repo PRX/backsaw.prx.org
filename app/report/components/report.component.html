@@ -4,15 +4,13 @@
   Edit Properties
 </button>
 
-<div id="run">
-  <div *ngIf="report.canFetchResponses()">
-    <button
-      autofocus
-      (click)="fetchResponses(100)">
-      Sample Downloads 100x
-    </button>
-  </div>
-</div>
+<button
+   id="run"
+  (window:keydown)="fetchResponses(100, $event)"
+  [disabled]="!report.canFetchResponses()"
+  (click)="fetchResponses(100)">
+  Sample Downloads 100x ⏎
+</button>
 
 <report-details
   [adzerkResponses$]="report.adzerkResponses$"
