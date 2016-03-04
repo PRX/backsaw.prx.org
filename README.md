@@ -4,7 +4,7 @@ Backsaw is a utility for inspecting and analyzing flighting behavior in the [Adz
 
 ## Development
 
-Development of Backsaw should be done using Node 5.6.x.
+Development of Backsaw should be done using Node 5.7.x.
 
 ### Setup
 
@@ -34,7 +34,7 @@ jspm install angular2
 
 `npm start` runs the app without compiling jspm dependencies, and uses the typescript files directly.
 
-`npm run local` imitates a production release, by building a single file executable ES5 from the jspm dependencies, and running the local server out of the `./.dist` directory, which contains copies of all files needed for a deployment.
+`npm run start:dist` imitates a production release, by building a single file executable ES5 from the jspm dependencies, and running the local server out of the `./.dist` directory, which contains copies of all files needed for a deployment.
 
 ## Deployment
 
