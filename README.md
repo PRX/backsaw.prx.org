@@ -40,7 +40,7 @@ jspm install angular2
 
 `npm run deploy` updates the `./.dist` directory, include the sfx bundle from jspm and any other app files, and pushes the files to S3. ***Use sparingly***, as it currently provides no protections against, and will deploy a broken feature branch without complaining.
 
-In order for a deploy to work, you must have a correctly configured `./aws.json` file for [gulp-s3](https://www.npmjs.com/package/gulp-s3). It should have an AWS key with access to the S3 bucket you're trying to deploy to.
+In order for a deploy to work, you should have you `~/.aws` credentials set up to have access to the applications S3 bucket.
 
 ## Notes
 

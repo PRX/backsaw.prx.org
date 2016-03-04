@@ -1,6 +1,6 @@
 {
   "name": "backsaw.prx.org",
-  "version": "1.2.5",
+  "version": "1.2.9",
   "description": "Adzerk flighting sampling and analysis",
   "homepage": "http://backsaw.prx.org",
   "bugs": "https://github.com/PRX/backsaw.prx.org/issues",
@@ -25,7 +25,7 @@
     "gulp-jade": "^1.1.0",
     "gulp-jspm": "^0.5.7",
     "gulp-rename": "^1.2.2",
-    "gulp-s3": "^0.3.0",
+    "gulp-s3-upload": "^1.5.1",
     "gulp-shell": "^0.5.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",

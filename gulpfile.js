@@ -9,12 +9,12 @@ let jade          = require('gulp-jade');
 let jspm          = require('gulp-jspm');
 let rename        = require('gulp-rename');
 let run           = require('run-sequence');
-let s3            = require('gulp-s3');
+var s3            = require('gulp-s3-upload')({useIAM:true});
 let shell         = require('gulp-shell');
 let sourcemaps    = require('gulp-sourcemaps');
 
 // Public tasks (serial)
-gulp.task('deploy', (cb) => run('build:dist', 'preinstall:dist', 'install:dist', cb));
+gulp.task('deploy', (cb) => run('build:dist', 'preinstall:dist', 'install:dist', 'postinstall:dist', cb));
 gulp.task('start', (cb) => run('build:dev', 'server:dev', cb));
 gulp.task('start:dist', (cb) => run('build:dist', 'server:dist', cb));
 gulp.task('test', (cb) => run('server:test', cb));
@@ -26,6 +26,7 @@ gulp.task('build:dist', (cb) => run(['copy:assets:dist', 'copy:vendor:dist', 'ja
 // Deploy tasks (serial)
 gulp.task('install:dist', (cb) => run('push:s3:dist', cb));
 gulp.task('preinstall:dist', (cb) => run('version:bump', 'version:mark:dist', cb));
+gulp.task('postinstall:dist', (cb) => run('push:s3:version', cb));
 
 // Server tasks
 gulp.task('server:dev', shell.task(['lite-server --config=config/dev.bs.config.json']));
@@ -77,10 +78,15 @@ gulp.task('copy:vendor:dist', (callback) => {
 
 // Utility tasks
 gulp.task('push:s3:dist', (callback) => {
-  let aws = JSON.parse(fs.readFileSync('./aws.json'));
   return gulp
-    .src('./.dist/**')
-    .pipe(s3(aws));
+    .src(['./.dist/**', '!./.dist/version.deploy'])
+    .pipe(s3({ Bucket: 'backsaw.prx.org' }));
+});
+
+gulp.task('push:s3:version', (callback) => {
+  return gulp
+    .src('./.dist/version.deploy')
+    .pipe(s3({ Bucket: 'backsaw.prx.org' }));
 });
 
 gulp.task('version:bump', (callback) => {
