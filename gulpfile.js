@@ -20,7 +20,7 @@ gulp.task('start:dist', (cb) => run('build:dist', 'server:dist', cb));
 gulp.task('test', (cb) => run('server:test', cb));
 
 // Build tasks (parallel)
-gulp.task('build:dev', (cb) => run(['jade:index:dev', 'jspm:bundle:dev']));
+gulp.task('build:dev', (cb) => run(['jade:index:dev', 'jspm:bundle:dev'], cb));
 gulp.task('build:dist', (cb) => run(['copy:assets:dist', 'copy:vendor:dist', 'jade:index:dist', 'jspm:bundle:dist'], cb));
 
 // Deploy tasks (serial)
