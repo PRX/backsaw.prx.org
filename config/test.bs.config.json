@@ -1,0 +1,10 @@
+{
+  "port": 3033,
+  "server": {
+    "baseDir": "./test",
+    "index": "index.html",
+    "routes": {
+        "/": "./"
+    }
+  }
+}

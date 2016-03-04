@@ -1,111 +1,97 @@
-var gulp          = require('gulp');
-var gutil         = require('gulp-util');
-var sourcemaps    = require('gulp-sourcemaps');
-var runSequence   = require('run-sequence');
-var jspm          = require('gulp-jspm');
-var jade          = require('gulp-jade');
-var s3            = require('gulp-s3');
-var rename        = require('gulp-rename');
-var fs            = require('fs');
-var bump          = require('gulp-bump');
-var file          = require('gulp-file');
+'use strict';
 
-gulp.task('default', ['buildDevIndex']);
+let bump          = require('gulp-bump');
+let file          = require('gulp-file');
+let fs            = require('fs');
+let gulp          = require('gulp');
+let gutil         = require('gulp-util');
+let jade          = require('gulp-jade');
+let jspm          = require('gulp-jspm');
+let rename        = require('gulp-rename');
+let runSequence   = require('run-sequence');
+let s3            = require('gulp-s3');
+let shell         = require('gulp-shell');
+let sourcemaps    = require('gulp-sourcemaps');
 
-gulp.task('buildDevIndex', function (callback) {
-  var YOUR_LOCALS = { release: false };
+// Public tasks (serial)
+gulp.task('deploy', (cb) => { runSequence('build:dist', 'preinstall:dist', 'install:dist'); });
+gulp.task('start', (cb) => { runSequence('build:dev', 'server:dev'); });
+gulp.task('start:dist', (cb) => { runSequence('build:dist', 'server:dist'); });
+gulp.task('test', (cb) => { runSequence('server:test'); });
 
+// Build tasks (parallel)
+gulp.task('build:dev', ['jade:index:dev', 'jspm:bundle:dev']);
+gulp.task('build:dist', ['copy:assets:dist', 'copy:vendor:dist', 'jade:index:dist', 'jspm:bundle:dist']);
+
+// Deploy tasks (serial)
+gulp.task('install:dist', ['push:s3:dist']);
+gulp.task('preinstall:dist', (cb) => { runSequence('version:bump', 'version:mark:dist'); });
+
+// Server tasks
+gulp.task('server:dev', shell.task(['lite-server --config=config/dev.bs.config.json']));
+gulp.task('server:dist', shell.task(['lite-server --config=config/dist.bs.config.json']));
+gulp.task('server:test', shell.task(['lite-server --config=config/test.bs.config.json']));
+
+// JSPM bundle tasks
+gulp.task('jspm:bundle:dev', shell.task([
+  'jspm bundle src/main - [src/app/**/*] ./.dev/vendor.js --inject'
+]));
+
+gulp.task('jspm:bundle:dist', (callback) => {
   return gulp
-    .src('./index.jade')
-    .pipe(jade({ locals: YOUR_LOCALS }))
-    .pipe(gulp.dest('./'));
-});
-
-gulp.task('buildIndex', function (callback) {
-  var YOUR_LOCALS = { release: true };
-
-  return gulp
-    .src('./index.jade')
-    .pipe(jade({ locals: YOUR_LOCALS }))
-    .pipe(gulp.dest('./.dist'));
-});
-
-gulp.task('jspmBundleSfx', function (callback) {
-  return gulp
-    .src('./app/main.ts')
+    .src('./src/main.ts')
     .pipe(sourcemaps.init())
       .pipe(jspm({ selfExecutingBundle: true, minify: true, mangle: false }))
       .pipe(rename('backsaw.min.js'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./.dist/scripts'));
+    .pipe(gulp.dest('./.dist/scripts/'));
 });
 
-gulp.task('copyTemplates', function (callback) {
+// Jade compile tasks
+gulp.task('jade:index:dev', (callback) => {
   return gulp
-    .src('./app/**/*.html')
-    .pipe(gulp.dest('./.dist/app'));
+    .src('./src/index.jade')
+    .pipe(jade({ locals: { release: false } }))
+    .pipe(gulp.dest('./src/'));
 });
 
-gulp.task('copyStyles', function (callback) {
+gulp.task('jade:index:dist', (callback) => {
   return gulp
-    .src('./app/**/*.css')
-    .pipe(gulp.dest('./.dist/app'));
+    .src('./src/index.jade')
+    .pipe(jade({ locals: { release: true } }))
+    .pipe(gulp.dest('./.dist/'));
 });
 
-gulp.task('copyImages', function (callback) {
+// Copy tasks
+gulp.task('copy:assets:dist', (callback) => {
   return gulp
-    .src('./images/**/*')
-    .pipe(gulp.dest('./.dist/images'));
+    .src(['./src/**/*.html', '!./src/index.html', './src/**/*.css', './src/images/**/*'], { base: 'src' })
+    .pipe(gulp.dest('./.dist/'));
 });
 
-gulp.task('copyPolyfills', function (callback) {
+gulp.task('copy:vendor:dist', (callback) => {
   return gulp
     .src('./node_modules/angular2/bundles/angular2-polyfills.js')
-    .pipe(gulp.dest('./.dist/scripts'));
+    .pipe(gulp.dest('./.dist/scripts/'));
 });
 
-gulp.task('uploadToS3', function (callback) {
-  aws = JSON.parse(fs.readFileSync('./aws.json'));
+// Utility tasks
+gulp.task('push:s3:dist', (callback) => {
+  let aws = JSON.parse(fs.readFileSync('./aws.json'));
   return gulp
     .src('./.dist/**')
     .pipe(s3(aws));
 });
 
-gulp.task('build', function (callback) {
-  runSequence(
-    'copyTemplates',
-    'copyStyles',
-    'copyImages',
-    'copyPolyfills',
-    'buildIndex',
-    'jspmBundleSfx',
-    function (error) {
-      if (error) {
-        console.log(error.message);
-      } else {
-        console.log('Release completed successfully.');
-      }
-      callback(error);
-    }
-  );
-});
-
-gulp.task('bumpVersion', function (callback){
+gulp.task('version:bump', (callback) => {
   return gulp
     .src('./package.json')
     .pipe(bump())
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('writeDeployMaker', function (callback) {
-  return file('version.deploy', require('./package.json').version, { src: true })
+gulp.task('version:mark:dist', function (callback) {
+  let pkg = require('./package.json');
+  return file('version.deploy', pkg.version, { src: true })
     .pipe(gulp.dest('./.dist/'));
-});
-
-gulp.task('deploy', function (callback) {
-  runSequence(
-    'bumpVersion',
-    'writeDeployMaker',
-    'uploadToS3'
-  );
 });

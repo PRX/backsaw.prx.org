@@ -1,12 +1,12 @@
-/node_modules/
-/jspm_packages/
-
-npm-debug.log
-
+/.dev/
 /.dist/
+/jspm_packages/
+/node_modules/
+
+/aws.json
+/npm-debug.log
 
 *.js.map
-/app/**/*.js
 
-/index.html
-/aws.json
+/src/**/*.js
+/src/index.html
