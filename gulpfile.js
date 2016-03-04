@@ -8,24 +8,24 @@ let gutil         = require('gulp-util');
 let jade          = require('gulp-jade');
 let jspm          = require('gulp-jspm');
 let rename        = require('gulp-rename');
-let runSequence   = require('run-sequence');
+let run           = require('run-sequence');
 let s3            = require('gulp-s3');
 let shell         = require('gulp-shell');
 let sourcemaps    = require('gulp-sourcemaps');
 
 // Public tasks (serial)
-gulp.task('deploy', (cb) => { runSequence('build:dist', 'preinstall:dist', 'install:dist'); });
-gulp.task('start', (cb) => { runSequence('build:dev', 'server:dev'); });
-gulp.task('start:dist', (cb) => { runSequence('build:dist', 'server:dist'); });
-gulp.task('test', (cb) => { runSequence('server:test'); });
+gulp.task('deploy', (cb) => run('build:dist', 'preinstall:dist', 'install:dist', cb));
+gulp.task('start', (cb) => run('build:dev', 'server:dev', cb));
+gulp.task('start:dist', (cb) => run('build:dist', 'server:dist', cb));
+gulp.task('test', (cb) => run('server:test', cb));
 
 // Build tasks (parallel)
-gulp.task('build:dev', ['jade:index:dev', 'jspm:bundle:dev']);
-gulp.task('build:dist', ['copy:assets:dist', 'copy:vendor:dist', 'jade:index:dist', 'jspm:bundle:dist']);
+gulp.task('build:dev', (cb) => run(['jade:index:dev', 'jspm:bundle:dev']));
+gulp.task('build:dist', (cb) => run(['copy:assets:dist', 'copy:vendor:dist', 'jade:index:dist', 'jspm:bundle:dist'], cb));
 
 // Deploy tasks (serial)
-gulp.task('install:dist', ['push:s3:dist']);
-gulp.task('preinstall:dist', (cb) => { runSequence('version:bump', 'version:mark:dist'); });
+gulp.task('install:dist', (cb) => run('push:s3:dist', cb));
+gulp.task('preinstall:dist', (cb) => run('version:bump', 'version:mark:dist', cb));
 
 // Server tasks
 gulp.task('server:dev', shell.task(['lite-server --config=config/dev.bs.config.json']));
