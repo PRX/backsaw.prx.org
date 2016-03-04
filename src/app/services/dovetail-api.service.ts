@@ -21,4 +21,23 @@ export class DovetailService {
       return body;
     });
   }
+
+  getAdzerkSlotOrder(url: string): Observable<string[]> {
+    let result: RegExpExecArray = /(dovetail\.prxu\.org\/.*)/.exec(url);
+    let dovetailUrl: string = 'https://' + result[1];
+
+    let headers: Headers = new Headers({ 'Accept': 'application/vnd.dovetail.v1+json' });
+    let options: RequestOptions = new RequestOptions({ headers: headers });
+
+    return this.http.get(dovetailUrl, options).map((res: Response) => {
+      let obj: {id: string; type?: string}[] = JSON.parse(res.text()).program.placements;
+      let output: string[] = [];
+      for (let placement of obj) {
+        if (placement.type !== 'original') {
+          output.push(placement.id);
+        }
+      }
+      return output;
+    });
+  }
 }

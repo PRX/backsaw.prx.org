@@ -17,6 +17,7 @@ export class ReportService {
   public adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   public filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   public filter: {} = {};
+  public slotOrder: string[];
 
   private episode: Episode;
   private adzerkRequest: AdzerkNativeAdAPIRequest;
@@ -144,6 +145,12 @@ export class ReportService {
       .getAdzerkRequestBody(this.episode.url)
       .subscribe((request: AdzerkNativeAdAPIRequest) => {
         this.adzerkRequest = request;
+      });
+
+    this.dovetailService
+      .getAdzerkSlotOrder(this.episode.url)
+      .subscribe((slotOrder: string[]) => {
+        this.slotOrder = slotOrder;
       });
   }
 

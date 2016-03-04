@@ -3,7 +3,6 @@ import {Component, Input, OnInit} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 
 import {
-  AdzerkNativeAdAPIResponseDecision,
   AdzerkNativeAdAPIResponse,
 } from '../services/adzerk_native_ad_api_client';
 import {SlotReportDetailsComponent} from './slot-report-details.component';
@@ -22,7 +21,6 @@ export class ReportDetailsComponent implements OnInit {
 
   adzerkResponses: AdzerkNativeAdAPIResponse[] = [];
   filteredAdzerkResponses: AdzerkNativeAdAPIResponse[] = [];
-  slotIds: string[] = [];
 
   constructor(
     private reportService: ReportService
@@ -37,9 +35,10 @@ export class ReportDetailsComponent implements OnInit {
     this.adzerkResponses$
       .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
         this.adzerkResponses = responses;
-
-        let decisions = responses[0].decisions;
-        this.slotIds = Object.keys(decisions);
       });
+  }
+
+  get slotIds(): string[] {
+    return this.reportService.slotOrder;
   }
 }
