@@ -38,7 +38,7 @@ export class ReportDetailsComponent implements OnInit {
       .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
         this.adzerkResponses = responses;
 
-        let decisions: AdzerkNativeAdAPIResponseDecision[] = responses[0].decisions;
+        let decisions = responses[0].decisions;
         this.slotIds = Object.keys(decisions);
       });
   }

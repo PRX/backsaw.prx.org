@@ -43,8 +43,8 @@ export class SlotReportDetailsComponent implements OnInit {
     this.adzerkResponses$
       .subscribe((responses: AdzerkNativeAdAPIResponse[]) => {
         for (let response of responses) {
-          let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
-          let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.slotId];
+          let decisions = response.decisions;
+          let decision = decisions[this.slotId];
 
           if (decision
             && !this.flightedAds.find((ad: FlightedAd) => ad.adId === decision.adId)) {

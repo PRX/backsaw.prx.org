@@ -60,7 +60,7 @@ interface AdzerkNativeAdAPIResponseUser {
 }
 
 export interface AdzerkNativeAdAPIResponse {
-  decisions: AdzerkNativeAdAPIResponseDecision[];
+  decisions: {[key: string]: AdzerkNativeAdAPIResponseDecision};
   user?: AdzerkNativeAdAPIResponseUser;
 }
 

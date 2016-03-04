@@ -45,8 +45,8 @@ export class NullAdReportDetailsComponent implements OnInit {
     this.count = 0;
 
     for (let response of this.filteredAdzerkResponses) {
-      let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
-      let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.flightedAd.slotId];
+      let decisions = response.decisions;
+      let decision = decisions[this.flightedAd.slotId];
 
       if (!decision) {
         this.count += 1;

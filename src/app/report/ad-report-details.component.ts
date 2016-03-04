@@ -114,7 +114,7 @@ export class AdReportDetailsComponent implements OnInit {
     this.count = 0;
 
     for (let response of this.filteredAdzerkResponses) {
-      let decisions: AdzerkNativeAdAPIResponseDecision[] = response.decisions;
+      let decisions = response.decisions;
       let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.flightedAd.slotId];
 
       if (decision
