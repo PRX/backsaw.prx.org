@@ -52,14 +52,14 @@ gulp.task('jspm:bundle:dist', callback => {
 gulp.task('jade:index:dev', callback => {
   return gulp
     .src('./src/index.jade')
-    .pipe(jade({ locals: { release: false } }))
+    .pipe(jade({ locals: { dist: false } }))
     .pipe(gulp.dest('./src/'));
 });
 
 gulp.task('jade:index:dist', callback => {
   return gulp
     .src('./src/index.jade')
-    .pipe(jade({ locals: { release: true } }))
+    .pipe(jade({ locals: { dist: true } }))
     .pipe(gulp.dest('./.dist/'));
 });
 
