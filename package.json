@@ -2,12 +2,17 @@
   "name": "backsaw.prx.org",
   "version": "1.2.9",
   "description": "Adzerk flighting sampling and analysis",
+  "keywords": [
+    "Backsaw",
+    "Adzerk"
+  ],
   "homepage": "http://backsaw.prx.org",
   "bugs": "https://github.com/PRX/backsaw.prx.org/issues",
   "license": "AGPL-1.0",
   "author": "PRX, Inc. <help@prx.org> (http://www.prx.org)",
   "contributors": [
-    "Chris Kalafarski <chris.kalafarski@prx.org>"
+    "Chris Kalafarski <chris.kalafarski@prx.org>",
+    "Chris Rhoden <chris@prx.org>"
   ],
   "repository": "https://github.com/PRX/backsaw.prx.org.git",
   "scripts": {
@@ -34,6 +39,9 @@
     "lite-server": "^2.1.0",
     "run-sequence": "^1.1.5",
     "rxjs": "^5.0.0-beta.2"
+  },
+  "engines": {
+    "node": "^5.7.0"
   },
   "jspm": {
     "configFile": "config/systemjs.config.js",
