@@ -13,7 +13,7 @@ export class RssFeedService {
 
   episodesForProgram(program: Program): Observable<Episode[]> {
     return this.http.get(program.url).map((res: Response) => {
-      let episodes = new Array<Episode>();
+      let episodes: Episode[] = [];
 
       let xml = res.text();
 

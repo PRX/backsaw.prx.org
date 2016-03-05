@@ -31,7 +31,7 @@ export class DovetailService {
 
     return this.http.get(dovetailUrl, options).map((res: Response) => {
       let obj: {id: string; type?: string}[] = JSON.parse(res.text()).program.placements;
-      let output = new Array<string>();
+      let output: string[] = [];
       for (let placement of obj) {
         if (placement.type !== 'original') {
           output.push(placement.id);

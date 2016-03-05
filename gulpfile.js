@@ -1,15 +1,15 @@
 'use strict';
 
-let bump          = require('gulp-bump');
-let file          = require('gulp-file');
-let gulp          = require('gulp');
-let jade          = require('gulp-jade');
-let jspm          = require('gulp-jspm');
-let rename        = require('gulp-rename');
-let run           = require('run-sequence');
-var s3            = require('gulp-s3-upload')({useIAM:true});
-let shell         = require('gulp-shell');
-let sourcemaps    = require('gulp-sourcemaps');
+const bump          = require('gulp-bump');
+const file          = require('gulp-file');
+const gulp          = require('gulp');
+const jade          = require('gulp-jade');
+const jspm          = require('gulp-jspm');
+const rename        = require('gulp-rename');
+const run           = require('run-sequence');
+const s3            = require('gulp-s3-upload')({ useIAM: true });
+const shell         = require('gulp-shell');
+const sourcemaps    = require('gulp-sourcemaps');
 
 // Public tasks (serial)
 gulp.task('deploy', cb => run('build:dist', 'preinstall:dist', 'install:dist', 'postinstall:dist', cb));
@@ -95,7 +95,7 @@ gulp.task('version:bump', () => {
 });
 
 gulp.task('version:mark:dist', () => {
-  let pkg = require('./package.json');
+  const pkg = require('./package.json');
   return file('version.deploy', pkg.version, { src: true })
     .pipe(gulp.dest('./.dist/'));
 });
