@@ -7,17 +7,14 @@ import {CampaignNameComponent} from './campaign-name.component';
 import {FlightNameComponent} from './flight-name.component';
 import {CreativeNameComponent} from './creative-name.component';
 import {AdNameComponent} from './ad-name.component';
-import {
-  AdzerkNativeAdAPIResponseDecision,
-  AdzerkNativeAdAPIResponse,
-} from '../services/adzerk_native_ad_api_client';
+import {AdzerkNativeAdAPIResponse} from '../services/adzerk_native_ad_api_client';
 import {ReportService} from '../services/report.service';
 
 @Component({
   directives: [CampaignNameComponent, FlightNameComponent, CreativeNameComponent, AdNameComponent],
   selector: 'ad-report-details',
   styleUrls: ['app/report/ad-report-details.component.css'],
-  templateUrl: 'app/report/ad-report-details.component.html',
+  templateUrl: 'app/report/ad-report-details.component.html'
 })
 export class AdReportDetailsComponent implements OnInit {
   @Input() flightedAd: FlightedAd;
@@ -76,7 +73,7 @@ export class AdReportDetailsComponent implements OnInit {
   }
 
   private isRelatedToFilter(): boolean {
-    let isRelated: boolean = false;
+    let isRelated = false;
 
     for (let slotId in this.filter) {
       if (this.filter.hasOwnProperty(slotId)) {
@@ -110,12 +107,12 @@ export class AdReportDetailsComponent implements OnInit {
     }
   }
 
-  private calculateCount() {
+  private calculateCount(): void {
     this.count = 0;
 
     for (let response of this.filteredAdzerkResponses) {
       let decisions = response.decisions;
-      let decision: AdzerkNativeAdAPIResponseDecision = decisions[this.flightedAd.slotId];
+      let decision = decisions[this.flightedAd.slotId];
 
       if (decision
         && decision.adId === this.flightedAd.adId

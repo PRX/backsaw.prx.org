@@ -25,5 +25,5 @@ export class LocalStorage {
 }
 
 export const LOCAL_STORAGE_PROVIDERS: Provider[] = [
-  provide(LocalStorage, {useClass: LocalStorage}),
+  provide(LocalStorage, {useClass: LocalStorage})
 ];

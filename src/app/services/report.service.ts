@@ -8,7 +8,7 @@ import {Episode} from './program.service';
 import {AdzerkNativeAdAPIRequestProperties,
   AdzerkNativeAdAPIRequest,
   AdzerkNativeAdAPIResponse,
-  AdzerkNativeAdAPI,
+  AdzerkNativeAdAPI
 } from './adzerk_native_ad_api_client';
 import {DovetailService} from './dovetail-api.service';
 
@@ -85,14 +85,13 @@ export class ReportService {
       return true;
     }
 
-    let failed: boolean;
-    failed = false;
+    let failed = false;
 
     for (let slotId in this.filter) {
       if (this.filter.hasOwnProperty(slotId)) {
         // Get the decision from the response for the slot that matches the slot
         ///the filter that's being checked
-        let decision: AdzerkNativeAdAPIRequestProperties = response.decisions[slotId];
+        let decision = response.decisions[slotId];
 
         // If this response had a null decision (no ad) for this slot, it should
         ///fail the test (this could be improved)
@@ -167,8 +166,7 @@ export class ReportService {
   fetchResponses(times: number): void {
     this.applyProperties();
 
-    let i: number;
-    for (i = 0; i < times; i++) {
+    for (let i = 0; i < times; i++) {
       this.fetchResponse();
     }
   }

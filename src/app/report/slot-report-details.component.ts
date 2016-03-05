@@ -4,10 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {AdReportDetailsComponent} from './ad-report-details.component';
 import {NullAdReportDetailsComponent} from './null-ad-report-details.component';
-import {
-  AdzerkNativeAdAPIResponseDecision,
-  AdzerkNativeAdAPIResponse,
-} from '../services/adzerk_native_ad_api_client';
+import {AdzerkNativeAdAPIResponse} from '../services/adzerk_native_ad_api_client';
 
 // TODO This isn't a great name because it's also used to represent a no-ad
 ///decision, when only a `slotId` is provided
@@ -26,7 +23,7 @@ export class FlightedAd {
   directives: [AdReportDetailsComponent, NullAdReportDetailsComponent],
   selector: 'slot-report-details',
   styleUrls: ['app/report/slot-report-details.component.css'],
-  templateUrl: 'app/report/slot-report-details.component.html',
+  templateUrl: 'app/report/slot-report-details.component.html'
 })
 export class SlotReportDetailsComponent implements OnInit {
   @Input() slotId: string;

@@ -55,13 +55,13 @@ export interface AdzerkManagementAPIAdResponse {
 @Injectable()
 export class AdzerkManagementAPI {
   headers: Headers = new Headers({
-    'X-Adzerk-ApiKey': this.auth.getAdzerkAPIKey(),
+    'X-Adzerk-ApiKey': this.auth.getAdzerkAPIKey()
   });
   options: RequestOptions = new RequestOptions({ headers: this.headers });
 
   // TODO https://api.adzerk.net/v1/flight/;
   private baseURL: string = 'https://' +
-  '62y4dsxai6.execute-api.us-east-1.amazonaws.com/prod/management/v1/';
+    '62y4dsxai6.execute-api.us-east-1.amazonaws.com/prod/management/v1/';
 
   constructor(
     private http: Http,
@@ -69,7 +69,7 @@ export class AdzerkManagementAPI {
   ) {}
 
   getAdvertiser(advertiserId: number): Observable<AdzerkManagementAPIAdvertiserResponse> {
-    let url: string = this.baseURL + 'advertiser/' + advertiserId;
+    let url = this.baseURL + 'advertiser/' + advertiserId;
 
     return this.http
       .get(url, this.options)
@@ -79,7 +79,7 @@ export class AdzerkManagementAPI {
   }
 
   getCampaign(campaignId: number): Observable<AdzerkManagementAPICampaignResponse> {
-    let url: string = this.baseURL + 'campaign/' + campaignId;
+    let url = this.baseURL + 'campaign/' + campaignId;
 
     return this.http
       .get(url, this.options)
@@ -89,7 +89,7 @@ export class AdzerkManagementAPI {
   }
 
   getFlight(flightId: number): Observable<AdzerkManagementAPIFlightResponse> {
-    let url: string = this.baseURL + 'flight/' + flightId;
+    let url = this.baseURL + 'flight/' + flightId;
 
     return this.http
       .get(url, this.options)
@@ -99,7 +99,7 @@ export class AdzerkManagementAPI {
   }
 
   getAd(flightId: number, adId: number): Observable<AdzerkManagementAPIAdResponse> {
-    let url: string = this.baseURL + 'flight/' + flightId + '/creative/' + adId;
+    let url = this.baseURL + 'flight/' + flightId + '/creative/' + adId;
 
     return this.http
       .get(url, this.options)

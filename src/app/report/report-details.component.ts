@@ -2,9 +2,7 @@ import {Component, Input, OnInit} from 'angular2/core';
 
 import {Observable} from 'rxjs/Observable';
 
-import {
-  AdzerkNativeAdAPIResponse,
-} from '../services/adzerk_native_ad_api_client';
+import {AdzerkNativeAdAPIResponse} from '../services/adzerk_native_ad_api_client';
 import {SlotReportDetailsComponent} from './slot-report-details.component';
 import {ReportService} from '../services/report.service';
 
@@ -12,7 +10,7 @@ import {ReportService} from '../services/report.service';
   directives: [SlotReportDetailsComponent],
   selector: 'report-details',
   styleUrls: ['app/report/report-details.component.css'],
-  templateUrl: 'app/report/report-details.component.html',
+  templateUrl: 'app/report/report-details.component.html'
 })
 export class ReportDetailsComponent implements OnInit {
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;

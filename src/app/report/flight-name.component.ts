@@ -3,7 +3,7 @@ import {Component, OnInit, Input} from 'angular2/core';
 import {FlightedAd} from './slot-report-details.component';
 import {
   AdzerkManagementAPIFlightResponse,
-  AdzerkManagementAPI,
+  AdzerkManagementAPI
 } from '../services/adzerk_management_api_client';
 
 @Component({
@@ -12,7 +12,7 @@ import {
   template: `
     <span *ngIf="!flightResponse">{{flightedAd.flightId}}</span>
     <span *ngIf="flightResponse">{{flightResponse.Name}}</span>
-  `,
+  `
 })
 export class FlightNameComponent implements OnInit {
   @Input() flightedAd: FlightedAd;

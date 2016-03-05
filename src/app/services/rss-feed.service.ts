@@ -13,26 +13,25 @@ export class RssFeedService {
 
   episodesForProgram(program: Program): Observable<Episode[]> {
     return this.http.get(program.url).map((res: Response) => {
-      let episodes: Episode[] = [];
+      let episodes = new Array<Episode>();
 
-      let xml: string = res.text();
+      let xml = res.text();
 
-      let parser: DOMParser = new DOMParser();
-      let doc: XMLDocument = parser.parseFromString(xml, 'application/xml');
+      let parser = new DOMParser();
+      let doc = <XMLDocument> parser.parseFromString(xml, 'application/xml');
 
-      let elements: NodeList = doc.querySelectorAll('item');
+      let elements = doc.querySelectorAll('item');
 
-      let i: number;
-      for (i = 0; i < elements.length; ++i) {
-        let item: Element = <Element> elements[i];
+      for (let i = 0; i < elements.length; ++i) {
+        let item = <Element> elements[i];
 
-        let title: string = function (html: string): string {
-          let txt: HTMLTextAreaElement = document.createElement('textarea');
+        let title = function (html: string) {
+          let txt = <HTMLTextAreaElement> document.createElement('textarea');
           txt.innerHTML = html;
           return txt.value;
         }(item.querySelector('title').innerHTML);
 
-        let encUrl: string = item.querySelector('enclosure').getAttribute('url');
+        let encUrl = item.querySelector('enclosure').getAttribute('url');
 
         episodes.push(new Episode(encUrl, title));
       }

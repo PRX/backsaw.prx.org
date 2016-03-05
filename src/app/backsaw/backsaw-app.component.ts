@@ -14,12 +14,12 @@ import {AuthenticationService} from '../services/authentication.service';
   providers: [AuthenticationService],
   selector: 'backsaw-app',
   styleUrls: ['app/backsaw/backsaw-app.component.css'],
-  templateUrl: 'app/backsaw/backsaw-app.component.html',
+  templateUrl: 'app/backsaw/backsaw-app.component.html'
 })
 @RouteConfig([
   { component: SearchComponent, name: 'Search', path: '/' },
   { component: ReportComponent, name: 'Report', path: '/report' },
-  { component: AdvancedComponent, name: 'Advanced', path: '/advanced' },
+  { component: AdvancedComponent, name: 'Advanced', path: '/advanced' }
 ])
 export class BacksawAppComponent {
   constructor(

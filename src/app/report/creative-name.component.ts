@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from 'angular2/core';
 
 import {FlightedAd} from './slot-report-details.component';
 import {AdzerkManagementAPIAdResponse,
-  AdzerkManagementAPI,
+  AdzerkManagementAPI
 } from '../services/adzerk_management_api_client';
 
 @Component({
@@ -11,7 +11,7 @@ import {AdzerkManagementAPIAdResponse,
   template: `
     <span *ngIf="!adResponse">{{flightedAd.creativeId}}</span>
     <span *ngIf="adResponse">{{adResponse.Creative.Title}}</span>
-  `,
+  `
 })
 export class CreativeNameComponent implements OnInit {
   @Input() flightedAd: FlightedAd;

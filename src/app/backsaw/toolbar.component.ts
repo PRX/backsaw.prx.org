@@ -12,7 +12,7 @@ import {SearchFormComponent} from '../search/search-form.component';
   template: `
     <search-form></search-form>
     <button (click)="onLogout()">Logout</button>
-  `,
+  `
 })
 export class ToolbarComponent {
   constructor(

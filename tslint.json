@@ -21,7 +21,6 @@
       "parameter",
       "arrow-parameter",
       "property-declaration",
-      "variable-declaration",
       "member-variable-declaration"
     ],
     "typedef-whitespace": [
@@ -67,7 +66,7 @@
     "no-var-keyword": true,
     "radix": true,
     "switch-default": true,
-    "triple-equals": [true, "allow-null-check"],
+    "triple-equals": true,
     "use-strict": [true, "check-module"],
     "eofline": true,
     "indent": [true, "spaces"],
@@ -78,7 +77,7 @@
     "trailing-comma": [
       true,
       {
-        "multiline": "always",
+        "multiline": "never",
         "singleline": "never"
       }
     ],

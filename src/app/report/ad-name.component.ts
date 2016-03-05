@@ -7,7 +7,7 @@ import {FlightedAd} from './slot-report-details.component';
   styleUrls: ['app/report/campaign-name.component.css'],
   template: `
     <span *ngIf="!campaignResponse">{{flightedAd.adId}}</span>
-  `,
+  `
 })
 export class AdNameComponent {
   @Input() flightedAd: FlightedAd;

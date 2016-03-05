@@ -3,17 +3,14 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {Observable} from 'rxjs/Observable';
 
-import {
-  Program,
-  Episode,
-} from '../services/program.service';
+import {Program, Episode} from '../services/program.service';
 import {RssFeedService} from '../services/rss-feed.service';
 
 @Component({
   directives: [ROUTER_DIRECTIVES],
   selector: 'search-results',
   styleUrls: ['app/search/search-results.component.css'],
-  templateUrl: 'app/search/search-results.component.html',
+  templateUrl: 'app/search/search-results.component.html'
 })
 export class SearchResultsComponent implements OnInit {
   @Input() program: Program;

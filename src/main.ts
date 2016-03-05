@@ -24,5 +24,5 @@ bootstrap(
     LOCAL_STORAGE_PROVIDERS,
     DovetailService,
     AdzerkNativeAdAPI,
-    RssFeedService,
+    RssFeedService
   ]);

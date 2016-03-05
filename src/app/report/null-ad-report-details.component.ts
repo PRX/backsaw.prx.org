@@ -2,16 +2,13 @@ import {Component, Input, OnInit, ElementRef} from 'angular2/core';
 
 import {Observable} from 'rxjs/Observable';
 
-import {
-  AdzerkNativeAdAPIResponse,
-  AdzerkNativeAdAPIResponseDecision,
-} from '../services/adzerk_native_ad_api_client';
+import {AdzerkNativeAdAPIResponse} from '../services/adzerk_native_ad_api_client';
 import {FlightedAd} from './slot-report-details.component';
 
 @Component({
   selector: 'null-ad-report-details',
   styleUrls: ['app/report/null-ad-report-details.component.css'],
-  templateUrl: 'app/report/null-ad-report-details.component.html',
+  templateUrl: 'app/report/null-ad-report-details.component.html'
 })
 export class NullAdReportDetailsComponent implements OnInit {
   @Input() flightedAd: FlightedAd;
@@ -41,7 +38,7 @@ export class NullAdReportDetailsComponent implements OnInit {
       });
   }
 
-  private calculateCount() {
+  private calculateCount(): void {
     this.count = 0;
 
     for (let response of this.filteredAdzerkResponses) {
@@ -54,7 +51,7 @@ export class NullAdReportDetailsComponent implements OnInit {
     }
   }
 
-  private toggleVisibility() {
+  private toggleVisibility(): void {
     if (this.count === 0) {
       this.el.nativeElement.style.display = 'none';
     } else {

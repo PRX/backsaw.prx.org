@@ -8,7 +8,7 @@ import {AuthenticationService} from '../services/authentication.service';
   providers: [AuthenticationService],
   selector: 'authentication-form',
   styleUrls: ['app/backsaw/authentication-form.component.css'],
-  templateUrl: 'app/backsaw/authentication-form.component.html',
+  templateUrl: 'app/backsaw/authentication-form.component.html'
 })
 export class AuthenticationFormComponent {
   constructor(

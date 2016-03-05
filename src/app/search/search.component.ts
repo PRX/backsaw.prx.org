@@ -15,7 +15,7 @@ class SearchQuery {
   styleUrls: ['app/search/search.component.css'],
   template: `
     <search-results [program]="program"></search-results>
-  `,
+  `
 })
 export class SearchComponent implements OnInit {
   program: Program;
@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.routeParams.get('url')) {
-      let url: string = decodeURIComponent(this.routeParams.get('url'));
+      let url = decodeURIComponent(this.routeParams.get('url'));
       this.program = this.programService.programFromURL(url);
     }
   }

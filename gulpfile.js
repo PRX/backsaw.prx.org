@@ -2,9 +2,7 @@
 
 let bump          = require('gulp-bump');
 let file          = require('gulp-file');
-let fs            = require('fs');
 let gulp          = require('gulp');
-let gutil         = require('gulp-util');
 let jade          = require('gulp-jade');
 let jspm          = require('gulp-jspm');
 let rename        = require('gulp-rename');
@@ -38,7 +36,7 @@ gulp.task('jspm:bundle:dev', shell.task([
   'jspm bundle src/main - [src/app/**/*] ./.dev/vendor.js --inject'
 ]));
 
-gulp.task('jspm:bundle:dist', callback => {
+gulp.task('jspm:bundle:dist', () => {
   return gulp
     .src('./src/main.ts')
     .pipe(sourcemaps.init())
@@ -49,14 +47,14 @@ gulp.task('jspm:bundle:dist', callback => {
 });
 
 // Jade compile tasks
-gulp.task('jade:index:dev', callback => {
+gulp.task('jade:index:dev', () => {
   return gulp
     .src('./src/index.jade')
     .pipe(jade({ locals: { dist: false } }))
     .pipe(gulp.dest('./src/'));
 });
 
-gulp.task('jade:index:dist', callback => {
+gulp.task('jade:index:dist', () => {
   return gulp
     .src('./src/index.jade')
     .pipe(jade({ locals: { dist: true } }))
@@ -64,39 +62,39 @@ gulp.task('jade:index:dist', callback => {
 });
 
 // Copy tasks
-gulp.task('copy:assets:dist', callback => {
+gulp.task('copy:assets:dist', () => {
   return gulp
     .src(['./src/**/*.html', '!./src/index.html', './src/**/*.css', './src/images/**/*'], { base: 'src' })
     .pipe(gulp.dest('./.dist/'));
 });
 
-gulp.task('copy:vendor:dist', callback => {
+gulp.task('copy:vendor:dist', () => {
   return gulp
     .src('./node_modules/angular2/bundles/angular2-polyfills.js')
     .pipe(gulp.dest('./.dist/scripts/'));
 });
 
 // Utility tasks
-gulp.task('push:s3:dist', callback => {
+gulp.task('push:s3:dist', () => {
   return gulp
     .src(['./.dist/**', '!./.dist/version.deploy'])
     .pipe(s3({ Bucket: 'backsaw.prx.org' }));
 });
 
-gulp.task('push:s3:version', callback => {
+gulp.task('push:s3:version', () => {
   return gulp
     .src('./.dist/version.deploy')
     .pipe(s3({ Bucket: 'backsaw.prx.org' }));
 });
 
-gulp.task('version:bump', callback => {
+gulp.task('version:bump', () => {
   return gulp
     .src('./package.json')
     .pipe(bump())
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('version:mark:dist', callback => {
+gulp.task('version:mark:dist', () => {
   let pkg = require('./package.json');
   return file('version.deploy', pkg.version, { src: true })
     .pipe(gulp.dest('./.dist/'));

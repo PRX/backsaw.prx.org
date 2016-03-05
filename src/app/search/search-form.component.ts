@@ -2,10 +2,7 @@ import {Component, OnInit, ElementRef} from 'angular2/core';
 import {NgForm} from 'angular2/common';
 import {Router} from 'angular2/router';
 
-import {
-  Program,
-  ProgramService,
-} from '../services/program.service';
+import {Program, ProgramService} from '../services/program.service';
 
 class SearchQuery {
   constructor(public url?: string) {}
@@ -16,7 +13,7 @@ class SearchQuery {
   providers: [ProgramService],
   selector: 'search-form',
   styleUrls: ['app/search/search-form.component.css'],
-  templateUrl: 'app/search/search-form.component.html',
+  templateUrl: 'app/search/search-form.component.html'
 })
 export class SearchFormComponent implements OnInit {
   programs: Program[];

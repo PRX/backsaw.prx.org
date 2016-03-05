@@ -4,7 +4,7 @@ import {Router} from 'angular2/router';
 
 import {
   AdzerkNativeAdAPIRequestProperties,
-  AdzerkNativeAdAPIRequest,
+  AdzerkNativeAdAPIRequest
 } from '../services/adzerk_native_ad_api_client';
 import {Episode} from '../services/program.service';
 import {TimestampSelectorComponent} from './timestamp-selector.component';
@@ -13,7 +13,7 @@ import {TimestampSelectorComponent} from './timestamp-selector.component';
 directives: [NgForm, TimestampSelectorComponent],
   selector: 'properties-form',
   styleUrls: ['app/advanced/properties-form.component.css'],
-  templateUrl: 'app/advanced/properties-form.component.html',
+  templateUrl: 'app/advanced/properties-form.component.html'
 })
 export class PropertiesFormComponent implements OnInit {
   @Input() adzerkRequest: AdzerkNativeAdAPIRequest;
@@ -31,8 +31,8 @@ export class PropertiesFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let properties: string = encodeURIComponent(JSON.stringify(this.propOverrides));
-    let url: string = this.episode.paramURL();
+    let properties = encodeURIComponent(JSON.stringify(this.propOverrides));
+    let url = this.episode.paramURL();
 
     this.router.navigate(['Report', { properties: properties, url: url }]);
   }

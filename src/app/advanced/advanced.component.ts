@@ -6,19 +6,18 @@ import {Episode} from '../services/program.service';
 import {DovetailService} from '../services/dovetail-api.service';
 import {
   AdzerkNativeAdAPIRequest,
-  AdzerkNativeAdAPIRequestProperties,
+  AdzerkNativeAdAPIRequestProperties
 } from '../services/adzerk_native_ad_api_client';
 
 @Component({
   directives: [PropertiesFormComponent],
   providers: [DovetailService],
   styleUrls: ['app/advanced/advanced.component.css'],
-  templateUrl: 'app/advanced/advanced.component.html',
+  templateUrl: 'app/advanced/advanced.component.html'
 })
 export class AdvancedComponent implements OnInit {
   episode: Episode;
   adzerkRequest: AdzerkNativeAdAPIRequest;
-
   propOverrides: AdzerkNativeAdAPIRequestProperties;
 
   constructor(
@@ -28,7 +27,7 @@ export class AdvancedComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.routeParams.get('url')) {
-      let url: string = decodeURIComponent(this.routeParams.get('url'));
+      let url = decodeURIComponent(this.routeParams.get('url'));
       this.episode = new Episode(url);
 
       this.dovetailService
