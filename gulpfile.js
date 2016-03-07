@@ -13,6 +13,7 @@ const sourcemaps    = require('gulp-sourcemaps');
 
 // Public tasks (serial)
 gulp.task('deploy', cb => run('build:dist', 'preinstall:dist', 'install:dist', 'postinstall:dist', cb));
+gulp.task('postinstall', cb => run(['typings:install', 'git:hooks:install'], cb));
 gulp.task('start', cb => run('build:dev', 'server:dev', cb));
 gulp.task('start:dist', cb => run('build:dist', 'server:dist', cb));
 gulp.task('test', cb => run('server:test', cb));
@@ -75,6 +76,10 @@ gulp.task('copy:vendor:dist', () => {
 });
 
 // Utility tasks
+gulp.task('git:hooks:install', shell.task([
+  "printf '#/bin/sh\njspm unbundle' > ./.git/hooks/pre-commmit"
+]));
+
 gulp.task('push:s3:dist', () => {
   return gulp
     .src(['./.dist/**', '!./.dist/version.deploy'])
@@ -86,6 +91,10 @@ gulp.task('push:s3:version', () => {
     .src('./.dist/version.deploy')
     .pipe(s3({ Bucket: 'backsaw.prx.org' }));
 });
+
+gulp.task('typings:install', shell.task([
+  'typings install'
+]));
 
 gulp.task('version:bump', () => {
   return gulp
