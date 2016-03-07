@@ -40,9 +40,9 @@ jspm install angular2
 
 ## Deployment
 
-`npm run deploy` updates the `./.dist` directory, include the sfx bundle from jspm and any other app files, and pushes the files to S3. ***Use sparingly***, as it currently provides no protections against, and will deploy a broken feature branch without complaining.
+`npm run deploy` updates the `./.dist` directory, including the sfx bundle from jspm and any other app files, and pushes the files to S3. ***Use sparingly***, as it currently provides no protections against, and will deploy a broken feature branch without complaining.
 
-In order for a deploy to work, you should have you `~/.aws` credentials set up to have access to the applications S3 bucket.
+In order for a deploy to work, you should have you `~/.aws` credentials set up to have access to the application's S3 bucket.
 
 ## Notes
 
