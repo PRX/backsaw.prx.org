@@ -77,7 +77,8 @@ gulp.task('copy:vendor:dist', () => {
 
 // Utility tasks
 gulp.task('git:hooks:install', shell.task([
-  "printf '#!/bin/sh\njspm unbundle' > ./.git/hooks/pre-commit && chmod +x ./.git/hooks/pre-commit"
+  "printf '#!/bin/sh\njspm unbundle' > ./.git/hooks/pre-commit",
+  'chmod +x ./.git/hooks/pre-commit'
 ]));
 
 gulp.task('push:s3:dist', () => {
