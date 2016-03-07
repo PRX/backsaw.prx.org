@@ -48,9 +48,7 @@ gulp.task('jspm:bundle:dist', () => {
     .pipe(gulp.dest('./.dist/scripts/'));
 });
 
-gulp.task('jspm:unbundle', shell.task([
-  'jspm unbundle'
-]));
+gulp.task('jspm:unbundle', shell.task(['jspm unbundle']));
 
 // Jade compile tasks
 gulp.task('jade:index:dev', () => {
