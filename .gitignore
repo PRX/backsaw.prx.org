@@ -2,6 +2,7 @@
 /.dist/
 /jspm_packages/
 /node_modules/
+/typings/
 
 /aws.json
 /npm-debug.log

@@ -40,8 +40,8 @@ gulp.task('jspm:bundle:dist', () => {
   return gulp
     .src('./src/main.ts')
     .pipe(sourcemaps.init())
-      .pipe(jspm({ selfExecutingBundle: true, minify: true, mangle: false }))
-      .pipe(rename('backsaw.min.js'))
+    .pipe(jspm({ selfExecutingBundle: true, minify: true, mangle: false }))
+    .pipe(rename('backsaw.min.js'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./.dist/scripts/'));
 });
