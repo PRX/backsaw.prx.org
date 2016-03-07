@@ -11,7 +11,7 @@ Development of Backsaw should be done using Node 5.7.x.
 Install prerequisites and development and application dependencies:
 
 ```
-npm install npm tsd jspm -g
+npm i -g npm
 npm install
 jspm install
 ```
