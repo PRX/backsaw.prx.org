@@ -13,7 +13,6 @@ Install prerequisites and development and application dependencies:
 ```
 npm i -g npm
 npm install
-jspm install
 ```
 
 _Note: `npm install` writes a git pre-commit hook to `./.git/hooks`._
@@ -31,6 +30,8 @@ New application dependencies should be installed with [jspm](http://jspm.io/), e
 ```
 jspm install angular2
 ```
+
+_(Following this Readme will install jspm locally, so the `jspm` command likely will not be available if you do need to run `jspm install`. There are several options for getting access to that command, but the easiest is installing `jspm` globally if you do need to add dependencies.)_
 
 ### Running
 
