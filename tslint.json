@@ -16,12 +16,7 @@
     "no-internal-module": true,
     "no-var-requires": true,
     "typedef": [
-      true,
-      "call-signature",
-      "parameter",
-      "arrow-parameter",
-      "property-declaration",
-      "member-variable-declaration"
+      false
     ],
     "typedef-whitespace": [
       true,

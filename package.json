@@ -19,7 +19,8 @@
     "deploy": "gulp deploy",
     "start": "gulp start",
     "start:dist": "gulp start:dist",
-    "test": "gulp test"
+    "test": "gulp test",
+    "postinstall": "typings install"
   },
   "dependencies": {},
   "devDependencies": {
@@ -38,7 +39,8 @@
     "jspm": "^0.16.30",
     "lite-server": "^2.1.0",
     "run-sequence": "^1.1.5",
-    "rxjs": "^5.0.0-beta.2"
+    "rxjs": "^5.0.0-beta.2",
+    "typings": "^0.6.8"
   },
   "engines": {
     "node": "^5.7.0"
@@ -54,7 +56,8 @@
       "zone.js": "npm:zone.js@^0.5.15"
     },
     "devDependencies": {
-      "typescript": "npm:typescript@^1.8.2"
+      "typescript": "npm:typescript@^1.8.2",
+      "typings": "npm:typings@^0.6.8"
     }
   }
 }
