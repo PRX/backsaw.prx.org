@@ -76,9 +76,9 @@ gulp.task('copy:vendor:dist', () => {
 });
 
 // Utility tasks
-const text = ['#!/bin/sh', 'PATH="/usr/local/bin:$PATH"', 'jspm unbundle'].join('\n');
+const loc = ['#!/bin/sh', 'PATH="/usr/local/bin:$PATH"', 'jspm unbundle'];
 gulp.task('git:hooks:install', shell.task([
-  `printf '${text}' > ./.git/hooks/pre-commit`,
+  `printf '${loc.join('\n')}' > ./.git/hooks/pre-commit`,
   'chmod +x ./.git/hooks/pre-commit'
 ]));
 
