@@ -13,6 +13,8 @@ const sourcemaps    = require('gulp-sourcemaps');
 
 // Public tasks (serial)
 gulp.task('deploy', cb => run('build:dist', 'preinstall:dist', 'install:dist', 'postinstall:dist', cb));
+gulp.task('git:hooks:pre-commit', cb => run('jspm:unbundle', cb));
+gulp.task('postinstall', cb => run(['typings:install', 'git:hooks:install'], cb));
 gulp.task('start', cb => run('build:dev', 'server:dev', cb));
 gulp.task('start:dist', cb => run('build:dist', 'server:dist', cb));
 gulp.task('test', cb => run('server:test', cb));
@@ -46,6 +48,8 @@ gulp.task('jspm:bundle:dist', () => {
     .pipe(gulp.dest('./.dist/scripts/'));
 });
 
+gulp.task('jspm:unbundle', shell.task(['jspm unbundle']));
+
 // Jade compile tasks
 gulp.task('jade:index:dev', () => {
   return gulp
@@ -75,6 +79,12 @@ gulp.task('copy:vendor:dist', () => {
 });
 
 // Utility tasks
+const loc = ['#!/bin/sh', 'PATH="/usr/local/bin:$PATH"', 'npm run git:hooks:pre-commit'];
+gulp.task('git:hooks:install', shell.task([
+  `printf '${loc.join('\n')}' > ./.git/hooks/pre-commit`,
+  'chmod +x ./.git/hooks/pre-commit'
+]));
+
 gulp.task('push:s3:dist', () => {
   return gulp
     .src(['./.dist/**', '!./.dist/version.deploy'])
@@ -86,6 +96,10 @@ gulp.task('push:s3:version', () => {
     .src('./.dist/version.deploy')
     .pipe(s3({ Bucket: 'backsaw.prx.org' }));
 });
+
+gulp.task('typings:install', shell.task([
+  'typings install'
+]));
 
 gulp.task('version:bump', () => {
   return gulp
