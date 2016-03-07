@@ -16,6 +16,8 @@ npm install
 jspm install
 ```
 
+_Note: `npm install` writes a git pre-commit hook to `./.git/hooks`._
+
 ### Contributions
 
 New development dependencies should be installed with npm, eg:
