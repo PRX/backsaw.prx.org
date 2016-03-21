@@ -1,6 +1,6 @@
 {
   "name": "backsaw.prx.org",
-  "version": "1.2.9",
+  "version": "1.2.11",
   "description": "Adzerk flighting sampling and analysis",
   "keywords": [
     "Backsaw",
@@ -22,11 +22,12 @@
     "start": "gulp start",
     "start:dist": "gulp start:dist",
     "test": "gulp test",
-    "postinstall": "gulp postinstall"
+    "postinstall": "gulp postinstall",
+    "a": "gulp push:s3:version"
   },
   "dependencies": {},
   "devDependencies": {
-    "angular2": "^2.0.0-beta.8",
+    "angular2": "^2.0.0-beta.11",
     "gulp": "^3.9.1",
     "gulp-bump": "^1.0.0",
     "gulp-file": "^0.2.0",
@@ -41,7 +42,7 @@
     "jspm": "^0.16.30",
     "lite-server": "^2.1.0",
     "run-sequence": "^1.1.5",
-    "rxjs": "^5.0.0-beta.2",
+    "rxjs": "5.0.0-beta.2",
     "typings": "^0.6.8"
   },
   "engines": {
