@@ -30,7 +30,7 @@ System.config({
     "ts": "github:frankwallis/plugin-typescript@4.0.2",
     "typescript": "npm:typescript@1.8.9",
     "typings": "npm:typings@0.6.10",
-    "zone.js": "npm:zone.js@0.5.15",
+    "zone.js": "npm:zone.js@0.6.6",
     "github:frankwallis/plugin-typescript@4.0.2": {
       "typescript": "npm:typescript@1.8.9"
     },
@@ -1292,11 +1292,10 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:zone.js@0.5.15": {
-      "es6-promise": "npm:es6-promise@3.1.2",
+    "npm:zone.js@0.6.5": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:zone.js@0.6.5": {
+    "npm:zone.js@0.6.6": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }
