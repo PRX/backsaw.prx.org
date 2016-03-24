@@ -22,7 +22,7 @@ System.config({
   },
 
   map: {
-    "angular2": "npm:angular2@2.0.0-beta.11",
+    "angular2": "npm:angular2@2.0.0-beta.12",
     "es6-shim": "github:es-shims/es6-shim@0.34.4",
     "plugin-typescript": "github:frankwallis/plugin-typescript@4.0.2",
     "reflect-metadata": "npm:reflect-metadata@0.1.3",
@@ -123,14 +123,13 @@ System.config({
       "url": "github:jspm/nodelibs-url@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:angular2@2.0.0-beta.11": {
+    "npm:angular2@2.0.0-beta.12": {
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
-      "es6-promise": "npm:es6-promise@3.1.2",
       "es6-shim": "npm:es6-shim@0.35.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "reflect-metadata": "npm:reflect-metadata@0.1.2",
       "rxjs": "npm:rxjs@5.0.0-beta.2",
-      "zone.js": "npm:zone.js@0.6.5"
+      "zone.js": "npm:zone.js@0.6.6"
     },
     "npm:ansi-styles@2.2.0": {
       "color-convert": "npm:color-convert@1.0.0"
@@ -455,9 +454,6 @@ System.config({
     "npm:error-ex@1.3.0": {
       "is-arrayish": "npm:is-arrayish@0.2.1",
       "util": "github:jspm/nodelibs-util@0.1.0"
-    },
-    "npm:es6-promise@3.1.2": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:es6-shim@0.35.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -1290,9 +1286,6 @@ System.config({
     "npm:xdg-basedir@2.0.0": {
       "os-homedir": "npm:os-homedir@1.0.1",
       "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:zone.js@0.6.5": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:zone.js@0.6.6": {
