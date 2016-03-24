@@ -1,6 +1,6 @@
 {
   "name": "backsaw.prx.org",
-  "version": "1.2.11",
+  "version": "1.2.17",
   "description": "Adzerk flighting sampling and analysis",
   "keywords": [
     "Backsaw",
@@ -40,6 +40,7 @@
     "jspm": "^0.16.30",
     "lite-server": "^2.1.0",
     "run-sequence": "^1.1.5",
+    "typescript": "^1.8.9",
     "typings": "^0.6.8"
   },
   "engines": {

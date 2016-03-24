@@ -2,6 +2,7 @@
 
 const bump          = require('gulp-bump');
 const file          = require('gulp-file');
+const fs            = require('fs');
 const gulp          = require('gulp');
 const jade          = require('gulp-jade');
 const jspm          = require('gulp-jspm');
@@ -21,7 +22,7 @@ gulp.task('test', cb => run('server:test', cb));
 
 // Build tasks (parallel)
 gulp.task('build:dev', cb => run(['jade:index:dev', 'jspm:bundle:dev'], cb));
-gulp.task('build:dist', cb => run(['copy:assets:dist', 'copy:vendor:dist', 'jade:index:dist', 'jspm:bundle:dist'], cb));
+gulp.task('build:dist', cb => run(['copy:assets:dist', 'jade:index:dist', 'jspm:bundle:dist'], cb));
 
 // Deploy tasks (serial)
 gulp.task('install:dist', cb => run('push:s3:dist', cb));
@@ -74,12 +75,6 @@ gulp.task('copy:assets:dist', () => {
     .pipe(gulp.dest('./.dist/'));
 });
 
-gulp.task('copy:vendor:dist', () => {
-  return gulp
-    .src('./node_modules/angular2/bundles/angular2-polyfills.js')
-    .pipe(gulp.dest('./.dist/scripts/'));
-});
-
 // Utility tasks
 const loc = ['#!/bin/sh', 'PATH="/usr/local/bin:$PATH"', 'npm run git:hooks:pre-commit'];
 gulp.task('git:hooks:install', shell.task([
@@ -111,7 +106,7 @@ gulp.task('version:bump', () => {
 });
 
 gulp.task('version:mark:dist', () => {
-  const pkg = require('./package.json');
+  const pkg = JSON.parse(fs.readFileSync('./package.json'));
   return file('version.deploy', pkg.version, { src: true })
     .pipe(gulp.dest('./.dist/'));
 });
