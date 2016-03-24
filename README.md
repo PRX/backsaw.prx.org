@@ -47,6 +47,4 @@ In order for a deploy to work, you should have you `~/.aws` credentials set up t
 
 ## Notes
 
-* `angular2` is currently an npm dependency so that we have access to `angular2-polyfills.js` during development and packaging. Hopefully this can get moved into jspm at some point.
-* `rxjs` is currently and npm dependency because the transpiler couldn't find the module to import and complained a lot in Atom. The app will build correctly if it's removed, but probably a good idea to keep it in there for now.
-* Make sure to keep those two packages in sync between `npm` and `jspm`!
+* The Typescript compiler will complain about imports from `angular` and `rxjs` (and other libraries) if they are only installed with JSPM. While `tsc` can find modules from NPM, it can't find modules from JSPM. If you don't want to see loads of errors when compiling (or when your IDE is compiling behind the scenes) you should `npm install` `angular2` and `jspm` until `tsc` adds support for JSPM, which is in progress (as of 3/24/2016).
