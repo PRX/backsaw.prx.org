@@ -4,7 +4,7 @@ Backsaw is a utility for inspecting and analyzing flighting behavior in the [Adz
 
 ## Development
 
-Development of Backsaw should be done using Node 5.7.x.
+Development of Backsaw should be done using Node 5.9.x.
 
 ### Setup
 
@@ -37,13 +37,13 @@ _(Following this Readme will install jspm locally, so the `jspm` command likely 
 
 `npm start` runs the app without compiling jspm dependencies, and uses the typescript files directly.
 
-`npm run start:dist` imitates a production release, by building a single file executable ES5 from the jspm dependencies, and running the local server out of the `./.dist` directory, which contains copies of all files needed for a deployment.
+`npm run start:dist` imitates a production release, by building a single file executable (ES5) from the jspm dependencies, and running the local server out of the `./.dist` directory, which contains copies of all files needed for a deployment.
 
 ## Deployment
 
-`npm run deploy` updates the `./.dist` directory, including the sfx bundle from jspm and any other app files, and pushes the files to S3. ***Use sparingly***, as it currently provides no protections against, and will deploy a broken feature branch without complaining.
+`npm run deploy` updates the `./.dist` directory, including the sfx bundle from jspm and any other app files, and pushes the files to S3. ***Use sparingly***, as it currently provides no protections against anything, and will deploy a broken feature branch without complaining.
 
-In order for a deploy to work, you should have you `~/.aws` credentials set up to have access to the application's S3 bucket.
+In order for a deploy to work, you should have your `~/.aws` credentials set up to have access to the application's S3 bucket.
 
 ## Notes
 
