@@ -10,6 +10,11 @@ html(lang='en')
 
     if locals.dist
       script(src='/scripts/backsaw.min.js')
+      script.
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-164824-55', 'auto');
+        ga('send', 'pageview');
+      script(async src='https://www.google-analytics.com/analytics.js')
     else
       script(src='/jspm_packages/system.js')
       script(src='/config/systemjs.config.js')
