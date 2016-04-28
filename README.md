@@ -7,7 +7,7 @@ Backsaw is a utility for inspecting and analyzing flighting behavior in the [Adz
 
 ## Development
 
-Development of Backsaw should be done using Node 5.9.x.
+Development of Backsaw should be done using Node 6.x.
 
 ### Setup
 
