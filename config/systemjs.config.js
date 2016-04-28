@@ -1166,6 +1166,9 @@ System.config({
       "tls": "github:jspm/nodelibs-tls@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:typescript@1.8.9": {
+      "os": "github:jspm/nodelibs-os@0.1.0"
+    },
     "npm:typings@0.6.10": {
       "any-promise": "npm:any-promise@1.1.0",
       "archy": "npm:archy@1.0.0",
