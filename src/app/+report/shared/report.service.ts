@@ -1,0 +1,195 @@
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
+import 'rxjs/add/operator/share';
+
+import {Episode} from './program.service';
+import {
+  AdzerkNativeAdAPIRequestProperties,
+  AdzerkNativeAdAPIRequest,
+  AdzerkNativeAdAPIResponse,
+  AdzerkNativeAdAPIService,
+  DovetailService
+} from '../../shared';
+
+@Injectable()
+export class ReportService {
+  public adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  public filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
+  public filter: {} = {};
+  public slotOrder: string[];
+
+  private episode: Episode;
+  private adzerkRequest: AdzerkNativeAdAPIRequest;
+  private adzerkRequestProperties: AdzerkNativeAdAPIRequestProperties;
+  private adzerkResponses: AdzerkNativeAdAPIResponse[];
+  private adzerkResponsesObserver: Observer<AdzerkNativeAdAPIResponse[]>;
+
+  constructor(
+    private dovetailService: DovetailService,
+    private azerkService: AdzerkNativeAdAPIService
+  ) {
+    this.adzerkResponses = [];
+    this.adzerkResponses$ = new Observable((observer: Observer<AdzerkNativeAdAPIResponse[]>) => {
+      this.adzerkResponsesObserver = observer;
+    }).share();
+
+    this.filteredAdzerkResponses$ = this.adzerkResponses$
+      .map((responses: AdzerkNativeAdAPIResponse[]) => {
+        let filteredAdzerkResponses: AdzerkNativeAdAPIResponse[] = [];
+
+        for (let response of responses) {
+          if (this.doesResponseSatisfyFilter(response)) {
+            filteredAdzerkResponses.push(response);
+          }
+        }
+
+        return filteredAdzerkResponses;
+      });
+  }
+
+  // Filters
+
+  clearFilter(): void {
+    this.filter = {};
+
+    if (this.adzerkResponsesObserver) {
+      this.adzerkResponsesObserver.next(this.adzerkResponses);
+    }
+  }
+
+  addFilter(slotId: string, key: string, value: number): void {
+    if (!this.filter[slotId]) {
+      this.filter[slotId] = {};
+    }
+
+    this.filter[slotId][key] = value;
+
+    if (this.adzerkResponsesObserver) {
+      this.adzerkResponsesObserver.next(this.adzerkResponses);
+    }
+  }
+
+  removeFilter(slotId: string, key: string, value: number): void {
+    if (this.filter[slotId] && this.filter[slotId][key]) {
+      delete this.filter[slotId][key];
+
+      if (this.adzerkResponsesObserver) {
+        this.adzerkResponsesObserver.next(this.adzerkResponses);
+      }
+    }
+  }
+
+  doesResponseSatisfyFilter(response: AdzerkNativeAdAPIResponse): boolean {
+    if (Object.keys(this.filter).length === 0) {
+      return true;
+    }
+
+    let failed = false;
+
+    for (let slotId in this.filter) {
+      if (this.filter.hasOwnProperty(slotId)) {
+        // Get the decision from the response for the slot that matches the slot
+        ///the filter that's being checked
+        let decision = response.decisions[slotId];
+
+        // If this response had a null decision (no ad) for this slot, it should
+        ///fail the test (this could be improved)
+        if (!decision) {
+          failed = true;
+        } else {
+          // Make sure all the values for this decision pass the filter
+
+          // Only need the filter for this particular slot
+          let slotFilter: {} = this.filter[slotId];
+
+          // For each property defined in the filter...
+          for (let adProp in slotFilter) {
+            if (slotFilter.hasOwnProperty(adProp)) {
+              // ...check to make sure the decision passes
+              if (slotFilter[adProp] !== decision[adProp]) {
+                failed = true;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return !failed;
+  }
+
+  // State
+
+  canFetchResponses(): boolean {
+    return !!this.adzerkRequest;
+  }
+
+  propertyOverrides(): AdzerkNativeAdAPIRequestProperties {
+    return this.adzerkRequestProperties;
+  }
+
+  // Setup
+
+  setEpisode(episode: Episode): void {
+    // Reset the service
+    this.episode = undefined;
+    this.adzerkRequest = undefined;
+    this.adzerkRequestProperties = undefined;
+    this.adzerkResponses = [];
+
+    this.episode = episode;
+
+    this.dovetailService
+      .getAdzerkRequestBody(this.episode.url)
+      .subscribe((request: AdzerkNativeAdAPIRequest) => {
+        this.adzerkRequest = request;
+      });
+
+    this.dovetailService
+      .getAdzerkSlotOrder(this.episode.url)
+      .subscribe((slotOrder: string[]) => {
+        this.slotOrder = slotOrder;
+      });
+  }
+
+  setProperties(properties: AdzerkNativeAdAPIRequestProperties): void {
+    if (this.adzerkResponses.length > 0) {
+      console.error('Cannot set properties after report has run.');
+    } else {
+      this.adzerkRequestProperties = properties;
+    }
+  }
+
+  // Execute
+
+  fetchResponses(times: number): void {
+    this.applyProperties();
+
+    for (let i = 0; i < times; i++) {
+      this.fetchResponse();
+    }
+  }
+
+  private fetchResponse(): void {
+    this.azerkService
+      .request(this.adzerkRequest)
+      .subscribe((response: AdzerkNativeAdAPIResponse) => {
+        this.adzerkResponses.push(response);
+
+        if (this.adzerkResponsesObserver) {
+          this.adzerkResponsesObserver.next(this.adzerkResponses);
+        }
+      });
+  }
+
+  private applyProperties(): void {
+    if (this.adzerkRequestProperties) {
+      this.adzerkRequestProperties.backsaw = true;
+
+      for (let placement of this.adzerkRequest.placements) {
+        placement.properties = this.adzerkRequestProperties;
+      }
+    }
+  }
+}

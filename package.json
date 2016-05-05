@@ -26,6 +26,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "codelyzer": "0.0.19",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.1.0",
     "gulp-file": "^0.2.0",

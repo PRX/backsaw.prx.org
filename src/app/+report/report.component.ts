@@ -1,0 +1,58 @@
+import {Component, OnInit} from '@angular/core';
+import {RouteParams} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
+
+import {ReportDetailsComponent, ReportService} from './';
+import {Episode} from '../+programs';
+import {AdzerkNativeAdAPIRequestProperties} from '../shared';
+
+@Component({
+  directives: [ReportDetailsComponent, ROUTER_DIRECTIVES],
+  providers: [ReportService],
+  styleUrls: ['app/report/report.component.css'],
+  templateUrl: 'app/report/report.component.html'
+})
+export class ReportComponent implements OnInit {
+  episode: Episode;
+
+  constructor(
+    private routeParams: RouteParams,
+    public report: ReportService
+  ) {}
+
+  ngOnInit(): void {
+    if (this.routeParams.get('url')) {
+      let url = decodeURIComponent(this.routeParams.get('url'));
+
+      this.episode = new Episode(url);
+      this.report.setEpisode(this.episode);
+
+      if (this.routeParams.get('properties')) {
+        let decodedProperties = decodeURIComponent(this.routeParams.get('properties'));
+        let propertyOverrides = <AdzerkNativeAdAPIRequestProperties> JSON.parse(decodedProperties);
+
+        this.report.setProperties(propertyOverrides);
+      }
+    }
+  }
+
+  encodedPropertyOverrides(): string {
+    if (this.report.propertyOverrides()) {
+      return encodeURIComponent(JSON.stringify(this.report.propertyOverrides()));
+    } else {
+      return '';
+    }
+  }
+
+  fetchResponses(times: number, event: KeyboardEvent): void {
+    if (!event || event.code === 'Enter') {
+      this.report.fetchResponses(times);
+    }
+  }
+
+  clearFilter(event: KeyboardEvent): void {
+    if (event.code === 'Escape') {
+      this.report.clearFilter();
+    }
+  }
+}
