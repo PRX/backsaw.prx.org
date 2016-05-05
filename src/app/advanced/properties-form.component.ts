@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from 'angular2/core';
-import {NgForm} from 'angular2/common';
-import {Router} from 'angular2/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgForm} from '@angular/common';
+import {Router} from '@angular/router';
 
 import {
   AdzerkNativeAdAPIRequestProperties,

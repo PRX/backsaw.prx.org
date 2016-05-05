@@ -1,6 +1,6 @@
 <slot-info><td colspan="7">{{slotId}}</td></slot-info>
 <ad-report-details
-  *ngFor="#flightedAd of flightedAds"
+  *ngFor="let flightedAd of flightedAds"
   [flightedAd]="flightedAd"
   [adzerkResponses$]="adzerkResponses$"
   [filteredAdzerkResponses$]="filteredAdzerkResponses$"

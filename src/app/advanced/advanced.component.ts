@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {RouteParams} from '@angular/router';
 
 import {PropertiesFormComponent} from './properties-form.component';
 import {Episode} from '../services/program.service';

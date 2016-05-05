@@ -7,10 +7,10 @@
     <select
       id="url"
       (change)="onChange(programUrl.value)"
-      onmouseover="this.selectedIndex = 0" 
+      onmouseover="this.selectedIndex = 0"
       #programUrl>
       <option value="">Select a program</option>
-      <option *ngFor="#p of programs" [value]="p.url">{{p.name}}</option>
+      <option *ngFor="let p of programs" [value]="p.url">{{p.name}}</option>
     </select>
   </fieldset>
 </form>

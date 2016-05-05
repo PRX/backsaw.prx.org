@@ -1,6 +1,6 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {RouteParams} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {ReportDetailsComponent} from './report-details.component';
 import {Episode} from '../services/program.service';

@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, OnChanges, SimpleChange} from 'angular2/core';
-import {NgForm} from 'angular2/common';
+import {Component, Input, OnInit, OnChanges, SimpleChange} from '@angular/core';
+import {NgForm} from '@angular/common';
 
 import {AdzerkNativeAdAPIRequestProperties} from '../services/adzerk_native_ad_api_client';
 

@@ -1,6 +1,6 @@
-import {Component, OnInit, ElementRef} from 'angular2/core';
-import {NgForm} from 'angular2/common';
-import {Router} from 'angular2/router';
+import {Component, OnInit, ElementRef} from '@angular/core';
+import {NgForm} from '@angular/common';
+import {Router} from '@angular/router';
 
 import {Program, ProgramService} from '../services/program.service';
 
@@ -29,6 +29,6 @@ export class SearchFormComponent implements OnInit {
   }
 
   onChange(programUrl: string): void {
-    this.router.navigate(['Search', { url: encodeURIComponent(programUrl) }]);
+    this.router.navigateByUrl(`/search?url=${encodeURIComponent(programUrl)}`);
   }
 }

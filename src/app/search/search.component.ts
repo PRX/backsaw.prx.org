@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {RouteParams} from '@angular/router';
 
 import {SearchFormComponent} from './search-form.component';
 import {SearchResultsComponent} from './search-results.component';
@@ -14,6 +14,7 @@ class SearchQuery {
   providers: [ProgramService],
   styleUrls: ['app/search/search.component.css'],
   template: `
+    <h1>hi</h1>
     <search-results [program]="program"></search-results>
   `
 })

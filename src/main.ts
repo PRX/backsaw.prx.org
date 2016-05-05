@@ -1,10 +1,11 @@
-import 'angular2/bundles/angular2-polyfills';
+import 'zone.js';
+import 'reflect-metadata';
 
-import {enableProdMode} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_BINDINGS} from 'angular2/http';
 
+import {enableProdMode} from '@angular/core';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {ROUTER_PROVIDERS} from '@angular/router';
+import {HTTP_BINDINGS} from '@angular/http';
 import 'rxjs/Rx';
 
 import {DovetailService} from './app/services/dovetail-api.service';
@@ -18,6 +19,7 @@ if (window.location.host !== 'localhost') {
   enableProdMode();
 }
 
+console.log('Bootstrapping...');
 bootstrap(
   BacksawAppComponent,
   [
