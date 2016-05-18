@@ -34,6 +34,7 @@ export class ProgramService {
       'the memory palace',
       'https://prx-feed.s3.amazonaws.com/thememorypalace/feed-rss.xml'
     ),
+    new Program('Millennial', 'https://prx-feed.s3.amazonaws.com/millennial/feed-rss.xml'),
     new Program('The Moth', 'https://prx-feed.s3.amazonaws.com/themoth/feed-rss.xml'),
     new Program('Serial', 'https://prx-feed.s3.amazonaws.com/serial/feed-rss.xml'),
     new Program('Strangers', 'https://prx-feed.s3.amazonaws.com/strangers/feed-rss.xml')
