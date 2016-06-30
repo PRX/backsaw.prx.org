@@ -37,7 +37,8 @@ export class ProgramService {
     new Program('Millennial', 'https://prx-feed.s3.amazonaws.com/millennial/feed-rss.xml'),
     new Program('The Moth', 'https://prx-feed.s3.amazonaws.com/themoth/feed-rss.xml'),
     new Program('Serial', 'https://prx-feed.s3.amazonaws.com/serial/feed-rss.xml'),
-    new Program('Strangers', 'https://prx-feed.s3.amazonaws.com/strangers/feed-rss.xml')
+    new Program('Strangers', 'https://prx-feed.s3.amazonaws.com/strangers/feed-rss.xml'),
+    new Program('Theory of Everything', 'https://prx-feed.s3.amazonaws.com/toe/feed-rss.xml')
   ];
 
   programFromURL(url: string): Program {
