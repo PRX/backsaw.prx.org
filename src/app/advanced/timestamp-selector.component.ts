@@ -13,38 +13,18 @@ export class TimestampSelectorComponent implements OnInit, OnChanges {
   @Input() propOverrides: AdzerkNativeAdAPIRequestProperties;
   @Input() prop: string;
 
-  date: {year: number, month: number, day: number} = { day: 1, month: 1, year: 2016 };
+  private initPropDateString: string;
 
-  ngOnInit(): void {
-    this.setControls();
+  private changeDatetime(value: string) {
+    this.propOverrides[this.prop] = `${Date.parse(value)}`;
   }
 
-  ngOnChanges(changes: {[propName: string]: SimpleChange}): void {
-    this.setControls();
+  private get propDate() {
+    return (new Date(+this.propOverrides[this.prop]));
   }
 
-  updateTimestampYear(year: number): void {
-    let d = new Date(year, this.date.month, this.date.day);
-    this.propOverrides[this.prop] = d.getTime();
-  }
-
-  updateTimestampMonth(month: number): void {
-    let d = new Date(this.date.year, month, this.date.day);
-    this.propOverrides[this.prop] = d.getTime();
-  }
-
-  updateTimestampDay(day: number): void {
-    let d = new Date(this.date.year, this.date.month, day);
-    this.propOverrides[this.prop] = d.getTime();
-  }
-
-  private setControls(): void {
-    if (this.propOverrides[this.prop]) {
-      let d = new Date(Number(this.propOverrides[this.prop]));
-
-      this.date.year = d.getUTCFullYear();
-      this.date.month = (d.getUTCMonth() + 1);
-      this.date.day = d.getUTCDate();
-    }
+  private get propDateString() {
+    const d = this.propDate;
+    return `${d.getUTCFullYear()}-${d.getUTCMonth()+1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()} UTC`;
   }
 }

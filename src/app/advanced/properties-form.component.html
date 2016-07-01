@@ -5,13 +5,13 @@
   </fieldset>
   <fieldset *ngIf="propKeys.indexOf('publishedAt') !== -1">
     <label for="publishedAt">publishedAt</label>
-    <input id="publishedAt" [(ngModel)]="propOverrides.publishedAt" ngControl="publishedAt">
     <timestamp-selector [propOverrides]="propOverrides" [prop]="'publishedAt'"></timestamp-selector>
+    <br><small>(All times UTC, 24 hour time)</small>
   </fieldset>
   <fieldset *ngIf="propKeys.indexOf('publishedAtPlus30') !== -1">
     <label for="publishedAtPlus30">publishedAtPlus30</label>
-    <input id="publishedAtPlus30" [(ngModel)]="propOverrides.publishedAtPlus30" ngControl="publishedAtPlus30">
     <timestamp-selector [propOverrides]="propOverrides" [prop]="'publishedAtPlus30'"></timestamp-selector>
+    <br><small>(All times UTC, 24 hour time)</small>
   </fieldset>
   <button type="submit">Submit</button>
 </form>
