@@ -13,7 +13,7 @@ import {RssFeedService} from '../services/rss-feed.service';
   templateUrl: 'app/search/search-results.component.html'
 })
 export class SearchResultsComponent implements OnInit {
-  @Input() program: Program;
+  @Input() program: Observable<Program>;
 
   episodes: Observable<Episode[]>;
 
@@ -22,8 +22,8 @@ export class SearchResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.program) {
-      this.episodes = this.feeds.episodesForProgram(this.program);
-    }
+    this.program.subscribe((program: Program) => {
+      this.episodes = this.feeds.episodesForProgram(program);
+    });
   }
 }
