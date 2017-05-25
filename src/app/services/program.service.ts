@@ -31,7 +31,7 @@ export class ProgramService {
   constructor (private http: Http) {}
 
   getPrograms(): Observable<Program[]> {
-    let feederUrl = 'http://feeder.prx.org/api/v1/podcasts?per=1000'
+    let feederUrl = 'https://feeder.prx.org/api/v1/podcasts?per=1000'
     let headers = new Headers({ 'Accept': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
