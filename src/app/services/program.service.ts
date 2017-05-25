@@ -1,4 +1,7 @@
 import {Injectable} from 'angular2/core';
+import {Http, Headers, RequestOptions, Response} from 'angular2/http';
+
+import {Observable} from 'rxjs/Observable';
 
 export class Episode {
   constructor(
@@ -25,23 +28,32 @@ export class Program {
 
 @Injectable()
 export class ProgramService {
-  programs: Program[] = [
-    new Program('99% Invisible', 'https://prx-feed.s3.amazonaws.com/99pi/feed-rss.xml'),
-    new Program('Criminal', 'https://prx-feed.s3.amazonaws.com/criminal/feed-rss.xml'),
-    new Program('The Heart', 'https://prx-feed.s3.amazonaws.com/theheart/feed-rss.xml'),
-    new Program('Love+Radio', 'https://prx-feed.s3.amazonaws.com/loveandradio/feed-rss.xml'),
-    new Program(
-      'the memory palace',
-      'https://prx-feed.s3.amazonaws.com/thememorypalace/feed-rss.xml'
-    ),
-    new Program('Millennial', 'https://prx-feed.s3.amazonaws.com/millennial/feed-rss.xml'),
-    new Program('The Moth', 'https://prx-feed.s3.amazonaws.com/themoth/feed-rss.xml'),
-    new Program('Serial', 'https://prx-feed.s3.amazonaws.com/serial/feed-rss.xml'),
-    new Program('Strangers', 'https://prx-feed.s3.amazonaws.com/strangers/feed-rss.xml'),
-    new Program('Theory of Everything', 'https://prx-feed.s3.amazonaws.com/toe/feed-rss.xml')
-  ];
+  constructor (private http: Http) {}
 
-  programFromURL(url: string): Program {
-    return this.programs.find((p: Program) => p.url === url);
+  getPrograms(): Observable<Program[]> {
+    let feederUrl = 'http://feeder.prx.org/api/v1/podcasts?per=1000'
+    let headers = new Headers({ 'Accept': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(feederUrl, options).map((res: Response) => {
+      let feederPodcasts = JSON.parse(res.text())['_embedded']['prx:items'];
+      let programs = <Program[]>[];
+
+      for (let podcast of feederPodcasts) {
+        programs.push(new Program(podcast.id + ': ' + podcast.title, podcast.publishedUrl));
+      }
+
+      return programs;
+    });
+  }
+
+  programFromURL(url: string): Observable<Program> {
+    return this.getPrograms().map((programs: Program[]) => {
+      for (let program of programs) {
+        if (program.url === url) {
+          return program;
+        }
+      }
+    }).first();
   }
 }

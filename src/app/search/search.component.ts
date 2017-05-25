@@ -1,6 +1,8 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 
+import {Observable} from 'rxjs/Observable';
+
 import {SearchFormComponent} from './search-form.component';
 import {SearchResultsComponent} from './search-results.component';
 import {ProgramService, Program} from '../services/program.service';
@@ -18,7 +20,7 @@ class SearchQuery {
   `
 })
 export class SearchComponent implements OnInit {
-  program: Program;
+  program: Observable<Program>;
 
   constructor (
     private routeParams: RouteParams,

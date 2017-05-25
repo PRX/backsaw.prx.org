@@ -25,7 +25,9 @@ export class SearchFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.programs = this.programService.programs;
+    this.programService.getPrograms().subscribe((programs: Program[]) => {
+      this.programs = programs;
+    });
   }
 
   onChange(programUrl: string): void {
