@@ -22,8 +22,10 @@ export class SearchResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.program.subscribe((program: Program) => {
-      this.episodes = this.feeds.episodesForProgram(program);
-    });
+    if (this.program) {
+      this.program.subscribe((program: Program) => {
+        this.episodes = this.feeds.episodesForProgram(program);
+      });
+    }
   }
 }
