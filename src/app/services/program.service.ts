@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Observable';
 export class Episode {
   constructor(
     public url: string,
-    public title?: string
+    public title?: string,
+    public keywords?: string[]
   ) {}
 
   paramURL(): string {

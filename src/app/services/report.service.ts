@@ -144,6 +144,7 @@ export class ReportService {
       .getAdzerkRequestBody(this.episode.url)
       .subscribe((request: AdzerkNativeAdAPIRequest) => {
         this.adzerkRequest = request;
+        this.episode.keywords = request.keywords;
       });
 
     this.dovetailService
