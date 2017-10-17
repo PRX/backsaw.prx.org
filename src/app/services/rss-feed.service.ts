@@ -12,7 +12,7 @@ export class RssFeedService {
   ) {}
 
   episodesForProgram(program: Program): Observable<Episode[]> {
-    return this.http.get(program.url).map((res: Response) => {
+    return this.http.get(this.cacheBust(program.url)).map((res: Response) => {
       let episodes: Episode[] = [];
 
       let xml = res.text();
@@ -38,5 +38,14 @@ export class RssFeedService {
 
       return episodes;
     });
+  }
+
+  cacheBust(url: string): string {
+    let ts = Math.floor(Date.now() / 1000);
+    if (url.indexOf('?') > -1) {
+      return `${url}&_ts=${ts}`;
+    } else {
+      return `${url}?_ts=${ts}`;
+    }
   }
 }
