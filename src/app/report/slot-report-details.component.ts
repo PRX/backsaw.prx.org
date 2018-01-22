@@ -27,6 +27,7 @@ export class FlightedAd {
 })
 export class SlotReportDetailsComponent implements OnInit {
   @Input() slotId: string;
+  @Input() isOriginal: boolean;
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   @Input() filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   @Input() filter: {};

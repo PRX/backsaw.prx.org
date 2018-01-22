@@ -1,4 +1,4 @@
-<slot-info><td colspan="7">{{slotId}}</td></slot-info>
+<slot-info><td colspan="7" [class.original]="isOriginal">{{slotId}}</td></slot-info>
 <ad-report-details
   *ngFor="#flightedAd of flightedAds"
   [flightedAd]="flightedAd"
@@ -6,6 +6,7 @@
   [filteredAdzerkResponses$]="filteredAdzerkResponses$"
   [filter]="filter"></ad-report-details>
 <null-ad-report-details
+  [class.original]="isOriginal"
   [flightedAd]="nullAd"
   [adzerkResponses$]="adzerkResponses$"
   [filteredAdzerkResponses$]="filteredAdzerkResponses$"></null-ad-report-details>

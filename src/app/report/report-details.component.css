@@ -23,7 +23,6 @@ slot-report-details {
 h1 {
   font-family: sans-serif;
   text-align: center;
-  margin-top: 200px;
   margin-bottom: 0;
   color: #ccc;
   letter-spacing: -1px;
@@ -32,9 +31,7 @@ h1 {
 h2 {
   font-family: sans-serif;
   text-align: center;
-  color: #ccc;
+  color: #ff1414;
   letter-spacing: -1px;
   font-size: 18px;
-  margin-top: 10px;
-  text-transform: uppercase;
 }
