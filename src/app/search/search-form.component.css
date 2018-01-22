@@ -15,7 +15,7 @@ label {
 select {
   display: block;
   margin: 12px;
-  min-width: 250px;
+  width: 250px;
   font-size: 14px;
   border: none;
   background: #555;
