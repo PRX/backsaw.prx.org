@@ -38,6 +38,14 @@ export class NullAdReportDetailsComponent implements OnInit {
       });
   }
 
+  get percentage(): number {
+    if (this.count && this.filteredAdzerkResponses.length) {
+      return this.count / this.filteredAdzerkResponses.length;
+    } else {
+      return 0;
+    }
+  }
+
   private calculateCount(): void {
     this.count = 0;
 
