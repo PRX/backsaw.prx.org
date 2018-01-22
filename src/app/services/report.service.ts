@@ -10,14 +10,16 @@ import {AdzerkNativeAdAPIRequestProperties,
   AdzerkNativeAdAPIResponse,
   AdzerkNativeAdAPI
 } from './adzerk_native_ad_api_client';
-import {DovetailService} from './dovetail-api.service';
+import {DovetailService,
+  DovetailDebugResponse,
+  DovetailArrangementEntry
+} from './dovetail-api.service';
 
 @Injectable()
 export class ReportService {
   public adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   public filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   public filter: {} = {};
-  public slotOrder: string[];
 
   private episode: Episode;
   private adzerkRequest: AdzerkNativeAdAPIRequest;
@@ -141,16 +143,14 @@ export class ReportService {
     this.episode = episode;
 
     this.dovetailService
-      .getAdzerkRequestBody(this.episode.url)
-      .subscribe((request: AdzerkNativeAdAPIRequest) => {
-        this.adzerkRequest = request;
-        this.episode.keywords = request.keywords;
-      });
-
-    this.dovetailService
-      .getAdzerkSlotOrder(this.episode.url)
-      .subscribe((slotOrder: string[]) => {
-        this.slotOrder = slotOrder;
+      .getDebugResponse(this.episode.url)
+      .subscribe((debug: DovetailDebugResponse) => {
+        this.adzerkRequest = debug.request;
+        this.episode.warning = debug.error || debug.warning;
+        this.episode.arrangement = debug.arrangement.map(a => {
+          return {id: a.id, isOriginal: a.type === 'original'};
+        });
+        this.episode.keywords = debug.request.keywords;
       });
   }
 

@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 interface AdzerkNativeAdAPIRequestPlacement {
   divName: string;
@@ -69,10 +70,15 @@ export class AdzerkNativeAdAPI {
   constructor(private http: Http) {}
 
   request(request: AdzerkNativeAdAPIRequest): Observable<AdzerkNativeAdAPIResponse> {
-    return this.http
-      .post('https://engine.adzerk.net/api/v2', JSON.stringify(request))
-      .map((res: Response) => {
-        return <AdzerkNativeAdAPIResponse> JSON.parse(res.text());
-      });
+    if (request.placements.length > 0) {
+      return this.http
+        .post('https://engine.adzerk.net/api/v2', JSON.stringify(request))
+        .map((res: Response) => {
+          return <AdzerkNativeAdAPIResponse> JSON.parse(res.text());
+        });
+    } else {
+      const nullResponse: AdzerkNativeAdAPIResponse = {decisions: {}};
+      return Observable.of(nullResponse);
+    }
   }
 }

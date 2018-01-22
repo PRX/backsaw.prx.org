@@ -3,7 +3,7 @@ import {RouteParams} from 'angular2/router';
 
 import {PropertiesFormComponent} from './properties-form.component';
 import {Episode} from '../services/program.service';
-import {DovetailService} from '../services/dovetail-api.service';
+import {DovetailService, DovetailDebugResponse} from '../services/dovetail-api.service';
 import {
   AdzerkNativeAdAPIRequest,
   AdzerkNativeAdAPIRequestProperties
@@ -31,9 +31,9 @@ export class AdvancedComponent implements OnInit {
       this.episode = new Episode(url);
 
       this.dovetailService
-        .getAdzerkRequestBody(this.episode.url)
-        .subscribe((request: AdzerkNativeAdAPIRequest) => {
-          this.adzerkRequest = request;
+        .getDebugResponse(this.episode.url)
+        .subscribe((debug: DovetailDebugResponse) => {
+          this.adzerkRequest = debug.request;
           this.setupPropOverrides();
         });
     }

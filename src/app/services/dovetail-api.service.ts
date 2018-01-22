@@ -5,11 +5,24 @@ import {Observable} from 'rxjs/Observable';
 
 import {AdzerkNativeAdAPIRequest} from '../services/adzerk_native_ad_api_client';
 
+export interface DovetailArrangementEntry {
+  id: string;
+  type: string;
+}
+
+export interface DovetailDebugResponse {
+  arrangement: DovetailArrangementEntry[];
+  program: {id: string};
+  request: AdzerkNativeAdAPIRequest;
+  warning: string;
+  error: string;
+}
+
 @Injectable()
 export class DovetailService {
   constructor (private http: Http) {}
 
-  getAdzerkRequestBody(url: string): Observable<AdzerkNativeAdAPIRequest> {
+  getDebugResponse(url: string): Observable<DovetailDebugResponse> {
     let result = /(dovetail\.prxu\.org\/.*)/.exec(url);
     let dovetailUrl = 'https://' + result[1];
 
@@ -17,29 +30,8 @@ export class DovetailService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.get(dovetailUrl, options).map((res: Response) => {
-      let body = <AdzerkNativeAdAPIRequest> JSON.parse(res.text()).request;
+      let body = <DovetailDebugResponse> JSON.parse(res.text());
       return body;
-    });
-  }
-
-  getAdzerkSlotOrder(url: string): Observable<string[]> {
-    let result = /(dovetail\.prxu\.org\/.*)/.exec(url);
-    let dovetailUrl = 'https://' + result[1];
-
-    let headers = new Headers({ 'Accept': 'application/vnd.dovetail.v1+json' });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.get(dovetailUrl, options).map((res: Response) => {
-      let output: string[] = [];
-      let arrangement: {id: string; type?: string}[] = JSON.parse(res.text()).arrangement;
-
-      for (let placement of arrangement) {
-        if (placement.type !== 'original') {
-          output.push(placement.id);
-        }
-      }
-
-      return output;
     });
   }
 }

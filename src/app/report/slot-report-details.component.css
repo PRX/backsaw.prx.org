@@ -17,3 +17,11 @@ slot-info td {
   padding: 5px 0;
   font-size: 14px;
 }
+
+slot-info td.original {
+  background: #f59f51;
+}
+
+null-ad-report-details.original {
+  background: #ffcd9f;
+}

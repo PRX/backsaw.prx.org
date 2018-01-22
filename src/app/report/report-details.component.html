@@ -1,9 +1,14 @@
-<div *ngIf="adzerkResponses.length === 0">
-  <h1>Waiting for decisions</h1>
-  <h2>Press enter ⏎</h2>
+<div *ngIf="!arrangement">
+  <h1>Waiting for dovetail arrangement</h1>
 </div>
 
-<div *ngIf="adzerkResponses.length > 0">
+<div *ngIf="arrangement">
+  <h1><a target="_blank" [href]="episodeUrl">{{episodeTitle}}</a></h1>
+
+  <h2 *ngIf="warning" class="warning">WARNING: {{warning}}</h2>
+
+  <h2 *ngIf="!warning && adzerkResponses.length === 0">Press enter to load decisions ⏎</h2>
+
   <table [class.filtered]="adzerkResponses.length !== filteredAdzerkResponses.length">
     <thead>
       <tr>
@@ -20,7 +25,7 @@
         </th>
       </tr>
     </thead>
-    <slot-report-details *ngFor="#slotId of slotIds" [slotId]="slotId" [adzerkResponses$]="adzerkResponses$" [filteredAdzerkResponses$]="filteredAdzerkResponses$" [filter]="filter"></slot-report-details>
+    <slot-report-details *ngFor="#slot of arrangement" [slotId]="slot.id" [isOriginal]="slot.isOriginal" [adzerkResponses$]="adzerkResponses$" [filteredAdzerkResponses$]="filteredAdzerkResponses$" [filter]="filter"></slot-report-details>
   </table>
   <report-keywords *ngIf="keywords.length > 0" [idKeyword]="keywords[0]" [keywords]="keywords.slice(1)"></report-keywords>
 </div>

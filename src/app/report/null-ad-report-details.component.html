@@ -4,5 +4,5 @@
 <td>None</td>
 <td>{{count}}</td>
 <td [class.filtered]="(adzerkResponses.length !== filteredAdzerkResponses.length)">
-  {{(count / filteredAdzerkResponses.length) | percent:'1.0-1'}}
+  {{percentage | percent:'1.0-1'}}
 </td>

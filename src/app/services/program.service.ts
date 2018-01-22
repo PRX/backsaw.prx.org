@@ -7,8 +7,23 @@ export class Episode {
   constructor(
     public url: string,
     public title?: string,
-    public keywords?: string[]
-  ) {}
+    public noImpressionUrl?: string,
+    public keywords?: string[],
+    public warning?: string,
+    public arrangement?: {id: string, isOriginal: boolean}[]
+  ) {
+    if (url) {
+      this.title = this.title || url.split('/').pop();
+
+      // Direct dovetail no-impression url
+      let result = /(dovetail\.prxu\.org\/.*)/.exec(url);
+      if (url.indexOf('?') > -1) {
+        this.noImpressionUrl = `https://${result[1]}&noImp`;
+      } else {
+        this.noImpressionUrl = `https://${result[1]}?noImp`;
+      }
+    }
+  }
 
   paramURL(): string {
     return encodeURIComponent(this.url);
