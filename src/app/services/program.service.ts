@@ -7,7 +7,9 @@ export class Episode {
   constructor(
     public url: string,
     public title?: string,
-    public keywords?: string[]
+    public keywords?: string[],
+    public warning?: string,
+    public arrangement?: {id: string, isOriginal: boolean}[]
   ) {}
 
   paramURL(): string {
