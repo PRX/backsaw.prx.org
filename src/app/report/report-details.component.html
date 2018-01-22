@@ -5,9 +5,9 @@
 <div *ngIf="arrangement">
   <h1><a target="_blank" [href]="episodeUrl">{{episodeTitle}}</a></h1>
 
-  <h2 *ngIf="adzerkResponses.length === 0">Press enter to load decisions ⏎</h2>
-
   <h2 *ngIf="warning" class="warning">WARNING: {{warning}}</h2>
+
+  <h2 *ngIf="!warning && adzerkResponses.length === 0">Press enter to load decisions ⏎</h2>
 
   <table [class.filtered]="adzerkResponses.length !== filteredAdzerkResponses.length">
     <thead>
