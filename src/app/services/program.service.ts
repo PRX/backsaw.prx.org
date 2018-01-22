@@ -6,11 +6,17 @@ import {Observable} from 'rxjs/Observable';
 export class Episode {
   constructor(
     public url: string,
+    public noImpressionUrl?: string,
     public title?: string,
     public keywords?: string[],
     public warning?: string,
     public arrangement?: {id: string, isOriginal: boolean}[]
-  ) {}
+  ) {
+    if (url) {
+      this.noImpressionUrl = url + (url.indexOf('?') === -1 ? '?noImp' : '&noImp');
+      this.title = url.split('/').pop();
+    }
+  }
 
   paramURL(): string {
     return encodeURIComponent(this.url);

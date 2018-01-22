@@ -17,6 +17,8 @@ export class ReportDetailsComponent implements OnInit {
   @Input() adzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   @Input() filteredAdzerkResponses$: Observable<AdzerkNativeAdAPIResponse[]>;
   @Input() filter: {};
+  @Input() episodeUrl: string;
+  @Input() episodeTitle: string;
   @Input() keywords: string[];
   @Input() arrangement: {id: string, isOriginal: boolean}[];
   @Input() warning: string;

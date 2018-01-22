@@ -2,11 +2,13 @@
   <h1>Waiting for dovetail arrangement</h1>
 </div>
 
-<div *ngIf="warning">
-  <h2>WARNING: {{warning}}</h2>
-</div>
-
 <div *ngIf="arrangement">
+  <h1><a target="_blank" [href]="episodeUrl">{{episodeTitle}}</a></h1>
+
+  <h2 *ngIf="adzerkResponses.length === 0">Press enter to load decisions ⏎</h2>
+
+  <h2 *ngIf="warning" class="warning">WARNING: {{warning}}</h2>
+
   <table [class.filtered]="adzerkResponses.length !== filteredAdzerkResponses.length">
     <thead>
       <tr>
