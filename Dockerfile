@@ -13,5 +13,6 @@ ENTRYPOINT [ "npm", "run" ]
 ADD package.json .
 RUN npm install
 ADD . .
+RUN npm run postinstall
 RUN npm run ci-build
 RUN npm run build-zip
