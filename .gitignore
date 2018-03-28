@@ -11,3 +11,5 @@
 
 /src/**/*.js
 /src/index.html
+
+.DS_Store
