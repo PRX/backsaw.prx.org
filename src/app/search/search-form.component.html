@@ -4,13 +4,18 @@
 
     <label for="url">Find episodes for</label>
     <!--  -->
-    <select
-      id="url"
-      (change)="onChange(programUrl.value)"
-      onmouseover="this.selectedIndex = 0" 
-      #programUrl>
-      <option value="">Select a program</option>
-      <option *ngFor="#p of programs" [value]="p.url">{{p.name}}</option>
-    </select>
+    <div id="finder">
+      <input
+        id="finder-input"
+        list="finder-list"
+        placeholder="Search by ID or Name"
+        (change)="find(finderSelection.value)"
+        onmouseover="this.value = ''"
+        #finderSelection>
+
+      <datalist id="finder-list">
+        <option *ngFor="#p of programs" [value]="p.name">
+      </datalist>
+    </div>
   </fieldset>
 </form>
