@@ -25,9 +25,27 @@ export class SearchFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const ua = navigator.userAgent;
+
+    if (/iPhone|iPad/i.test(ua)) {
+      // Mobile, use fallback
+      document.getElementById('finder').style.display = 'none';
+      document.getElementById('old-finder').style.display = 'block';
+    } else if (/Chrome/i.test(ua)) {
+      // Desktop Chrome, use fancy
+    } else {
+      // Other desktop, use fallback
+      document.getElementById('finder').style.display = 'none';
+      document.getElementById('old-finder').style.display = 'block';
+    }
+
     this.programService.getPrograms().subscribe((programs: Program[]) => {
       this.programs = programs;
     });
+  }
+
+  onChange(programUrl: string): void {
+    this.router.navigate(['Search', { url: encodeURIComponent(programUrl) }]);
   }
 
   find(programName: string): void {

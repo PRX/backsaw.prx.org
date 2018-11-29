@@ -23,6 +23,9 @@ select {
   outline: none;
 }
 
+#old-finder {
+  display: none;
+}
 
 #finder-input {
   margin: 10px 0 0 10px;
