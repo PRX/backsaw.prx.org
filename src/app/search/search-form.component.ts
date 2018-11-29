@@ -30,7 +30,11 @@ export class SearchFormComponent implements OnInit {
     });
   }
 
-  onChange(programUrl: string): void {
-    this.router.navigate(['Search', { url: encodeURIComponent(programUrl) }]);
+  find(programName: string): void {
+    for (let p of this.programs) {
+      if (programName === p.name) {
+        this.router.navigate(['Search', { url: encodeURIComponent(p.url) }]);
+      }
+    }
   }
 }
