@@ -4,6 +4,16 @@
 
     <label for="url">Find episodes for</label>
     <!--  -->
+    <div id="old-finder">
+      <select
+            id="url"
+            (change)="onChange(programUrl.value)"
+            onmouseover="this.selectedIndex = 0"
+            #programUrl>
+        <option value="">Select a program</option>
+        <option *ngFor="#p of programs" [value]="p.url">{{p.name}}</option>
+      </select>
+    </div>
     <div id="finder">
       <input
         id="finder-input"
