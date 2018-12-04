@@ -2,7 +2,6 @@
 
 [![Dependency Status](https://gemnasium.com/badges/github.com/PRX/backsaw.prx.org.svg)](https://gemnasium.com/github.com/PRX/backsaw.prx.org)
 
-
 Backsaw is a utility for inspecting and analyzing flighting behavior in the [Adzerk](http://adzerk.com/) [Native Ad API](http://help.adzerk.com/hc/en-us/sections/200425759-Native-Ads-API).
 
 ## Development
