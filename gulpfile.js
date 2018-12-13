@@ -79,8 +79,8 @@ gulp.task('copy:assets:dist', () => {
 // Utility tasks
 const loc = ['#!/bin/sh', 'PATH="/usr/local/bin:$PATH"', 'npm run git:hooks:pre-commit'];
 gulp.task('git:hooks:install', shell.task([
-  // `printf '${loc.join('\n')}' > ./.git/hooks/pre-commit`,
-  // 'chmod +x ./.git/hooks/pre-commit'
+  `printf '${loc.join('\n')}' > ./.git/hooks/pre-commit`,
+  'chmod +x ./.git/hooks/pre-commit'
 ]));
 
 gulp.task('push:s3:dist', () => {
