@@ -16,6 +16,7 @@ const sourcemaps    = require('gulp-sourcemaps');
 gulp.task('deploy', cb => run('build:dist', 'preinstall:dist', 'install:dist', 'postinstall:dist', cb));
 gulp.task('git:hooks:pre-commit', cb => run('jspm:unbundle', cb));
 gulp.task('postinstall', cb => run(['jspm:install', 'typings:install', 'git:hooks:install'], cb));
+gulp.task('ci-postinstall', cb => run(['jspm:install', 'typings:install'], cb));
 gulp.task('start', cb => run('build:dev', 'server:dev', cb));
 gulp.task('start:dist', cb => run('build:dist', 'server:dist', cb));
 gulp.task('test', cb => run('server:test', cb));
