@@ -18,11 +18,14 @@
   "repository": "https://github.com/PRX/backsaw.prx.org.git",
   "scripts": {
     "deploy": "gulp deploy",
+    "build-zip": "mkdir -p /.prxci && cd .dist && zip -rq /.prxci/build.zip .",
+    "ci-build": "gulp build:dist ",
     "git:hooks:pre-commit": "gulp git:hooks:pre-commit",
     "start": "gulp start",
     "start:dist": "gulp start:dist",
     "test": "gulp test",
-    "postinstall": "gulp postinstall"
+    "postinstall": "gulp postinstall",
+    "ci-postinstall": "gulp ci-postinstall"
   },
   "dependencies": {},
   "devDependencies": {
