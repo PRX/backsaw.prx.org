@@ -10,7 +10,8 @@ export class Episode {
     public noImpressionUrl?: string,
     public keywords?: string[],
     public warning?: string,
-    public arrangement?: {id: string, isOriginal: boolean}[]
+    public arrangement?: {id: string, isOriginal: boolean}[],
+    public categories?: string[]
   ) {
     if (url) {
       this.title = this.title || url.split('/').pop();
@@ -27,6 +28,10 @@ export class Episode {
 
   paramURL(): string {
     return encodeURIComponent(this.url);
+  }
+
+  isAdFree(): boolean {
+    return this.categories && this.categories.length && this.categories.indexOf('adfree') !== -1;
   }
 }
 
