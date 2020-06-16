@@ -34,14 +34,7 @@ export class RssFeedService {
         let categoryTags = item.querySelectorAll('category');
         let categories: string[] = [];
         for (let j = 0; j < categoryTags.length; ++j) {
-          // Get the value of the category tag
-          let category = function (html: string) {
-            let txt = <HTMLTextAreaElement> document.createElement('textarea');
-            txt.innerHTML = html;
-            return txt.value;
-          }(categoryTags[j].innerHTML);
-
-          categories.push(category);
+          categories.push(categoryTags[j].textContent.trim());
         }
 
         let enclosure = item.querySelector('enclosure');
