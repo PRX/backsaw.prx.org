@@ -2,5 +2,6 @@
   <li *ngFor="#episode of episodes | async">
     <a [routerLink]="['/Report', {url: episode.paramURL()}]">{{episode.title}}</a>
     (<a [routerLink]="['/Advanced', {url: episode.paramURL()}]">Custom</a>)
+    <small *ngIf="episode.isAdFree()">Ad-free</small>
   </li>
 </ul>

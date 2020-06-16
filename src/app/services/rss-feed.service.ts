@@ -31,10 +31,16 @@ export class RssFeedService {
           return txt.value;
         }(item.querySelector('title').innerHTML);
 
+        let categoryTags = item.querySelectorAll('category');
+        let categories: string[] = [];
+        for (let j = 0; j < categoryTags.length; ++j) {
+          categories.push(categoryTags[j].textContent.trim());
+        }
+
         let enclosure = item.querySelector('enclosure');
         if (enclosure) {
           let encUrl = enclosure.getAttribute('url');
-          episodes.push(new Episode(encUrl, title));
+          episodes.push(new Episode(encUrl, title, null, null, null, null, categories));
         } else {
           console.warn(`Episode ${title} has no enclosure!`);
         }
