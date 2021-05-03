@@ -1,8 +1,10 @@
 version: 0.2
 env:
   variables:
-    PRX_S3_STATIC_S3_KEY: "s3-static/PRX-backsaw.prx.org.zip"
-    PRX_S3_STATIC_CONFIG_PARAMETERS: "BacksawArchiveS3ObjectVersion"
+    PRX_S3_STATIC_CONFIG_PARAMETERS: "BacksawArchiveS3ObjectKey"
+  parameter-store:
+    DOCKERHUB_USERNAME: "/prx/DOCKERHUB_USERNAME"
+    DOCKERHUB_PASSWORD: "/prx/DOCKERHUB_PASSWORD"
 phases:
   build:
     commands:
